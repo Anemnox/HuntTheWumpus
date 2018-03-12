@@ -1,6 +1,6 @@
 package main;
 
-public class GameControl {
+public class GameControl implements RunOnGameLoop{
 	
 	public GameControl() {
 		
@@ -34,8 +34,8 @@ public class GameControl {
         //calls graphic and loads a death screen
     }
 
-    public void respawn() {
-        //Calls map to random location and calls graphic for animation
+    @Override
+    public void update(double tick) {
+    	
     }
-
 }

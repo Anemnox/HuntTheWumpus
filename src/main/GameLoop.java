@@ -5,7 +5,7 @@ package main;
 
 public class GameLoop extends Thread {
     private int maxFPS;
-    private boolean powerSavingMode;
+    private boolean frameCapOn;
     public double averageMillisPerFrame;
     public int averageFPS;
     private boolean isRunning;
@@ -15,16 +15,18 @@ public class GameLoop extends Thread {
     int totalFrames;
     double elapsedTime;
     double totalTime;
+    RunOnGameLoop updateClass;
 
     //Constructors
-    public GameLoop(int maxFrames, boolean mode) {
+    public GameLoop(RunOnGameLoop update, int maxFrames, boolean mode) {
         setMaxFPS(maxFrames);
-        powerSavingMode = mode;
+        frameCapOn = mode;
+        updateClass = update;
     }
 
     public GameLoop() {
         setMaxFPS(100);
-        powerSavingMode = true;
+        frameCapOn = true;
     }
 
     //
@@ -40,7 +42,6 @@ public class GameLoop extends Thread {
 
         //System.out.println("System time: " + System.nanoTime());
         while(isRunning) {
-            checkInput();
             currentTime = System.nanoTime();
             elapsedTime = toMillis(currentTime - previousTime);
             previousTime = currentTime;
@@ -55,7 +56,7 @@ public class GameLoop extends Thread {
             }
 
             averageMillisPerFrame = toAverageMillisPerFrame(totalTime, totalFrames);
-            if (powerSavingMode) {
+            if (frameCapOn) {
                 if (totalFrames < maxFPS) {
                     if (totalTime <= (millisPerTick * totalFrames)) {
                         try {
@@ -96,19 +97,18 @@ public class GameLoop extends Thread {
     //
     //   UPDATE Methods
     //
-    private void checkInput() {
-        
-    }
+    
     private void tick(double updateIncrament) {
         totalFrames++;
+        updateClass.update(updateIncrament);
     }
 
     //
     //   Loop Settings
     //
     public void togglePowerSavingMode() {
-        if(powerSavingMode) powerSavingMode = false;
-        else powerSavingMode = true;
+        if(frameCapOn) frameCapOn = false;
+        else frameCapOn = true;
     }
     public void setMaxFPS(int maxFrames) {
         if(maxFrames > 1000) {
@@ -130,7 +130,7 @@ public class GameLoop extends Thread {
     //   Return Methods
     //
     public boolean isSavingPower() {
-        return powerSavingMode;
+        return frameCapOn;
     }
 
     //
