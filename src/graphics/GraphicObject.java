@@ -1,5 +1,6 @@
 package graphics;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 public class GraphicObject {
@@ -8,6 +9,7 @@ public class GraphicObject {
 	private double radius; 
 	private int height;
 	private int width;
+	private Color color;
 	
 	/*
 	 * Constructs an Object for the graphical userface.
@@ -25,7 +27,9 @@ public class GraphicObject {
 		
 	
 	public void paint(Graphics graphic) {
+		graphic.setColor(color);
 		graphic.fillRect(x(), y(), width, height);
+		
 	}
 	
 	

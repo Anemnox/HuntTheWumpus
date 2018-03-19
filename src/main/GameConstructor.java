@@ -6,7 +6,12 @@ public class GameConstructor
 {
 	public static WumpusWindow window;
 	
+	// x, y, width, height
 	public static int[][] menuData = {
+			{100, 100, 300, 100},
+			{100, 300, 300, 100},
+			{500, 100, 300, 100},
+			{400, 300, 300, 100},
 			
 	};
 	

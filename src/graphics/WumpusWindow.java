@@ -16,7 +16,7 @@ public class WumpusWindow extends JFrame{
 		setSize(this.width, this.height);
 		setBackground(Color.LIGHT_GRAY);
 		setResizable(false);
-		setUndecorated(true);
+		setUndecorated(false);
 		setVisible(true);
 	
 		mainFrame = new DisplayFrame(width, height);

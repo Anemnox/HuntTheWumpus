@@ -18,6 +18,7 @@ public class DisplayFrame extends JPanel{
 		setBackground(Color.BLUE);
         setForeground(Color.BLACK);
         setFont(new Font("Ariel", Font.PLAIN, 20));
+        listOfObjects = new ArrayList<>();
     }
 	
 	
