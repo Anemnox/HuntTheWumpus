@@ -3,12 +3,10 @@ package main;
 public class GameBoard  implements RunOnGameLoop
 {
 	// The GameBoard handles the location of everything on the map
-	public Hex3 playerLocation;
-	public Hex3 wumpusLocation;
 	
 	
 	
-
+	/*
 	private class Hex3 {
 		int x;
 		int y;
@@ -83,10 +81,10 @@ public class GameBoard  implements RunOnGameLoop
 					System.out.println("ERROR! [OOB] Out of Bounds on Hex3's move function!");
 			}
 		}
+		*/
 		
 		
-		
-	}
+	
 
 
 
