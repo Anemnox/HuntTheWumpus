@@ -1,6 +1,6 @@
 package main;
 
-public class GameBoard 
+public class GameBoard  implements RunOnGameLoop
 {
 	// The GameBoard handles the location of everything on the map
 	public Hex3 playerLocation;
@@ -48,6 +48,7 @@ public class GameBoard
 			}
 		}
 		
+		// TODO Make sure the move command loops the player around the map
 		public void move(int direction) {
 			// Moves this coordinate in one of six directions.
 			// Input:	0	| 1		  | 2		  | 3		| 4		   | 5
@@ -86,6 +87,13 @@ public class GameBoard
 		
 		
 	}
+
+
+
+
+	@Override
+	public void update(double tick) {
+		// TODO Auto-generated method stub
+		
+	}
 }
-
-
