@@ -138,8 +138,8 @@ public class GameLoop extends Thread {
     //
     private double toMillis(long nanotime){
         return (double) nanotime / 1000000.00;
-
     }
+    
     private double toAverageMillisPerFrame(double time, int totalFrames) {
         return (double) time / totalFrames;
     }

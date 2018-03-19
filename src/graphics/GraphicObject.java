@@ -2,7 +2,7 @@ package graphics;
 
 import java.awt.Graphics;
 
-public abstract class GraphicObject {
+public class GraphicObject {
 	private Coordinate coords;
 	private int[][] points;
 	private double radius; 
@@ -14,11 +14,13 @@ public abstract class GraphicObject {
 	 *  
 	 * @param p convex points with origin of (0, 0)
 	 */
-	public GraphicObject(int[][] p) {
-		points = p;
+	public GraphicObject(Coordinate coords, int width, int height) {
+		this.coords = coords;
+		this.width = width;
+		this.height = height;
 	}
 	
-	public abstract void update(double millis);
+	public void update(double millis) {};
 	
 		
 	

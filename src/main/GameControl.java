@@ -1,6 +1,6 @@
 package main;
 
-public class GameControl implements RunOnGameLoop{
+public class GameControl implements RunOnGameLoop {
 	
 	public GameControl() {
 		
@@ -33,7 +33,7 @@ public class GameControl implements RunOnGameLoop{
     public void death() {
         //calls graphic and loads a death screen
     }
-
+    
     @Override
     public void update(double tick) {
     	

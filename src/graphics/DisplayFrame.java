@@ -21,7 +21,9 @@ public class DisplayFrame extends JPanel{
     }
 	
 	
-	
+	public void add(GraphicObject graphicObject) {
+		listOfObjects.add(graphicObject);
+	}
 	
 	@Override
 	public void paintComponent(Graphics graphics) {
