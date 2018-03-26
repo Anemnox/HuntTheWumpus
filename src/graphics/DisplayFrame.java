@@ -52,4 +52,7 @@ public class DisplayFrame extends JPanel{
 	public int getHeight() {
 		return height;
 	}
+	public ArrayList<GraphicObject> getObjects(){
+		return listOfObjects;
+	}
 }

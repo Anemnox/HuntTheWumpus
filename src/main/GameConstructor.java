@@ -4,7 +4,6 @@ import graphics.*;
 
 public class GameConstructor
 {
-	public static WumpusWindow window;
 	
 	// x, y, width, height
 	public static int[][] menuData = {
@@ -15,11 +14,12 @@ public class GameConstructor
 			
 	};
 	
-	public static void initializeMenu() {
-		window = new WumpusWindow(1028, 768);
+	public static WumpusWindow initializeWindow() {
+		WumpusWindow window = new WumpusWindow(1028, 768);
 		for(int i = 0; i < menuData.length; i++) {
 			window.getFrame().add(new GraphicObject(new Coordinate(menuData[i][0], menuData[i][1]), menuData[i][2], menuData[i][3]));
 		}
+		return window;
 	}
 	public static void initializeGame() {
 		

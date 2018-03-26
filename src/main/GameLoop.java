@@ -24,9 +24,8 @@ public class GameLoop extends Thread {
         updateClass = update;
     }
 
-    public GameLoop() {
-        setMaxFPS(100);
-        frameCapOn = true;
+    public GameLoop(RunOnGameLoop update) {
+        this(update, 100, true);
     }
 
     //

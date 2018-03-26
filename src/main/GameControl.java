@@ -1,8 +1,16 @@
 package main;
 
+import graphics.GraphicObject;
+import graphics.WumpusWindow;
+
 public class GameControl implements RunOnGameLoop {
+	private GameLoop mainLoop;
+	private WumpusWindow window;
+	
 	
 	public GameControl() {
+		mainLoop = new GameLoop(this, 100, true);
+		window = GameConstructor.initializeWindow();
 		
 	}
 	
@@ -18,6 +26,11 @@ public class GameControl implements RunOnGameLoop {
         //Calls Players for gold and add an arrow
     }
 
+    public void displayTrivia(int x) {
+    	currentTrivia = new TriviaDisplayObject(Trivia.getTriviax());
+    }
+    
+    
     public void buyTips() {
         //Calls trivia for a quiz then returns a random tip
     }
@@ -34,8 +47,15 @@ public class GameControl implements RunOnGameLoop {
         //calls graphic and loads a death screen
     }
     
+    
+    public void checkInput() {
+    	for(GraphicObject object : window.getFrame().getObjects()) {
+    		
+    	}
+    }
     @Override
     public void update(double tick) {
-    	
+    	 checkInput();
     }
+    
 }

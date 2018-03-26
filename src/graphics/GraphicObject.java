@@ -34,6 +34,10 @@ public class GraphicObject {
 	
 	
 	public boolean objectTouch(GraphicObject object) {
+		if(object.leftX() < this.rightX() && object.rightX() > this.leftX()) {
+			if(object.topY() < this.bottomY() && object.bottomY() > this.topY()) 
+				return true;
+		}
 		return false;
 	}
 	
