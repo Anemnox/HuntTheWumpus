@@ -1,12 +1,12 @@
 package main;
 
-public class GameBoard  implements RunOnGameLoop
+public class MapCoordinates  implements RunOnGameLoop
 {
 	// The GameBoard handles the location of everything on the map
 	private int xCoor;
 	private int yCoor;
 	
-	public GameBoard(int x, int y) {
+	public MapCoordinates(int x, int y) {
 		xCoor = x;
 		yCoor = y;
 	}
