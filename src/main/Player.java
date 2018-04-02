@@ -18,6 +18,10 @@ public class Player {
 		return arrows;
 	}
 	
+	public void decrementArrow() {
+		arrows--;
+	}
+	
 	public void setGold(int setAmount) {
 		gold = setAmount;
 	}
@@ -26,4 +30,7 @@ public class Player {
 		return gold;
 	}
 	
+	public void incrementGold() {
+		gold++;
+	}
 }
