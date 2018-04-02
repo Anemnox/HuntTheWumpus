@@ -18,7 +18,8 @@ public class WumpusWindow extends JFrame{
 		setResizable(false);
 		setUndecorated(false);
 		setVisible(true);
-	
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		mainFrame = new DisplayFrame(width, height);
 		add(mainFrame);
 	}

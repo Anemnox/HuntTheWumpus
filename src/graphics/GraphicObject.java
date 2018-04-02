@@ -9,7 +9,10 @@ public class GraphicObject {
 	private double radius; 
 	private int height;
 	private int width;
+	
+	
 	private Color color;
+	private Animation animation;
 	
 	/*
 	 * Constructs an Object for the graphical userface.
@@ -20,15 +23,25 @@ public class GraphicObject {
 		this.coords = coords;
 		this.width = width;
 		this.height = height;
+		color = Color.BLACK;
 	}
 	
 	public void update(double millis) {};
 	
 		
 	
-	public void paint(Graphics graphic) {
-		graphic.setColor(color);
-		graphic.fillRect(x(), y(), width, height);
+	public void paint(Graphics graphic, int x, int y) {
+		try {
+			if(animation.getFrame() != null) {
+				graphic.drawImage(animation.getFrame(), x() + x, y() + y, null);
+			} else {
+				graphic.setColor(color);
+				graphic.fillRect(x(), y(), width, height);
+			} 
+		} catch (Exception e) {
+			graphic.setColor(color);
+			graphic.fillRect(x(), y(), width, height);
+		}
 		
 	}
 	
@@ -41,9 +54,9 @@ public class GraphicObject {
 		return false;
 	}
 	
-	public boolean pointTouch(GraphicObject object, Coordinate coords) {
-		if(coords.getX() > object.leftX() && coords.getX() < object.rightX()) {
-			if(coords.getY() > object.topY() && coords.getY() < object.bottomY())
+	public boolean pointTouch(Coordinate coords) {
+		if(coords.getX() > leftX() && coords.getX() < rightX()) {
+			if(coords.getY() > topY() && coords.getY() < bottomY())
 				return true;
 		}
 		return false;
@@ -60,7 +73,18 @@ public class GraphicObject {
 	
 	
 	
+	//Mouse Interaction classes
+	public void mouseHover() {
+		color = Color.GREEN;
+	}
 	
+	public void mouseClick() {
+		
+	}
+	
+	public void noContact() {
+		color = Color.BLACK;
+	}
 	
 	
 	
@@ -90,5 +114,9 @@ public class GraphicObject {
 	}
 	public int y() {
 		return coords.getY();
+	}
+	
+	public String toString() {
+		return "Object: " + x() + ", " + y();
 	}
 }
