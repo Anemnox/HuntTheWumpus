@@ -8,5 +8,5 @@ public class TriviaDisplayObject extends GraphicObject{
 		todisp = toDisplay;
 	}
 	
-	paint()
+	//paint()
 }

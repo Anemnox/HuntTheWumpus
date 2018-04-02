@@ -1,5 +1,11 @@
 package main;
 
+import java.awt.MouseInfo;
+import java.awt.Point;
+
+import javax.swing.SwingUtilities;
+
+import graphics.Coordinate;
 import graphics.GraphicObject;
 import graphics.WumpusWindow;
 
@@ -11,7 +17,7 @@ public class GameControl implements RunOnGameLoop {
 	public GameControl() {
 		mainLoop = new GameLoop(this, 100, true);
 		window = GameConstructor.initializeWindow();
-		
+		mainLoop.start();
 	}
 	
 	public void status() {
@@ -27,7 +33,7 @@ public class GameControl implements RunOnGameLoop {
     }
 
     public void displayTrivia(int x) {
-    	currentTrivia = new TriviaDisplayObject(Trivia.getTriviax());
+    	//currentTrivia = new TriviaDisplayObject(Trivia.getTriviax());
     }
     
     
@@ -49,13 +55,26 @@ public class GameControl implements RunOnGameLoop {
     
     
     public void checkInput() {
-    	for(GraphicObject object : window.getFrame().getObjects()) {
+    	try {
+    		Point mousePoint = MouseInfo.getPointerInfo().getLocation();
+    		Point windowPoint = window.getLocation();
+    		Coordinate mouseCoords = new Coordinate(mousePoint.x - windowPoint.x, mousePoint.y - windowPoint.y);
+    		window.getFrame().setMouseCoords(mouseCoords.getX(), mouseCoords.getY());
+    		for(GraphicObject object : window.getFrame().getObjects()) {
+    			if(object.pointTouch(mouseCoords)) {
+    				object.mouseHover();
+    			} else {
+    				object.noContact();
+    			}
+    		}
+    	} catch(Exception e) {
     		
     	}
     }
     @Override
     public void update(double tick) {
     	 checkInput();
+    	 window.getFrame().update(tick);
     }
     
 }

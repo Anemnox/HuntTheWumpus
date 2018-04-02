@@ -10,8 +10,10 @@ import javax.swing.JPanel;
 public class DisplayFrame extends JPanel{
 	private ArrayList<GraphicObject> listOfObjects;
 	private int width, height;
+	private Coordinate coords;
+	private int mouseX, mouseY;
 	
-	public DisplayFrame(int width, int height) {
+	public DisplayFrame(int width, int height, Coordinate coords) {
 		this.width = width;
 		this.height = height;
 		//setBackground(new Color(1.0f, 1.0f, 1.0f, 0.0f));
@@ -19,25 +21,43 @@ public class DisplayFrame extends JPanel{
         setForeground(Color.BLACK);
         setFont(new Font("Ariel", Font.PLAIN, 20));
         listOfObjects = new ArrayList<>();
+        this.coords = coords;
+    }
+	
+	public DisplayFrame(int width, int height) {
+		this(width, height, new Coordinate(0, 0));
     }
 	
 	
 	public void add(GraphicObject graphicObject) {
 		listOfObjects.add(graphicObject);
+		System.out.println(graphicObject);
+	}
+	
+	
+	
+	public void update(double tick) {
+		repaint();
 	}
 	
 	@Override
 	public void paintComponent(Graphics graphics) {
         super.paintComponent(graphics);
         try {
+        	graphics.drawString("Mouse x: " + mouseX + "   Mouse y: " + mouseY, 20, 20);
 	        for(GraphicObject object : listOfObjects) {
-	        	object.paint(graphics);
+	        	object.paint(graphics, x(), y());
 	        }
         } catch (Exception e) {
         	
         }
     }
 	
+	
+	public void setMouseCoords(int x, int y) {
+		mouseX = x;
+		mouseY = y;
+	}
 	public void setHeight(int h) {
 		height = h;
 	}
@@ -51,6 +71,13 @@ public class DisplayFrame extends JPanel{
 	}
 	public int getHeight() {
 		return height;
+	}
+	private int y() {
+		return coords.getX();
+	}
+
+	private int x() {
+		return coords.getY();
 	}
 	public ArrayList<GraphicObject> getObjects(){
 		return listOfObjects;
