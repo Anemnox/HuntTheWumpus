@@ -1,12 +1,22 @@
 package graphics;
 
-public class TriviaDisplayObject extends GraphicObject{
-	private String todisp;
+import java.awt.Color;
+import java.awt.Graphics;
+
+public class TriviaDisplayObject extends GraphicObject {
+	private String text;
+	private Font font;
 	
-	public TriviaDisplayObject(String toDisplay) {
-		super(new Coordinate(0, 0), 100, 100);
-		todisp = toDisplay;
+	public TriviaDisplayObject(Coordinate coord, String toDisplay) {
+		super(coord, 100, 100);
+		
+		text = toDisplay;
 	}
 	
-	//paint()
+	@Override
+	public void paint(Graphics graphic, int x, int y) {
+		graphic.setColor(Color.BLACK);
+		graphic.drawString(text, x() + x, y() + y);
+	}
+	
 }

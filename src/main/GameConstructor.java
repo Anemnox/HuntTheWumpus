@@ -24,4 +24,10 @@ public class GameConstructor
 	public static void initializeGame() {
 		
 	}
+	
+	public static WumpusWindow testTriviaDisplay() {
+		WumpusWindow window = new WumpusWindow(1028, 768);
+		window.getFrame().add(new TriviaDisplayObject(new Coordinate(300, 300), "This is not working"));
+		return window;
+	}
 }

@@ -3,11 +3,13 @@ package graphics;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
-public class DisplayFrame extends JPanel{
+public class DisplayFrame extends JPanel implements MouseListener {
 	private ArrayList<GraphicObject> listOfObjects;
 	private int width, height;
 	private Coordinate coords;
@@ -82,4 +84,30 @@ public class DisplayFrame extends JPanel{
 	public ArrayList<GraphicObject> getObjects(){
 		return listOfObjects;
 	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {}
 }
