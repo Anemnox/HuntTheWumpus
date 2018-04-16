@@ -2,6 +2,13 @@ package main;
 
 public class MapCoordinates  implements RunOnGameLoop
 {
+	// CONVERT INDEX TO COORDINATES
+	// x = index / height
+	// y = (index % height) - 1
+	
+	// CONVERT COORDINATES TO INDEX
+	// index = (x * height) + y + 1
+	
 	// The GameBoard handles the location of everything on the map
 	private int xCoor;
 	private int yCoor;
@@ -27,6 +34,16 @@ public class MapCoordinates  implements RunOnGameLoop
 	
 	public void setY(int input) {
 		yCoor = input;
+	}
+	
+	// Equals compares this objects coordinates with the coordinates of another object
+	public boolean equals(MapCoordinates target) {
+		if(xCoor == target.getX() && yCoor == target.getY()) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 	
 	// The TestMove command checks if a movement can be made, using the Cave's walls
@@ -83,6 +100,8 @@ public class MapCoordinates  implements RunOnGameLoop
 		}
 	}
 	
+	// Private functions to modify XY coordinates into index coordinates
+	// TODO make functions
 
 	@Override
 	public void update(double tick) {
