@@ -4,7 +4,7 @@ import java.awt.Color;
 
 import javax.swing.JFrame;
 
-public class WumpusWindow extends JFrame{
+public class WumpusWindow extends JFrame {
 	private int height;
 	private int width;
 	private DisplayFrame mainFrame;

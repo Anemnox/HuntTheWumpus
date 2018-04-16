@@ -13,10 +13,9 @@ public class GameControl implements RunOnGameLoop {
 	private GameLoop mainLoop;
 	private WumpusWindow window;
 	
-	
 	public GameControl() {
 		mainLoop = new GameLoop(this, 100, true);
-		window = GameConstructor.initializeWindow();
+		window = GameConstructor.testTriviaDisplay();
 		mainLoop.start();
 	}
 	
@@ -53,7 +52,6 @@ public class GameControl implements RunOnGameLoop {
         //calls graphic and loads a death screen
     }
     
-    
     public void checkInput() {
     	try {
     		Point mousePoint = MouseInfo.getPointerInfo().getLocation();
@@ -71,6 +69,7 @@ public class GameControl implements RunOnGameLoop {
     		
     	}
     }
+    
     @Override
     public void update(double tick) {
     	 checkInput();
