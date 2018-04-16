@@ -14,16 +14,20 @@ public class DisplayFrame extends JPanel implements MouseListener {
 	private int width, height;
 	private Coordinate coords;
 	private int mouseX, mouseY;
+	private boolean mouseDown;
+	private int clicks;
 	
 	public DisplayFrame(int width, int height, Coordinate coords) {
 		this.width = width;
 		this.height = height;
 		//setBackground(new Color(1.0f, 1.0f, 1.0f, 0.0f));
+        addMouseListener(this);
 		setBackground(Color.BLUE);
         setForeground(Color.BLACK);
         setFont(new Font("Ariel", Font.PLAIN, 20));
         listOfObjects = new ArrayList<>();
         this.coords = coords;
+        clicks = 0;
     }
 	
 	public DisplayFrame(int width, int height) {
@@ -47,6 +51,7 @@ public class DisplayFrame extends JPanel implements MouseListener {
         super.paintComponent(graphics);
         try {
         	graphics.drawString("Mouse x: " + mouseX + "   Mouse y: " + mouseY, 20, 20);
+        	graphics.drawString("Mouse Down: " + mouseDown + "   Mouse Clicks: " + clicks, 20, 80);
 	        for(GraphicObject object : listOfObjects) {
 	        	object.paint(graphics, x(), y());
 	        }
@@ -85,9 +90,14 @@ public class DisplayFrame extends JPanel implements MouseListener {
 		return listOfObjects;
 	}
 
+	
+	
+	
+	
+	//Mouse Listener
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		
+		clicks += 1;
 	}
 
 	@Override
@@ -105,9 +115,11 @@ public class DisplayFrame extends JPanel implements MouseListener {
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+		mouseDown = true;
 	}
 
 	@Override
-	public void mouseReleased(MouseEvent e) {}
+	public void mouseReleased(MouseEvent e) {
+		mouseDown = false;
+	}
 }
