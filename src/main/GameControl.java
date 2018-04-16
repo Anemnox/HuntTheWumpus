@@ -12,6 +12,8 @@ import graphics.WumpusWindow;
 public class GameControl implements RunOnGameLoop {
 	private GameLoop mainLoop;
 	private WumpusWindow window;
+	private Player player;
+	private MapCoordinates playerLoc, wumpus, pit1, pit2, bat1, bat2;
 	
 	public GameControl() {
 		mainLoop = new GameLoop(this, 100, true);
@@ -23,8 +25,14 @@ public class GameControl implements RunOnGameLoop {
         //Return the status of the player, Calls Player
     }
 
-    public void move() {
+	/**
+	 * Method to move the player to a new room
+	 * @param dir Input from 0-5, clockwise. 0 represents an upward movement
+	 * and 5 represents a up-left movement.
+	 */
+    public void move(int dir) {
         //Calls player or cave system and add gold
+    	player.move(dir);
     }
 
     public void buyArrow() {
@@ -35,15 +43,17 @@ public class GameControl implements RunOnGameLoop {
     	//currentTrivia = new TriviaDisplayObject(Trivia.getTriviax());
     }
     
-    
     public void buyTips() {
         //Calls trivia for a quiz then returns a random tip
     }
 
     public void start() {
         //Creates new Player and calls map
+    	player = new Player();
+    	
     }
 
+    
     public void shootArrow() {
         //Calls map and checks to see if arrow hits Wumpus and removes an arrow
     }

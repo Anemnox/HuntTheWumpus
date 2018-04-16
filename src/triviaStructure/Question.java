@@ -1,4 +1,4 @@
-package trivia;
+package triviaStructure;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -6,7 +6,7 @@ import java.io.*;
 
 public class Question {
 	
-		private Scanner scan = new Scanner(new File("C:\\Users\\sn373546\\Documents\\GitHub\\HuntTheWumpus\\Trivia\\bin\\Questions"));
+		private Scanner scan = new Scanner(new File("src\\Questions"));
 		private ArrayList<String> questions = new ArrayList<>();
 		private ArrayList<String> choices = new ArrayList<>();
 		private ArrayList<String> correctAns = new ArrayList<>();
@@ -62,7 +62,7 @@ public class Question {
 		
 		public boolean isCorrect(String choice)
 		{
-			return (choice.equals(correctAns.get(index)));
+			return (choice.equalsIgnoreCase(correctAns.get(index)));
 		}
 		
 		

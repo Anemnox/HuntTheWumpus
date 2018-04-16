@@ -1,10 +1,9 @@
-package trivia;
+package triviaStructure;
 
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class QuestionTester {
-	
 	
 	public static void main(String[] args) throws FileNotFoundException
 	{
