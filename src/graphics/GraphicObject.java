@@ -4,15 +4,15 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public class GraphicObject {
-	private Coordinate coords;
-	private int[][] points;
-	private double radius; 
-	private int height;
-	private int width;
+	protected Coordinate coords;
+	protected int[][] points;
+	protected double radius; 
+	protected int height;
+	protected int width;
 	
 	
-	private Color color;
-	private Animation animation;
+	protected Color color;
+	protected Animation animation;
 	
 	/*
 	 * Constructs an Object for the graphical userface.
@@ -73,20 +73,6 @@ public class GraphicObject {
 	
 	
 	
-	//Mouse Interaction classes
-	public void mouseHover() {
-		color = Color.GREEN;
-	}
-	
-	public void mouseClick() {
-		
-	}
-	
-	public void noContact() {
-		color = Color.BLACK;
-	}
-	
-	
 	
 	
 	
@@ -119,4 +105,5 @@ public class GraphicObject {
 	public String toString() {
 		return "Object: " + x() + ", " + y();
 	}
+
 }
