@@ -36,11 +36,11 @@ public class GraphicObject {
 				graphic.drawImage(animation.getFrame(), x() + x, y() + y, null);
 			} else {
 				graphic.setColor(color);
-				graphic.fillRect(x(), y(), width, height);
+				graphic.fillRect(x() + x, y() + y, width, height);
 			} 
 		} catch (Exception e) {
 			graphic.setColor(color);
-			graphic.fillRect(x(), y(), width, height);
+			graphic.fillRect(x() + x, y() + y, width, height);
 		}
 		
 	}

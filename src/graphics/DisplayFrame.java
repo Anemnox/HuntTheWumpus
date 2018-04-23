@@ -27,6 +27,7 @@ public class DisplayFrame extends JPanel implements MouseListener {
         setForeground(Color.BLACK);
         setFont(new Font("Ariel", Font.PLAIN, 20));
         listOfObjects = new ArrayList<>();
+        listOfButtons = new ArrayList<>();
         this.coords = coords;
         clicks = 0;
     }
@@ -40,10 +41,23 @@ public class DisplayFrame extends JPanel implements MouseListener {
 		listOfObjects.add(graphicObject);
 		System.out.println(graphicObject);
 	}
-	
+	public void addButton(ButtonObject button) {
+		listOfButtons.add(button);
+	}
 	
 	
 	public void update(double tick) {
+		try {
+			for(GraphicObject obj : listOfObjects) {
+				obj.update(tick);
+			}
+		} catch (Exception e) {}
+		try {
+			for(ButtonObject button : listOfButtons) {
+				button.update(tick);
+			}
+		} catch (Exception e) {}
+		
 		repaint();
 	}
 	
@@ -53,7 +67,10 @@ public class DisplayFrame extends JPanel implements MouseListener {
         try {
         	graphics.drawString("Mouse x: " + mouseX + "   Mouse y: " + mouseY, 20, 20);
         	graphics.drawString("Mouse Down: " + mouseDown + "   Mouse Clicks: " + clicks, 20, 80);
-	        for(GraphicObject object : listOfObjects) {
+        	for(ButtonObject object : listOfButtons) {
+	        	object.paint(graphics, x(), y());
+	        }
+        	for(GraphicObject object : listOfObjects) {
 	        	object.paint(graphics, x(), y());
 	        }
         } catch (Exception e) {

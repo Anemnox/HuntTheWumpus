@@ -30,7 +30,7 @@ public class GameControl implements RunOnGameLoop {
 	 */
     public void move(int dir) {
         //Calls player or cave system and add gold
-    	player.move(dir);
+    	//player.move(dir);
     }
 
     public void buyArrow() {
