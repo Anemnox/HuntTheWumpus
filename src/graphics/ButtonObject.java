@@ -3,12 +3,12 @@ package graphics;
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class Button extends GraphicObject{
+public class ButtonObject extends GraphicObject{
 	protected boolean mouseHover;
 	protected boolean mouseDown;
 
 	
-	public Button (Coordinate coords, int width, int height) {
+	public ButtonObject (Coordinate coords, int width, int height) {
 		super(coords, width, height);
 	}
 	
@@ -21,9 +21,15 @@ public class Button extends GraphicObject{
 	
 	public void clicked() {
 		// TODO Auto-generated method stub
+		mouseDown = true;
 	}
 	
-	
+	public void noContact() {
+		// TODO Auto-generated method stub
+		mouseHover = false;
+		mouseDown = false;
+		
+	}
 	
 	
 	
@@ -40,4 +46,7 @@ public class Button extends GraphicObject{
 			graphic.fillRect(x(), y(), width, height);
 		}	
 	}
+
+
+	
 }

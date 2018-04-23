@@ -5,9 +5,7 @@ import java.awt.Point;
 
 import javax.swing.SwingUtilities;
 
-import graphics.Coordinate;
-import graphics.GraphicObject;
-import graphics.WumpusWindow;
+import graphics.*;
 
 public class GameControl implements RunOnGameLoop {
 	private GameLoop mainLoop;
@@ -68,11 +66,11 @@ public class GameControl implements RunOnGameLoop {
     		Point windowPoint = window.getLocation();
     		Coordinate mouseCoords = new Coordinate(mousePoint.x - windowPoint.x, mousePoint.y - windowPoint.y);
     		window.getFrame().setMouseCoords(mouseCoords.getX(), mouseCoords.getY());
-    		for(GraphicObject object : window.getFrame().getObjects()) {
-    			if(object.pointTouch(mouseCoords)) {
-    				object.mouseHover();
+    		for(ButtonObject button : window.getFrame().getButtons()) {
+    			if(button.pointTouch(mouseCoords)) {
+    				button.mouseHover();
     			} else {
-    				object.noContact();
+    				button.noContact();
     			}
     		}
     	} catch(Exception e) {

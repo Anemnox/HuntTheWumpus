@@ -1,6 +1,6 @@
 package graphics;
 
-public class CaveObject extends Button{
+public class CaveObject extends ButtonObject{
 	private int caveID;
 	
 	public CaveObject(Coordinate coords, int width, int height, int ID) {

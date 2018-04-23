@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 
 public class DisplayFrame extends JPanel implements MouseListener {
 	private ArrayList<GraphicObject> listOfObjects;
+	private ArrayList<ButtonObject> listOfButtons;
 	private int width, height;
 	private Coordinate coords;
 	private int mouseX, mouseY;
@@ -89,7 +90,9 @@ public class DisplayFrame extends JPanel implements MouseListener {
 	public ArrayList<GraphicObject> getObjects(){
 		return listOfObjects;
 	}
-
+	public ArrayList<ButtonObject> getButtons() {
+		return listOfButtons;
+	}
 	
 	
 	
