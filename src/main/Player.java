@@ -5,6 +5,8 @@ public class Player {
 	
 	private int arrows;
 	private int gold;
+	private int turns = 0;
+	private int score;
 	
 	public Player() {
 		
@@ -41,4 +43,23 @@ public class Player {
 	public void decGold() { // Decreases the gold count by 1
 		gold--;
 	}
+	
+	public void setTurns(int setAmount) {
+		turns = setAmount;
+	}
+	
+	public int getTurns() {
+		return turns;
+	}
+	
+	public void incTurns() {
+		turns++;
+	}
+
+	public int calculateScore() {
+		score = (100 - turns) + gold + (arrows * 10);
+		return score;
+	}
+
+	
 }

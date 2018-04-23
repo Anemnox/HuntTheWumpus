@@ -2,6 +2,7 @@ package main;
 
 public class MapCoordinates  implements RunOnGameLoop
 {	
+	private Cave cave;
 	// The GameBoard handles the location of everything on the map
 	private int xCoor;
 	private int yCoor;
