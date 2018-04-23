@@ -24,9 +24,8 @@ public class GameLoop extends Thread {
         updateClass = update;
     }
 
-    public GameLoop() {
-        setMaxFPS(100);
-        frameCapOn = true;
+    public GameLoop(RunOnGameLoop update) {
+        this(update, 100, true);
     }
 
     //
@@ -138,8 +137,8 @@ public class GameLoop extends Thread {
     //
     private double toMillis(long nanotime){
         return (double) nanotime / 1000000.00;
-
     }
+    
     private double toAverageMillisPerFrame(double time, int totalFrames) {
         return (double) time / totalFrames;
     }
