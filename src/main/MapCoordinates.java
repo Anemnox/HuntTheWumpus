@@ -1,17 +1,14 @@
 package main;
 
 public class MapCoordinates  implements RunOnGameLoop
-{
-	// CONVERT INDEX TO COORDINATES
-	// x = index / height
-	// y = (index % height) - 1
-	
-	// CONVERT COORDINATES TO INDEX
-	// index = (x * height) + y + 1
-	
+{	
 	// The GameBoard handles the location of everything on the map
 	private int xCoor;
 	private int yCoor;
+	
+	// NOTE: These variables are placeholders. I'll need the board dimensions from Everett
+	private int boardHeight = 5;
+	private int boardWidth;
 	
 	public MapCoordinates(int x, int y) {
 		xCoor = x;
@@ -101,8 +98,26 @@ public class MapCoordinates  implements RunOnGameLoop
 	}
 	
 	// Private functions to modify XY coordinates into index coordinates
-	// TODO make functions
-
+	// CONVERT INDEX TO COORDINATES
+	// x = index / height
+	// y = (index % height) - 1
+	
+	// CONVERT COORDINATES TO INDEX
+	// index = (x * height) + y + 1
+	
+	private int indexToX(int in) {
+		return (in / boardHeight);
+	}
+	
+	private int indexToY(int in) {
+		return ((in % boardHeight) - 1);
+	}
+	
+	private int coorToIndex(int xIn, int yIn) {
+		return ((xIn * boardHeight) + yIn + 1);
+	}
+	
+	
 	@Override
 	public void update(double tick) {
 		// TODO Auto-generated method stub
