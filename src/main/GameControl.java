@@ -13,6 +13,11 @@ public class GameControl implements RunOnGameLoop {
 	private Player player;
 	private MapCoordinates playerLoc, wumpus, pit1, pit2, bat1, bat2;
 	
+	private int movement;
+	
+	/**
+	 * Method to construct the GameControl object
+	 */
 	public GameControl() {
 		mainLoop = new GameLoop(this, 100, true);
 		window = GameConstructor.testTriviaDisplay();
@@ -29,31 +34,67 @@ public class GameControl implements RunOnGameLoop {
 	 * and 5 represents a up-left movement.
 	 */
     public void move(int dir) {
-        //Calls player or cave system and add gold
-    	//player.move(dir);
+    	playerLoc.move(dir);
     }
 
+    /**
+     * Method to use gold to buy an arrow
+     */
     public void buyArrow() {
-        //Calls Players for gold and add an arrow
+        
     }
 
     public void displayTrivia(int x) {
     	//currentTrivia = new TriviaDisplayObject(Trivia.getTriviax());
     }
     
+    /**
+     * To be honest I have no idea how this would work
+     */
     public void buyTips() {
         //Calls trivia for a quiz then returns a random tip
     }
 
+    /**
+     * Method to start a new game
+     */
     public void start() {
         //Creates new Player and calls map
     	player = new Player();
-    	
+    	playerLoc = new MapCoordinates(0,0);
+    	wumpus = new MapCoordinates(0,0);
+    	pit1 = new MapCoordinates(0,0);
+    	pit2 = new MapCoordinates(0,0);
+    	bat1 = new MapCoordinates(0,0);
+    	bat2 = new MapCoordinates(0,0);
     }
 
-    
-    public void shootArrow() {
-        //Calls map and checks to see if arrow hits Wumpus and removes an arrow
+    /**
+     * Method to shoot an arrow into a room
+     * @param dir Input from 0-5, clockwise. 0 represents an upward movement
+	 * and 5 represents a up-left movement.
+     */
+    public void shootArrow(int dir) {
+       switch (dir) {
+	       case 0:
+	    	   
+	    	   break;
+	       case 1:
+	    	   
+	    	   break;
+	       case 2:
+	    	   
+	    	   break;
+	       case 3:
+	    	   
+	    	   break;
+	       case 4:
+	    	   
+	    	   break;
+    	   default:
+    		   System.out.println("This shouldn't happen (Shoot Arrow Error");
+    		   break;
+       }
     }
 
     public void death() {
