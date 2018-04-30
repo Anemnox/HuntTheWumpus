@@ -6,6 +6,7 @@ import java.awt.Point;
 import javax.swing.SwingUtilities;
 
 import graphics.*;
+import main.wumpusConstructor.GameConstructor;
 
 public class GameControl implements RunOnGameLoop {
 	private GameLoop mainLoop;

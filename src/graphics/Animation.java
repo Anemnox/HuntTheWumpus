@@ -38,14 +38,16 @@ public class Animation {
 
     //Changing Animation Frames
     public void setFrame(int frameNumber) {
-        if(frameNumber < numberOfFrames) {
-            currentFrame = frameNumber;
-            int row = (frameNumber) % frameColumn;
-            int column = (frameNumber) / frameColumn;
-            frame = spriteSheet.getSubimage(row * frameWidth, column * frameHeight, frameWidth, frameHeight);
-        } else {
-            System.out.println("Error: Can't change Frames");
-        }
+    	if(spriteSheet != null) {
+	        if(frameNumber < numberOfFrames) {
+	            currentFrame = frameNumber;
+	            int row = (frameNumber) % frameColumn;
+	            int column = (frameNumber) / frameColumn;
+	            frame = spriteSheet.getSubimage(row * frameWidth, column * frameHeight, frameWidth, frameHeight);
+	        } else {
+	            System.out.println("Error: Can't change Frames");
+	        }
+    	}
     }
 
     public void nextFrame(){

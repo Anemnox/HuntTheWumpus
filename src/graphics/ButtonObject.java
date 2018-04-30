@@ -8,8 +8,8 @@ public class ButtonObject extends GraphicObject{
 	protected boolean mouseDown;
 
 	
-	public ButtonObject (Coordinate coords, int width, int height) {
-		super(coords, width, height);
+	public ButtonObject (Animation anim, Coordinate coords, int width, int height) {
+		super(anim, coords, width, height);
 	}
 	
 	

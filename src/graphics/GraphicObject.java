@@ -19,7 +19,8 @@ public class GraphicObject {
 	 *  
 	 * @param p convex points with origin of (0, 0)
 	 */
-	public GraphicObject(Coordinate coords, int width, int height) {
+	public GraphicObject(Animation anim, Coordinate coords, int width, int height) {
+		animation = anim;
 		this.coords = coords;
 		this.width = width;
 		this.height = height;
