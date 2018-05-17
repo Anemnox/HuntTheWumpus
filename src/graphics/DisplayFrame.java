@@ -3,11 +3,15 @@ package graphics;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.MouseInfo;
+import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
+
+import graphics.UserInterface.ButtonObject;
 
 public class DisplayFrame extends JPanel implements MouseListener {
 	private ArrayList<GraphicObject> listOfObjects;
@@ -23,7 +27,7 @@ public class DisplayFrame extends JPanel implements MouseListener {
 		this.height = height;
 		//setBackground(new Color(1.0f, 1.0f, 1.0f, 0.0f));
         addMouseListener(this);
-		setBackground(Color.BLUE);
+		setBackground(Color.getHSBColor(0.18f, 0.27f, 0.89f));
         setForeground(Color.BLACK);
         setFont(new Font("Ariel", Font.PLAIN, 20));
         listOfObjects = new ArrayList<>();
@@ -59,6 +63,7 @@ public class DisplayFrame extends JPanel implements MouseListener {
 		} catch (Exception e) {}
 		
 		repaint();
+		//System.out.println("Updating");
 	}
 	
 	@Override
@@ -111,12 +116,23 @@ public class DisplayFrame extends JPanel implements MouseListener {
 		return listOfButtons;
 	}
 	
-	
-	
-	
 	//Mouse Listener
 	@Override
 	public void mouseClicked(MouseEvent e) {
+		Point mousePoint = MouseInfo.getPointerInfo().getLocation();
+		Point windowPoint = this.getLocation();
+		Coordinate mouseCoords = new Coordinate(mousePoint.x - windowPoint.x, mousePoint.y - windowPoint.y);
+		try {
+			for(ButtonObject button : getButtons()) {
+				if(button.pointTouch(mouseCoords)) {
+					button.clicked();
+				} else {
+					button.noContact();
+				}
+			}
+		} catch (Exception e1) {
+			
+		}
 		clicks += 1;
 	}
 
@@ -136,10 +152,37 @@ public class DisplayFrame extends JPanel implements MouseListener {
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
 		mouseDown = true;
+		Point mousePoint = MouseInfo.getPointerInfo().getLocation();
+		Point windowPoint = this.getLocation();
+		Coordinate mouseCoords = new Coordinate(mousePoint.x - windowPoint.x, mousePoint.y - windowPoint.y);
+		for(ButtonObject button : getButtons()) {
+			if(button.pointTouch(mouseCoords)) {
+				button.mouseDown();
+			} else {
+				button.noContact();
+			}
+		}
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
+		Point mousePoint = MouseInfo.getPointerInfo().getLocation();
+		Point windowPoint = this.getLocation();
+		Coordinate mouseCoords = new Coordinate(mousePoint.x - windowPoint.x, mousePoint.y - windowPoint.y);
+		try {
+			for(ButtonObject button : getButtons()) {
+				button.mouseUp();
+			}
+		} catch (Exception e1) {
+			
+		}
 		mouseDown = false;
+	}
+
+	public void clearAll() {
+		// TODO Auto-generated method stub
+		listOfButtons.clear();
+		listOfObjects.clear();
+		
 	}
 }

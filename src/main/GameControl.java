@@ -6,6 +6,8 @@ import java.awt.Point;
 import javax.swing.SwingUtilities;
 
 import graphics.*;
+import graphics.UserInterface.ButtonAction;
+import graphics.UserInterface.ButtonObject;
 import main.wumpusConstructor.GameConstructor;
 
 public class GameControl implements RunOnGameLoop {
@@ -13,16 +15,27 @@ public class GameControl implements RunOnGameLoop {
 	private WumpusWindow window;
 	private Player player;
 	private MapCoordinates playerLoc, wumpus, pit1, pit2, bat1, bat2;
-	
 	private int movement;
+	
 	
 	/**
 	 * Method to construct the GameControl object
 	 */
 	public GameControl() {
 		mainLoop = new GameLoop(this, 100, true);
-		window = GameConstructor.testTriviaDisplay();
+		//window = GameConstructor.testTriviaDisplay();
+		window = GameConstructor.initializeWindow();
+		startMenu();
 		mainLoop.start();
+	}
+
+	
+	//
+	//	Setting up DisplayFrame for GameMenu, GameBoard, etc
+	//
+	
+	public void startMenu() {
+		GameConstructor.initializeMenu(window);
 	}
 	
 	public void status() {
@@ -56,10 +69,14 @@ public class GameControl implements RunOnGameLoop {
         //Calls trivia for a quiz then returns a random tip
     }
 
+    
+    //
+    //		Button Clicks
+    //
     /**
      * Method to start a new game
      */
-    public void start() {
+    public void startGameBoard() {
         //Creates new Player and calls map
     	player = new Player();
     	playerLoc = new MapCoordinates(0,0);
@@ -68,8 +85,28 @@ public class GameControl implements RunOnGameLoop {
     	pit2 = new MapCoordinates(0,0);
     	bat1 = new MapCoordinates(0,0);
     	bat2 = new MapCoordinates(0,0);
+    	
+    	
+    	GameConstructor.initializeGame(window);
     }
 
+	
+	public void displaySettings() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void displayInstructions() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	public void exit() {
+
+	}
+	
+    
+	
     /**
      * Method to shoot an arrow into a room
      * @param dir Input from 0-5, clockwise. 0 represents an upward movement
@@ -109,6 +146,7 @@ public class GameControl implements RunOnGameLoop {
     		Coordinate mouseCoords = new Coordinate(mousePoint.x - windowPoint.x, mousePoint.y - windowPoint.y);
     		window.getFrame().setMouseCoords(mouseCoords.getX(), mouseCoords.getY());
     		for(ButtonObject button : window.getFrame().getButtons()) {
+    			
     			if(button.pointTouch(mouseCoords)) {
     				button.mouseHover();
     			} else {

@@ -1,8 +1,12 @@
-package graphics;
+package graphics.UserInterface;
 
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+
+import graphics.Animation;
+import graphics.Coordinate;
+import graphics.GraphicObject;
 
 public class TriviaDisplayObject extends GraphicObject {
 	private String text;

@@ -1,27 +1,52 @@
 package main.wumpusConstructor;
 
+import main.GameControl;
+
 public class GameData {
-	
-	// x, y, width, height
+	//
+	//				Menu Screen
+	//
 	public static int[][] menuData = {
-			{50, 200, 400, 400}
+			//{x, y, width, height}
+			{70, 150, 700, 400}
 	};
 	
 	public static int[][] menuButtonData = {
-			{600, 100, 300, 100},
-			{600, 250, 300, 100},
-			{600, 400, 300, 100},
-			{600, 550, 300, 100},
+			//{x, y, width, height, imageID, tagID}
+			{900, 100, 300, 100, 1},
+			{900, 250, 300, 100, 1},
+			{900, 400, 300, 100, 1},
+			{900, 550, 300, 100, 1},
 	};
 	
-	// image Data
+	
+	
+	//
+	//				Game Screen
+	//
+	public static int[][] gameBoardData = {
+			
+	};
+	
+	public static int[][] gameBoardButtonData = {
+			{}, // Setting Button
+			{}, // Shop Button
+			{}
+	};
+	
+	
+	//
+	// 				image Data
+	//
 	public static String[] imageNames = {
-			"images/minecraftTest.png"
+			"images/minecraftTest.png",
+			"images/MenuButton.png"
 	};
 	
-	//info: width, height, number of frames, frames per column
+	//info: width, height, number of frames, frames per row
 	public static int[][] imageData = {
 			{300, 168, 1, 1},
+			{300, 100, 3, 1}
 	};
 	
 }

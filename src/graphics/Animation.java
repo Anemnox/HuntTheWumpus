@@ -11,7 +11,7 @@ public class Animation {
     private int currentFrame;
     private int frameHeight;
     private int frameWidth;
-    private int frameColumn;
+    private int framesPerRow;
     public int numberOfFrames;
     public int time;
 
@@ -21,7 +21,7 @@ public class Animation {
         frameHeight = h;
         frameWidth = w;
         numberOfFrames = num;
-        frameColumn = column;
+        framesPerRow = column;
         setFrame(0);
     }
 
@@ -32,7 +32,7 @@ public class Animation {
         frameHeight = h;
         frameWidth = w;
         numberOfFrames = num;
-        frameColumn = column;
+        framesPerRow = column;
         setFrame(0);
     }
 
@@ -41,8 +41,8 @@ public class Animation {
     	if(spriteSheet != null) {
 	        if(frameNumber < numberOfFrames) {
 	            currentFrame = frameNumber;
-	            int row = (frameNumber) % frameColumn;
-	            int column = (frameNumber) / frameColumn;
+	            int row = (frameNumber) % framesPerRow;
+	            int column = (frameNumber) / framesPerRow;
 	            frame = spriteSheet.getSubimage(row * frameWidth, column * frameHeight, frameWidth, frameHeight);
 	        } else {
 	            System.out.println("Error: Can't change Frames");
