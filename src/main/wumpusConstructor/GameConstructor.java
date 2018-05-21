@@ -16,12 +16,19 @@ public class GameConstructor
 	// MAIN GAME CONTROLS
 	public static GameControl controls;
 	
-	
+	/**
+	 * Method to create and return the game window
+	 * @return A new WumpusWindow object
+	 */
 	public static WumpusWindow initializeWindow() {
 		WumpusWindow window = new WumpusWindow(1366, 768);
 		return window;
 	}
 	
+	/**
+	 * Method to set a window to display the start screen
+	 * @param window Window used to display start screen
+	 */
 	public static void initializeMenu(WumpusWindow window) {
 		window.getFrame().clearAll();
 		//

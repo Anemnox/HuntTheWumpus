@@ -1,3 +1,7 @@
+/* TODO (This is Michael, here is a list of things I need:
+ * Cave - I need methods to access the array content
+ */
+
 package main;
 
 import java.awt.MouseInfo;
@@ -29,11 +33,9 @@ public class GameControl implements RunOnGameLoop {
 		mainLoop.start();
 	}
 
-	
-	//
-	//	Setting up DisplayFrame for GameMenu, GameBoard, etc
-	//
-	
+	/**
+	 * Method to set the game window to display the start screen
+	 */
 	public void startMenu() {
 		GameConstructor.initializeMenu(window);
 	}
@@ -74,9 +76,11 @@ public class GameControl implements RunOnGameLoop {
     //		Button Clicks
     //
     /**
-     * Method to start a new game
+     * Method to create a new game board for
+     * @param gen The specific board to be generated (int)
      */
     public void startGameBoard() {
+    	//TODO Communicate with Cave to determine which board to initialize
         //Creates new Player and calls map
     	player = new Player();
     	playerLoc = new MapCoordinates(0,0);
@@ -102,7 +106,7 @@ public class GameControl implements RunOnGameLoop {
 	}
 	
 	public void exit() {
-
+		
 	}
 	
     
