@@ -7,6 +7,7 @@ import javax.imageio.ImageIO;
 import graphics.*;
 import graphics.UserInterface.ButtonAction;
 import graphics.UserInterface.ButtonObject;
+import graphics.UserInterface.StatusBarObject;
 import graphics.UserInterface.TriviaDisplayObject;
 import main.GameControl;
 import main.wumpusConstructor.*;
@@ -90,12 +91,20 @@ public class GameConstructor
 					);
 		};
 		//
+		//	
+		//
+		window.getFrame().add(
+				new StatusBarObject(getAnimation(1)) 
+				);
+		
+		//
 		//	Misc 
 		//
 		for(int i = 0; i < GameData.gameBoardData.length; i++) {
 			window.getFrame().add(new GraphicObject(null, new Coordinate(GameData.menuData[i][0], GameData.menuData[i][1]), 
 					GameData.menuData[i][2], GameData.menuData[i][3]));
 		}
+		
 	}
 	
 	
