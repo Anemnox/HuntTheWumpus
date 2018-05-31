@@ -1,15 +1,18 @@
-package main;
+package main.gameboardEntities;
 
 // The player object stores all data regarding the player
-public class Player {
+public class Player implements GameEntity{
 	
 	private int arrows;
 	private int gold;
-	private int turns = 0;
+	private int turns;
 	private int score;
 	
 	public Player() {
-		
+		turns = 0; 
+		gold = 0;
+		arrows = 0;
+		score = 0;
 	}
 	
 	public void setArrows(int setAmount) { // Force sets the arrow count of the player

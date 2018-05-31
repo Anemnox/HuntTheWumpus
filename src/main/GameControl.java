@@ -9,9 +9,11 @@ import java.awt.Point;
 
 import javax.swing.SwingUtilities;
 
+import etc.MapCoordinates;
 import graphics.*;
 import graphics.UserInterface.ButtonAction;
 import graphics.UserInterface.ButtonObject;
+import main.gameboardEntities.Player;
 import main.wumpusConstructor.GameConstructor;
 
 public class GameControl implements RunOnGameLoop {

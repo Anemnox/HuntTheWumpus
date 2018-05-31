@@ -4,7 +4,7 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 
 import graphics.*;
-import main.Player;
+import main.gameboardEntities.Player;
 
 public class StatusBarObject extends GraphicObject{
 	private ArrayList<Player> listOfPlayers;

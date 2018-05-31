@@ -1,8 +1,11 @@
-package main;
+package etc;
+
+import main.RunOnGameLoop;
+import main.gameboardEntities.CaveSystem;
 
 public class MapCoordinates  implements RunOnGameLoop
 {	
-	private Cave cave;
+	private CaveSystem cave;
 	// The GameBoard handles the location of everything on the map
 	private int xCoor;
 	private int yCoor;
@@ -16,22 +19,10 @@ public class MapCoordinates  implements RunOnGameLoop
 		yCoor = y;
 	}
 	
-	// Get and Set commands for the x coordinate
-	public int getX() {
-		return xCoor;
-	}
-	
-	public void setX(int input) {
-		xCoor = input;
-	}
-	
-	// Get and Set commands for the y coordinate
-	public int getY() {
-		return yCoor;
-	}
-	
-	public void setY(int input) {
-		yCoor = input;
+	@Override
+	public void update(double tick) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	// Equals compares this objects coordinates with the coordinates of another object
@@ -98,6 +89,9 @@ public class MapCoordinates  implements RunOnGameLoop
 		}
 	}
 	
+	
+	
+	
 	// Private functions to modify XY coordinates into index coordinates
 	// CONVERT INDEX TO COORDINATES
 	// x = index / height
@@ -119,9 +113,21 @@ public class MapCoordinates  implements RunOnGameLoop
 	}
 	
 	
-	@Override
-	public void update(double tick) {
-		// TODO Auto-generated method stub
-		
+	// Get and Set commands for the x coordinate
+	public int getX() {
+		return xCoor;
+	}
+	
+	public void setX(int input) {
+		xCoor = input;
+	}
+	
+	// Get and Set commands for the y coordinate
+	public int getY() {
+		return yCoor;
+	}
+	
+	public void setY(int input) {
+		yCoor = input;
 	}
 }
