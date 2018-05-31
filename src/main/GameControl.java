@@ -6,6 +6,7 @@ package main;
 
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.util.ArrayList;
 
 import javax.swing.SwingUtilities;
 
@@ -17,12 +18,14 @@ import main.gameboardEntities.Player;
 import main.wumpusConstructor.GameConstructor;
 
 public class GameControl implements RunOnGameLoop {
+	private String gameState;
 	private GameLoop mainLoop;
 	private WumpusWindow window;
 	private Player player;
 	private MapCoordinates playerLoc, wumpus, pit1, pit2, bat1, bat2;
 	private int movement;
-	
+	private ArrayList<Object> deck;
+	private ArrayList<Object> discard;
 	
 	/**
 	 * Method to construct the GameControl object
@@ -33,6 +36,8 @@ public class GameControl implements RunOnGameLoop {
 		window = GameConstructor.initializeWindow();
 		startMenu();
 		mainLoop.start();
+		
+		
 	}
 
 	/**
@@ -45,7 +50,7 @@ public class GameControl implements RunOnGameLoop {
 	public void status() {
         //Return the status of the player, Calls Player
     }
-
+	
 	/**
 	 * Method to move the player to a new room
 	 * @param dir Input from 0-5, clockwise. 0 represents an upward movement
@@ -73,7 +78,6 @@ public class GameControl implements RunOnGameLoop {
         //Calls trivia for a quiz then returns a random tip
     }
 
-    
     //
     //		Button Clicks
     //
@@ -82,6 +86,9 @@ public class GameControl implements RunOnGameLoop {
      * @param gen The specific board to be generated (int)
      */
     public void startGameBoard() {
+    	discard = new ArrayList<Object>(); //TODO initialize deck of cards
+		deck = new ArrayList<Object>();
+
     	//TODO Communicate with Cave to determine which board to initialize
         //Creates new Player and calls map
     	player = new Player();
@@ -96,12 +103,14 @@ public class GameControl implements RunOnGameLoop {
     	GameConstructor.initializeGame(window);
     }
 
-	
 	public void displaySettings() {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/**
+	 * Method to display the instruction screen
+	 */
 	public void displayInstructions() {
 		// TODO Auto-generated method stub
 		
@@ -110,8 +119,6 @@ public class GameControl implements RunOnGameLoop {
 	public void exit() {
 		
 	}
-	
-    
 	
     /**
      * Method to shoot an arrow into a room
@@ -169,5 +176,6 @@ public class GameControl implements RunOnGameLoop {
     	 checkInput();
     	 window.getFrame().update(tick);
     }
+    
     
 }
