@@ -4,6 +4,8 @@ import java.awt.Color;
 
 import javax.swing.JFrame;
 
+import main.wumpusConstructor.GameConstructor;
+
 public class WumpusWindow extends JFrame {
 	private int height;
 	private int width;

@@ -31,20 +31,21 @@ public class GameConstructor
 	 */
 	public static void initializeMenu(WumpusWindow window) {
 		window.getFrame().clearAll();
+		window.getFrame().setBackground(getAnimation(2));
 		//
 		//  Buttons
 		//
 		for(int i = 0; i < GameData.menuButtonData.length; i++) {
-			window.getFrame().addButton(
-					new ButtonObject(getAnimation(GameData.menuButtonData[i][4]), new Coordinate(GameData.menuButtonData[i][0], GameData.menuButtonData[i][1]), 
-					GameData.menuButtonData[i][2], GameData.menuButtonData[i][3])
-					);
+			ButtonObject obj = new ButtonObject(getAnimation(GameData.menuButtonData[i][4]), new Coordinate(GameData.menuButtonData[i][0], GameData.menuButtonData[i][1]), 
+					GameData.menuButtonData[i][2], GameData.menuButtonData[i][3]);
+			obj.setText(GameData.buttonText[GameData.menuButtonData[i][5]]);
+			window.getFrame().addButton(obj);
 		};
 		//
 		//	Misc 
 		//
 		for(int i = 0; i < GameData.menuData.length; i++) {
-			window.getFrame().add(new GraphicObject(null, new Coordinate(GameData.menuData[i][0], GameData.menuData[i][1]), 
+			window.getFrame().add(new GraphicObject(getAnimation(GameData.menuData[i][4]), new Coordinate(GameData.menuData[i][0], GameData.menuData[i][1]), 
 					GameData.menuData[i][2], GameData.menuData[i][3]));
 		}
 		//

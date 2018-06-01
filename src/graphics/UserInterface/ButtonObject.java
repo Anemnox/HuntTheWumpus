@@ -1,6 +1,7 @@
 package graphics.UserInterface;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 
 import graphics.Animation;
@@ -11,10 +12,13 @@ public class ButtonObject extends GraphicObject{
 	protected boolean mouseHover;
 	protected boolean mouseDown;
 	protected ButtonAction buttonAction;
+	protected String textToDisplay;
+	protected Font currentFont;
 	
 	public ButtonObject (Animation anim, Coordinate coords, int width, int height, ButtonAction action) {
 		super(anim, coords, width, height);
 		buttonAction = action;
+		currentFont = new Font("Showcard gothic", Font.PLAIN, 58);
 	}
 	public ButtonObject (Animation anim, Coordinate coords, int width, int height) {
 		this(anim, coords, width, height, null);
@@ -26,9 +30,15 @@ public class ButtonObject extends GraphicObject{
 			animation.setFrame(2);
 		} else if (mouseHover) {
 			animation.setFrame(1);
+			currentFont = new Font("showcard gothic", Font.BOLD, 58);
 		} else {
 			animation.setFrame(0);
+			currentFont = new Font("showcard gothic", Font.PLAIN, 58);
 		}
+	}
+	
+	public void setText(String text) {
+		textToDisplay = text;
 	}
 	
 	//Mouse Interaction classes
@@ -75,6 +85,13 @@ public class ButtonObject extends GraphicObject{
 			graphic.setColor(color);
 			graphic.fillRect(x(), y(), width, height);
 		}	
+		try {
+			graphic.setColor(Color.getHSBColor(0.09f, 0.73f, 0.29f));
+			graphic.setFont(currentFont);
+			graphic.drawString(textToDisplay, x() + 20, y() + 70);
+		} catch (Exception e) {
+			
+		}
 	}
 	
 	public boolean getMouseDown() {

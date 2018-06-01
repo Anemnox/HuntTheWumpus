@@ -3,6 +3,9 @@ package main.gameboardEntities;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import graphics.Coordinate;
+import main.wumpusConstructor.GameConstructor;
+
 public class CaveSystem 
 {
 	public static int[][] arr1 = {
@@ -45,7 +48,8 @@ public class CaveSystem
 		//delcare int
 		//list all through 30 arrays
 		for(int i = 0; i < arr1.length; i++) {
-			listOfCaves.add(new Cave(i, arr1[i]));
+			Coordinate tempCoords = new Coordinate(0, 0);
+			listOfCaves.add(new Cave(GameConstructor.getAnimation(0), tempCoords, i, arr1[i]));
 		}
 		
 		
