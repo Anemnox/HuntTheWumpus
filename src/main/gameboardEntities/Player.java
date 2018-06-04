@@ -3,16 +3,15 @@ package main.gameboardEntities;
 // The player object stores all data regarding the player
 public class Player implements GameEntity{
 	
+	private int wumpusHits;
 	private int arrows;
 	private int gold;
 	private int turns;
-	private int score;
 	
 	public Player() {
 		turns = 0; 
-		gold = 0;
-		arrows = 0;
-		score = 0;
+		gold = 3;
+		arrows = 2;
 	}
 	
 	public void setArrows(int setAmount) { // Force sets the arrow count of the player
@@ -60,7 +59,8 @@ public class Player implements GameEntity{
 	}
 
 	public int calculateScore() {
-		score = (100 - turns) + gold + (arrows * 10);
+		int score;
+		score = (wumpusHits * 10) + gold + (arrows * 2) - turns;
 		return score;
 	}
 
