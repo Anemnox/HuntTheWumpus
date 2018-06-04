@@ -17,15 +17,17 @@ import graphics.UserInterface.ButtonObject;
 import main.gameboardEntities.CaveSystem;
 import main.gameboardEntities.Player;
 import main.wumpusConstructor.GameConstructor;
+import triviaStructure.Question;
 
 public class GameControl implements RunOnGameLoop {
+	private Question question;
 	private String gameState;
 	private GameLoop mainLoop;
 	private WumpusWindow window;
 	
 	
 	private Player player;
-	private MapCoordinates playerLoc, wumpus, pit1, pit2, bat1, bat2;
+	private MapCoordinates playerLoc, pit1, pit2, bat1, bat2;
 	private int movement;
 	
 	private CaveSystem caveMap;

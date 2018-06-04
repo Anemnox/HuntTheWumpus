@@ -14,8 +14,6 @@ public class Card {
 	private ArrayList<String> cardList = new ArrayList<>();
 	private ArrayList<Integer> iDList = new ArrayList<>();
 	
-	
-	
 	public Card() throws FileNotFoundException 
 	{
 		while (scan.hasNextLine())
