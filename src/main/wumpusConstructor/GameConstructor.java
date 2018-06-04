@@ -9,6 +9,7 @@ import graphics.UserInterface.ButtonAction;
 import graphics.UserInterface.ButtonObject;
 import graphics.UserInterface.TriviaDisplayObject;
 import main.GameControl;
+import main.gameboardEntities.CaveSystem;
 import main.wumpusConstructor.*;
 
 public class GameConstructor
@@ -104,6 +105,7 @@ public class GameConstructor
 			window.getFrame().add(new GraphicObject(null, new Coordinate(GameData.menuData[i][0], GameData.menuData[i][1]), 
 					GameData.menuData[i][2], GameData.menuData[i][3]));
 		}
+		window.getFrame().add(new CaveSystem());
 	}
 	
 	

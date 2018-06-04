@@ -48,7 +48,8 @@ public class GameData {
 			"images/minecraftTest.png",
 			"images/MenuButton.png",
 			"images/Table Background large.png",
-			"images/Title.png"
+			"images/Title.png",
+			"images/Caves.png"
 	};
 	
 	//info: width, height, number of frames, frames per row
@@ -56,7 +57,8 @@ public class GameData {
 			{300, 168, 1, 1},
 			{300, 100, 3, 1},
 			{1366, 768, 1, 1},
-			{700, 389, 1, 1}
+			{700, 389, 1, 1},
+			{100, 86, 4, 2}
 	};
 	
 }

@@ -2,6 +2,7 @@ package graphics;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 
 public class GraphicObject {
 	protected Coordinate coords;
@@ -101,6 +102,10 @@ public class GraphicObject {
 	}
 	public int y() {
 		return coords.getY();
+	}
+	
+	public BufferedImage getFrame() {
+		return animation.getFrame();
 	}
 	
 	public String toString() {

@@ -208,4 +208,8 @@ public class DisplayFrame extends JPanel implements MouseListener {
 		listOfObjects.clear();
 		
 	}
+	
+	public boolean mouseDown() {
+		return mouseDown;
+	}
 }

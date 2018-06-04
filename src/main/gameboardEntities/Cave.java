@@ -7,12 +7,12 @@ import graphics.Coordinate;
 import graphics.UserInterface.ButtonObject;
 
 public class Cave extends ButtonObject{
-	public ArrayList<GameEntity> listOfEntites;
+	public ArrayList<GameEntity> listOfEntities;
 	public int caveID;
 	public int[] doors;
 	
 	public Cave(Animation anim, Coordinate coords, int ID, int[] passageWays) {
-		super(anim, coords, 200, 200, null);
+		super(anim, coords, 100, 86, null);
 		caveID = ID;
 		doors = passageWays;
 		// TODO Auto-generated constructor stub
@@ -27,8 +27,12 @@ public class Cave extends ButtonObject{
 		return possible;
 	}
 	
-	public ArrayList<GameEntity> getEntites() {
-		return listOfEntites;
+	
+	public void addEntity(GameEntity entity) {
+		listOfEntities.add(entity);
+	}
+	public ArrayList<GameEntity> getEntities() {
+		return listOfEntities;
 	}
 	
 	

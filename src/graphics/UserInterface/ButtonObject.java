@@ -76,7 +76,7 @@ public class ButtonObject extends GraphicObject{
 	public void paint(Graphics graphic, int x, int y) {
 		try {
 			if(animation.getFrame() != null) {
-				graphic.drawImage(animation.getFrame(), x(), y(), null);
+				graphic.drawImage(animation.getFrame(), x + x(), y + y(), null);
 			} else {
 				graphic.setColor(color);
 				graphic.fillRect(x(), y(), width, height);

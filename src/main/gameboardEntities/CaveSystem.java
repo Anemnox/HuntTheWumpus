@@ -1,12 +1,15 @@
 package main.gameboardEntities;
 
+import java.awt.Graphics;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 import graphics.Coordinate;
+import graphics.GraphicObject;
 import main.wumpusConstructor.GameConstructor;
 
-public class CaveSystem 
+public class CaveSystem extends GraphicObject
 {
 	public static int[][] arr1 = {
 			{5, 6, 26}, //1
@@ -43,28 +46,71 @@ public class CaveSystem
 			};
 	public ArrayList<Cave> listOfCaves;
 	//constructor
-	public CaveSystem()
-	{	
-		//delcare int
+	public Coordinate cameraCoords;
+	
+	public CaveSystem(){
+		super(null, new Coordinate(110, 90), 1140, 580);
+		//declare int
 		//list all through 30 arrays
+		listOfCaves = new ArrayList<>();
 		for(int i = 0; i < arr1.length; i++) {
-			Coordinate tempCoords = new Coordinate(0, 0);
-			listOfCaves.add(new Cave(GameConstructor.getAnimation(0), tempCoords, i, arr1[i]));
+			Coordinate tempCoords = new Coordinate(95 * (i / 6), 94 * (i % 6) + (47 * ((i / 6) % 2)));
+			listOfCaves.add(new Cave(GameConstructor.getAnimation(4), tempCoords, i, arr1[i]));
 		}
-		
+		cameraCoords = new Coordinate(0, 0);
 		
 		
 		
 		/* run a true false situation grabbing index (number in the array) 
 		 *  and tell whether it is possible to move to each room until it finds a match
 		 */
+	}
+	
+	public void populateCaves(ArrayList<GameEntity> listOfEntities) {
+		for(Cave cave : listOfCaves) {
+			cave.listOfEntities.clear();
+		}
 		
+		int count = 0;
+		Random rand = new Random();
+		while(count < listOfEntities.size()) {
+			int i = rand.nextInt(listOfCaves.size() - 1);
+			if(listOfCaves.get(i).getEntities().isEmpty()) {
+				listOfCaves.get(i).addEntity(listOfEntities.get(count));
+				count ++;
+			}
+		}
+	}
 		
+	public void paint(Graphics graphics, int x, int y) {
+		//super.paint(graphic, x, y);
+		for(Cave cave: listOfCaves) {
+			try {
+				//graphics.drawImage(cave.getFrame(), x + cave.x() + x(), y + cave.y() + y(), null);
+				//System.out.println(x+x() + ", " + y +y());
+				cave.paint(graphics, x + x(), y + y());
+			} catch (Exception e) {
+				
+			}
+		}
 		
-		 
-	 }
+	}
 		
-		
+	public void setCamera(int x, int y) {
+		cameraCoords.setCoords(x, y);
+	}
+	
+	public int getNumberOfCaves() {
+		return listOfCaves.size();
+	}
+	
+	public int x() {
+		return coords.getX() + cameraCoords.getX();
+	}
+	
+	public int y() {
+		return coords.getY() + cameraCoords.getY();
+	}
 }
 	
 

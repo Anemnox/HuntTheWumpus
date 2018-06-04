@@ -14,6 +14,7 @@ import etc.MapCoordinates;
 import graphics.*;
 import graphics.UserInterface.ButtonAction;
 import graphics.UserInterface.ButtonObject;
+import main.gameboardEntities.CaveSystem;
 import main.gameboardEntities.Player;
 import main.wumpusConstructor.GameConstructor;
 
@@ -21,11 +22,17 @@ public class GameControl implements RunOnGameLoop {
 	private String gameState;
 	private GameLoop mainLoop;
 	private WumpusWindow window;
+	
+	
 	private Player player;
 	private MapCoordinates playerLoc, wumpus, pit1, pit2, bat1, bat2;
 	private int movement;
+	
+	private CaveSystem caveMap;
+	
 	private ArrayList<Object> deck;
 	private ArrayList<Object> discard;
+	private Object caveMap;
 	
 	/**
 	 * Method to construct the GameControl object
@@ -37,6 +44,7 @@ public class GameControl implements RunOnGameLoop {
 		startMenu();
 		mainLoop.start();
 		
+		caveMap = new CaveSystem();
 		
 	}
 
@@ -166,6 +174,11 @@ public class GameControl implements RunOnGameLoop {
     				button.noContact();
     			}
     		}
+    		
+    		if(window.getFrame().mouseDown() && caveMap != null) {
+    			
+    		}
+    		
     	} catch(Exception e) {
     		
     	}
