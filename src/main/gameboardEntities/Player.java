@@ -1,68 +1,75 @@
 package main.gameboardEntities;
 
+import java.awt.Graphics;
+
+import graphics.Animation;
+import graphics.Coordinate;
+import graphics.GraphicObject;
+
 // The player object stores all data regarding the player
-public class Player implements GameEntity{
+public class Player extends GraphicObject{
 	
 	private int wumpusHits;
 	private int arrows;
 	private int gold;
-	private int turns;
+	private int caveID;
 	
-	public Player() {
-		turns = 0; 
+	public Player(Animation anim) {
+		super(anim, new Coordinate(0, 0), 50, 50);
 		gold = 3;
 		arrows = 2;
+	}
+	
+	//public void paint(Graphics graphic, int x, int y) {
+	
+	//}
+	
+	public void update(double tick) {
+		
+	}
+	
+		
+	
+	
+	
+	
+	
+	public int calculateScore() {
+		int score;
+		score = (wumpusHits * 10) + gold + (arrows * 2);
+		return score;
+	}
+
+	
+	
+
+	//
+	//		setter methods
+	//
+	public void setGold(int setAmount) { // Force sets the gold count of the player
+		gold = setAmount;
 	}
 	
 	public void setArrows(int setAmount) { // Force sets the arrow count of the player
 		arrows = setAmount;
 	}
 	
-	public int getArrows() { // Returns how many arrows the player has
-		return arrows;
+	public void changeArrow(int incr) { // Add/Remove arrows
+		arrows += incr;
 	}
 	
-	public void incArrow() { // Increases the arrow count by 1
-		arrows++;
+	public void changeGold(int incr) { // Add/Remove Gold
+		gold += incr;
 	}
 	
-	public void decArrow() { // Decreases the arrow count by 1
-		arrows--;
-	}
 	
-	public void setGold(int setAmount) { // Force sets the gold count of the player
-		gold = setAmount;
-	}
-	
+	//Getter Methods;
 	public int getGold() { // Returns how much gold the player has
 		return gold;
 	}
-	
-	public void incGold() { // Increases the gold count by 1
-		gold++;
-	}
-	
-	public void decGold() { // Decreases the gold count by 1
-		gold--;
-	}
-	
-	public void setTurns(int setAmount) {
-		turns = setAmount;
-	}
-	
-	public int getTurns() {
-		return turns;
-	}
-	
-	public void incTurns() {
-		turns++;
-	}
 
-	public int calculateScore() {
-		int score;
-		score = (wumpusHits * 10) + gold + (arrows * 2) - turns;
-		return score;
+	public int getArrows() { // Returns how many arrows the player has
+		return arrows;
 	}
-
 	
 }

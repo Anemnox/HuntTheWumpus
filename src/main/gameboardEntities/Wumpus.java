@@ -1,8 +1,12 @@
 package main.gameboardEntities;
 
-import etc.MapCoordinates;
+import java.awt.Graphics;
 
-public class Wumpus {
+import graphics.Animation;
+import graphics.Coordinate;
+import graphics.GraphicObject;
+
+public class Wumpus extends GraphicObject {
 	private int health;
 	
 	/**
@@ -10,10 +14,16 @@ public class Wumpus {
 	 * @param h How many hits the wumpus can take (health)
 	 * @param loc The room the wumpus is in
 	 */
-	public Wumpus(int h, int loc) {
+	public Wumpus(Animation anim, int h, int loc) {
+		super(anim, new Coordinate(0, 0), 50, 50);
 		health = h;
 		
 	}
+	
+	public void update(double millis) {
+		
+	}
+	
 	
 	/**
 	 * Method to call when the Wumpus takes damage
@@ -30,5 +40,11 @@ public class Wumpus {
 	 */
 	public void move() {
 		//Do we really need this?
+	}
+
+	@Override
+	public void paint(Graphics graphic, int x, int y) {
+		// TODO Auto-generated method stub
+		
 	}
 }

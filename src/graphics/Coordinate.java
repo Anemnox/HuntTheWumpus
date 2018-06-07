@@ -21,4 +21,8 @@ public class Coordinate {
 	public int getY() {
 		return posY;
 	}
+	
+	public String toString() {
+		return "(" + posX + ", " + posY + ")";
+	}
 }

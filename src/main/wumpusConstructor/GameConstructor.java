@@ -7,6 +7,7 @@ import javax.imageio.ImageIO;
 import graphics.*;
 import graphics.UserInterface.ButtonAction;
 import graphics.UserInterface.ButtonObject;
+import graphics.UserInterface.GameButtonObject;
 import graphics.UserInterface.TriviaDisplayObject;
 import main.GameControl;
 import main.gameboardEntities.CaveSystem;
@@ -93,11 +94,32 @@ public class GameConstructor
 		//  Buttons
 		//
 		for(int i = 0; i < GameData.gameBoardButtonData.length; i++) {
-			window.getFrame().addButton(
-					new ButtonObject(null, new Coordinate(GameData.menuButtonData[i][0], GameData.menuButtonData[i][1]), 
-					GameData.menuButtonData[i][2], GameData.menuButtonData[i][3])
-					);
+			ButtonObject button = new GameButtonObject(getAnimation(GameData.gameBoardButtonData[i][4]), 
+					new Coordinate(GameData.gameBoardButtonData[i][0], GameData.gameBoardButtonData[i][1]), 
+			GameData.gameBoardButtonData[i][2], GameData.gameBoardButtonData[i][3]);
+			
+			button.setText(GameData.buttonText[GameData.gameBoardButtonData[i][5]]);
+			window.getFrame().addButton(button);
 		};
+		//
+		//	Button Actions
+		//
+		try {
+		window.getFrame().getButtons().get(3).setAction(
+				new ButtonAction() {
+					public void action() {
+						controls.centerBoard();
+					}
+
+				}
+				);
+		} catch (Exception e) {
+			
+		}
+		
+		
+		
+		
 		//
 		//	Misc 
 		//
@@ -105,7 +127,6 @@ public class GameConstructor
 			window.getFrame().add(new GraphicObject(null, new Coordinate(GameData.menuData[i][0], GameData.menuData[i][1]), 
 					GameData.menuData[i][2], GameData.menuData[i][3]));
 		}
-		window.getFrame().add(new CaveSystem());
 	}
 	
 	

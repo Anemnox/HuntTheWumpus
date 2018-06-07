@@ -15,26 +15,47 @@ import graphics.*;
 import graphics.UserInterface.ButtonAction;
 import graphics.UserInterface.ButtonObject;
 import main.gameboardEntities.CaveSystem;
+import main.gameboardEntities.Dice;
 import main.gameboardEntities.Player;
 import main.wumpusConstructor.GameConstructor;
 import triviaStructure.Question;
 
-public class GameControl implements RunOnGameLoop {
+public class GameControl extends Thread implements RunOnGameLoop {
 	private Question question;
 	private String gameState;
 	private GameLoop mainLoop;
 	private WumpusWindow window;
+	private Coordinate mouseCoords;
 	
+	//private MapCoordinates playerLoc, pit1, pit2, bat1, bat2;
+	//private int movement;
 	
-	private Player player;
-	private MapCoordinates playerLoc, pit1, pit2, bat1, bat2;
-	private int movement;
-	
-	private CaveSystem caveMap;
+	private boolean isHolding;
+	private Coordinate holdPoint;
+	private Coordinate cameraPoint;
 	
 	private ArrayList<Object> deck;
 	private ArrayList<Object> discard;
-	private Object caveMap;
+	
+	//
+	//		Gameplay Variables
+	//
+	private CaveSystem caveMap;
+	private ArrayList<GraphicObject> listOfPlayers;
+	private boolean gameIsRunning;
+	private Dice dice;
+	private int currentPlayer;
+	private int turnNumber;
+	private boolean turnEnd;
+	private GameAction currentAction;
+	private boolean rolledDice;
+	private int diceRoll;
+	private int totalMoves;
+	private int targetDirection;
+	
+	enum GameAction {
+		ROLL, DRAW_TRIVIA, DRAW_ACTION, MOVE, SHOOT, WAIT
+	}
 	
 	/**
 	 * Method to construct the GameControl object
@@ -45,17 +66,17 @@ public class GameControl implements RunOnGameLoop {
 		window = GameConstructor.initializeWindow();
 		startMenu();
 		mainLoop.start();
-		
-		caveMap = new CaveSystem();
-		
+		listOfPlayers = new ArrayList<>();
 	}
 
-	/**
-	 * Method to set the game window to display the start screen
-	 */
-	public void startMenu() {
-		GameConstructor.initializeMenu(window);
-	}
+	
+    /**
+     * To be honest I have no idea how this would work
+     */
+    public void buyTips() {
+        //Calls trivia for a quiz then returns a random tip
+    }
+	
 	
 	public void status() {
         //Return the status of the player, Calls Player
@@ -67,7 +88,7 @@ public class GameControl implements RunOnGameLoop {
 	 * and 5 represents a up-left movement.
 	 */
     public void move(int dir) {
-    	playerLoc.move(dir);
+    	//playerLoc.move(dir);
     }
 
     /**
@@ -81,16 +102,22 @@ public class GameControl implements RunOnGameLoop {
     	//currentTrivia = new TriviaDisplayObject(Trivia.getTriviax());
     }
     
-    /**
-     * To be honest I have no idea how this would work
-     */
-    public void buyTips() {
-        //Calls trivia for a quiz then returns a random tip
-    }
 
+    
+    
+    
     //
     //		Button Clicks
     //
+
+    /**
+	 * Method to set the game window to display the start screen
+	 */
+	public void startMenu() {
+		GameConstructor.initializeMenu(window);
+	}
+
+	
     /**
      * Method to create a new game board for
      * @param gen The specific board to be generated (int)
@@ -99,25 +126,40 @@ public class GameControl implements RunOnGameLoop {
     	discard = new ArrayList<Object>(); //TODO initialize deck of cards
 		deck = new ArrayList<Object>();
 
+		
     	//TODO Communicate with Cave to determine which board to initialize
-        //Creates new Player and calls map
-    	player = new Player();
-    	playerLoc = new MapCoordinates(0,0);
-    	wumpus = new MapCoordinates(0,0);
-    	pit1 = new MapCoordinates(0,0);
-    	pit2 = new MapCoordinates(0,0);
-    	bat1 = new MapCoordinates(0,0);
-    	bat2 = new MapCoordinates(0,0);
-    	
-    	
+        
+		
     	GameConstructor.initializeGame(window);
+    	caveMap = new CaveSystem(window.getFrame());
+    	dice = new Dice(GameConstructor.getAnimation(6));
+    	dice.setAction(
+    		new ButtonAction() {
+	    		public void action() {
+	    			currentAction = GameAction.ROLL;
+				}
+    	});
+    	
+    	listOfPlayers.add(new Player(null));
+    	listOfPlayers.add(new Player(null));
+		window.getFrame().addButton(caveMap);
+		window.getFrame().addButton(dice);
+		System.out.println("Populating Caves");
+		caveMap.populateCaves(listOfPlayers);
+		start();
     }
 
+    /**
+     * Method to display the settings screen
+     */
+    
 	public void displaySettings() {
 		// TODO Auto-generated method stub
 		
 	}
 
+	
+	
 	/**
 	 * Method to display the instruction screen
 	 */
@@ -126,8 +168,124 @@ public class GameControl implements RunOnGameLoop {
 		
 	}
 	
+	/**
+	 * Method to Exit the game
+	 */
 	public void exit() {
 		
+	}
+	
+	
+	//
+	//   Game Play
+	//
+	public void run() {
+		gameIsRunning = true;
+		currentPlayer = 0;
+		turnNumber = 1;
+		currentAction = GameAction.WAIT;
+		diceRoll = 1;
+		totalMoves = 0;
+		targetDirection = 0;
+		turnEnd = false;
+		while(gameIsRunning) {
+			//System.out.println("Game is running");
+			if(currentAction != GameAction.WAIT) {
+				switch(currentAction) {
+				case ROLL:
+					if(!rolledDice) {
+						for(int i = 0; i < 20; i++) {
+							dice.rollAnimation();
+							try {
+								Thread.sleep(60);
+							} catch (Exception e) {
+								
+							}
+						}
+						diceRoll = dice.rollDice();
+						rolledDice = true;
+					}
+					
+					currentAction = GameAction.WAIT;
+					break;
+				case MOVE:
+					
+					
+					currentAction = GameAction.WAIT;
+					break;
+				case SHOOT:
+					
+					
+					currentAction = GameAction.WAIT;
+					break;
+				case DRAW_TRIVIA:
+					
+					
+					currentAction = GameAction.WAIT;
+					break;
+				case DRAW_ACTION:
+					
+					
+					currentAction = GameAction.WAIT;
+					break;
+				
+				default:
+					
+					
+					break;
+					
+				}
+				
+				if(totalMoves >= diceRoll) {
+					turnEnd = true;
+				}
+				
+				if(turnEnd) {
+					currentPlayer ++;
+					totalMoves = 0;
+					rolledDice = false;
+					currentAction = GameAction.WAIT;
+					if(currentPlayer > listOfPlayers.size() - 1) {
+						currentPlayer = 0;
+						turnNumber ++;
+					}
+					turnEnd = false;
+				}
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			} else {
+				try {
+					Thread.sleep(50);
+				} catch (Exception e) {
+					
+				}
+			}
+			
+		}
+	}
+	
+	public void setGameAction(GameAction action) {
+		currentAction = action;
+	}
+	
+	
+	public void playTrivia() {
+		
+	}
+	
+	public void centerBoard() {
+		// TODO Auto-generated method stub
+		caveMap.setCamera(1,  1);
 	}
 	
     /**
@@ -152,21 +310,22 @@ public class GameControl implements RunOnGameLoop {
 	       case 4:
 	    	   
 	    	   break;
-    	   default:
+    	   default:	
     		   System.out.println("This shouldn't happen (Shoot Arrow Error");
     		   break;
        }
     }
-
-    public void death() {
-        //calls graphic and loads a death screen
-    }
     
+    
+    
+    //
+    //		GUI Code
+    //
     public void checkInput() {
     	try {
     		Point mousePoint = MouseInfo.getPointerInfo().getLocation();
     		Point windowPoint = window.getLocation();
-    		Coordinate mouseCoords = new Coordinate(mousePoint.x - windowPoint.x, mousePoint.y - windowPoint.y);
+    		mouseCoords = new Coordinate(mousePoint.x - windowPoint.x, mousePoint.y - windowPoint.y);
     		window.getFrame().setMouseCoords(mouseCoords.getX(), mouseCoords.getY());
     		for(ButtonObject button : window.getFrame().getButtons()) {
     			
@@ -178,7 +337,24 @@ public class GameControl implements RunOnGameLoop {
     		}
     		
     		if(window.getFrame().mouseDown() && caveMap != null) {
-    			
+    			if(!isHolding) {
+    				isHolding = true;
+    				holdPoint = new Coordinate(mouseCoords.getX(), mouseCoords.getY());
+    				
+    				//System.out.println("Mouse pressed");
+    				//System.out.println("Hold Point: " + holdPoint);
+    				//System.out.println("cameraPoint: " + cameraPoint);
+    			} else {
+    				Coordinate changeInDistance = new Coordinate(mouseCoords.getX() - holdPoint.getX(), mouseCoords.getY() - holdPoint.getY());
+    				
+    				caveMap.setCamera(changeInDistance.getX() + cameraPoint.getX(), 
+    						changeInDistance.getY() + cameraPoint.getY());
+    				//System.out.println("Map Coords: " + caveMap.getCameraX() + ", " + caveMap.getCameraY());
+    			}
+    		} else {
+    			isHolding = false;
+				cameraPoint = new Coordinate(caveMap.getSavedCameraX(), caveMap.getSavedCameraY());
+
     		}
     		
     	} catch(Exception e) {
@@ -192,5 +368,14 @@ public class GameControl implements RunOnGameLoop {
     	 window.getFrame().update(tick);
     }
     
+    public Coordinate getMousePoint() {
+    	return mouseCoords;
+    }
     
+    public GameAction getCurrentGameAction() {
+    	return currentAction;
+    }
+
+
+	
 }

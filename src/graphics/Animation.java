@@ -1,6 +1,9 @@
 package graphics;
 
+import java.awt.Image;
 import java.awt.image.BufferedImage;
+
+
 
 /**
  * Created by sn317602 on 11/18/2016.
@@ -8,6 +11,7 @@ import java.awt.image.BufferedImage;
 public class Animation {
     private BufferedImage spriteSheet;
     private BufferedImage frame;
+    private int scaling;
     private int currentFrame;
     private int frameHeight;
     private int frameWidth;
@@ -23,6 +27,7 @@ public class Animation {
         numberOfFrames = num;
         framesPerRow = column;
         setFrame(0);
+        scaling = 100;
     }
 
     //Temporary Background Creator - MAKE SURE TO MAKE BACKGROUND CLASS
@@ -36,6 +41,12 @@ public class Animation {
         setFrame(0);
     }
 
+    //set image Scale
+    public void setScale(int scale) {
+    	this.scaling = scale;
+    }
+    
+    
     //Changing Animation Frames
     public void setFrame(int frameNumber) {
     	if(spriteSheet != null) {
@@ -60,7 +71,14 @@ public class Animation {
 
     //Returning Frame
     public BufferedImage getFrame() {
-        return frame;
+    	return frame;
+        /*return (BufferedImage) frame.getScaledInstance((int)(frameWidth * ((double) scaling / 100)), 
+        		(int)(frameHeight * ((double) scaling / 100)), 
+        		Image.SCALE_DEFAULT);*/
+    }
+    
+    public int getFrameIndex() {
+    	return currentFrame;
     }
 }
 

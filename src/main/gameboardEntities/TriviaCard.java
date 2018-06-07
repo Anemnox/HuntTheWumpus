@@ -1,5 +1,5 @@
 package main.gameboardEntities;
 
-public interface GameEntity {
+public class TriviaCard {
 
 }
