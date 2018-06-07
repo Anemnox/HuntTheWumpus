@@ -58,7 +58,8 @@ public class GameData {
 			"images/Title.png",
 			"images/Caves.png",
 			"images/Button Two.png",
-			"images/Rolling Dice.png"
+			"images/Rolling Dice.png",
+			"images/Doors.png"
 	};
 	
 	//info: width, height, number of frames, frames per row, Scaling 
@@ -69,7 +70,8 @@ public class GameData {
 			{700, 389, 1, 1, 100},
 			{100, 86, 4, 2, 100},
 			{100, 50, 1, 1, 100},
-			{130, 130, 15, 4, 100}
+			{130, 130, 15, 4, 100},
+			{100, 86, 6, 3, 100},
 	};
 	
 }

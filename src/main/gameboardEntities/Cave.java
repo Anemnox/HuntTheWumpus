@@ -13,18 +13,57 @@ import graphics.GraphicObject;
 import graphics.UserInterface.ButtonObject;
 
 public class Cave extends ButtonObject{
+	public static Animation doorFrames;
 	public ArrayList<GraphicObject> listOfEntities;
 	public int caveID;
 	public float opacity;
 	public int[] doors;
+	
+	public int[] doorWayDirection;
+	
 	public boolean textIsVisible;
 	public boolean roomIsVisible;
 	public boolean focused;
+	
+	public static void setDoorsAnimation(Animation animation) {
+		doorFrames = animation;
+	}
 	
 	public Cave(Animation anim, Coordinate coords, int ID, int[] passageWays) {
 		super(anim, coords, 100, 86, null);
 		caveID = ID;
 		doors = passageWays;
+		
+		doorWayDirection = new int[passageWays.length];
+		for(int i = 0; i < passageWays.length; i++) {
+			int change = caveID - passageWays[i];
+			int direction = 0;
+			switch(change) {
+			case 1:
+				direction = 3;
+				break;
+			case 6:
+				direction = 1;
+				break;
+			case 7:
+				direction = 2;
+				break;
+			case -1:
+				direction = 0;
+				break;
+			case -6:
+				direction = 5;
+				break;
+			case -7:
+				direction = 6;
+				break;
+			default:
+				direction = 0;
+				break;
+			}
+			doorWayDirection[i] = direction;
+		}
+		
 		opacity = (float) 0.8;
 		// TODO Auto-generated constructor stub
 		textIsVisible = true;
@@ -85,6 +124,15 @@ public class Cave extends ButtonObject{
 		} catch (Exception e) {
 			graphic.setColor(color);
 			graphic.fillRect(x(), y(), width, height);
+		}
+		try {
+			for(int i : doorWayDirection) {
+				doorFrames.setFrame(i);
+				graphic.drawImage(doorFrames.getFrame(), x + x(), y + y(), null);
+			}
+			
+		} catch(Exception e) {
+			
 		}
 		try {
 			for(GraphicObject object: listOfEntities) {
