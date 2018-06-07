@@ -15,38 +15,40 @@ import main.wumpusConstructor.GameConstructor;
 
 public class CaveSystem extends ButtonObject
 {
+	/**
+	 * Cave System 1
+	 */
 	public static int[][] arr1 = {
-			{5, 6, 26}, //1
-			{3, 6, 7}, //2
-			{2, 8, 4}, //3
-			{3, 5, 28}, //4
-			{1, 4, 10}, //5
-			{1, 2, 12}, //6
-			{2, 8, 12}, //7
-			{3, 7, 14}, //8
-			{14, 15, 10}, //9
-			{11, 5, 9}, //10
-			{16, 10, 20}, //11
-			{7, 6, 16}, //12
-			{18, 17, 14}, //13
-			{13, 8, 9}, //14
-			{9, 20, 19},//15
-			{11, 21, 12}, //16
-			{13, 23, 18}, //17
-			{17, 13, 24}, //18
-			{15, 24, 25}, //19
-			{15, 11, 21}, //20
-			{20, 22, 16}, //21
-			{26, 21, 27}, //22
-			{17, 27, 24}, //23
-			{18, 19, 23}, //24
-			{19, 29, 30}, //25
-			{30, 1, 22}, //26
-			{22, 23, 28}, //27
-			{27, 29, 4}, //28 
-			{28, 25, 30}, //29
-			{26, 25, 29} //30
-			
+			{1, 6}, //0
+			{0, 2, 7}, //1
+			{1, 7, 8}, //2
+			{4, 8, 9}, //3
+			{3, 5, 9, 10}, //4
+			{4, 10, 11}, //5
+			{0, 7, 12}, //6
+			{1, 2, 6, 14}, //7
+			{2, 3, 15}, //8
+			{3, 4, 16}, //9
+			{4, 5, 17}, //10
+			{5, 17}, //11
+			{6, 18}, //12
+			{14, 18, 19}, //13
+			{7, 13, 15, 20}, //14
+			{8, 14, 21}, //15
+			{9, 21, 22}, //16
+			{10, 16, 22, 11}, //17*
+			{13, 24, 19}, //18
+			{13, 18, 26}, //19
+			{14, 21, 26, 27}, //20
+			{15, 16, 20, 27}, //21
+			{16, 23, 29}, //22
+			{22}, //23
+			{18, 25}, //24
+			{}, //25
+			{19, 20}, //26
+			{20, 27}, //27
+			{}, //28
+			{22}, //29
 			};
 	public ArrayList<Cave> listOfCaves;
 	//constructor
@@ -57,6 +59,10 @@ public class CaveSystem extends ButtonObject
 	public DisplayFrame currentFrame;
 	public int highlightedCave;
 	
+	/**
+	 * Constructs the cave system
+	 * @param frame TODO Andrew I need you for this
+	 */
 	public CaveSystem(DisplayFrame frame){
 		super(null, new Coordinate(410, 90), 590, 580);
 		//declare int
@@ -77,7 +83,10 @@ public class CaveSystem extends ButtonObject
 		 */
 	}
 	
-	
+	/**
+	 * 
+	 * @param listOfEntities
+	 */
 	public void populateCaves(ArrayList<GraphicObject> listOfEntities) {
 		for(Cave cave : listOfCaves) {
 			cave.listOfEntities.clear();
@@ -95,8 +104,6 @@ public class CaveSystem extends ButtonObject
 			}
 		}
 	}
-	
-	
 	
 	
 	public void update(double millis) {
