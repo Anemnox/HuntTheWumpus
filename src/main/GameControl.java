@@ -163,7 +163,9 @@ public class GameControl extends Thread implements RunOnGameLoop {
 		
 	}
 
-	
+	public void startScoreboard() {
+		GameConstructor.initializeScoreboard(window);
+	}
 	
 	/**
 	 * Method to display the instruction screen

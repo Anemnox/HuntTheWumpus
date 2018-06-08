@@ -129,6 +129,14 @@ public class GameConstructor
 
 					}
 				);
+			window.getFrame().getButtons().get(2).setAction(
+					new ButtonAction() {
+						public void action() {
+							controls.startScoreboard();//TODO change this later
+						}
+
+					}
+				);
 		} catch (Exception e) {
 			
 		}
@@ -145,7 +153,7 @@ public class GameConstructor
 		}
 	}
 	
-	public static void intializeScoreboard(WumpusWindow window) {
+	public static void initializeScoreboard(WumpusWindow window) {
 		window.getFrame().clearAll();
 		//
 		//  Buttons
