@@ -47,6 +47,11 @@ public class GameData {
 			{1100, 340, 150, 70, 5, 7}, // Center
 	};
 	
+	public static int[][] scoreboardButtonData = {
+			{},
+			{}
+	};
+	
 	
 	//
 	// 				image Data

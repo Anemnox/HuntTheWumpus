@@ -121,6 +121,14 @@ public class GameConstructor
 
 					}
 				);
+			window.getFrame().getButtons().get(1).setAction(
+					new ButtonAction() {
+						public void action() {
+							controls.shootArrow();
+						}
+
+					}
+				);
 		} catch (Exception e) {
 			
 		}
@@ -137,6 +145,20 @@ public class GameConstructor
 		}
 	}
 	
+	public static void intializeScoreboard(WumpusWindow window) {
+		window.getFrame().clearAll();
+		//
+		//  Buttons
+		//
+		for(int i = 0; i < GameData.scoreboardButtonData.length; i++) {
+			ButtonObject button = new GameButtonObject(getAnimation(GameData.gameBoardButtonData[i][4]), 
+					new Coordinate(GameData.gameBoardButtonData[i][0], GameData.gameBoardButtonData[i][1]), 
+			GameData.gameBoardButtonData[i][2], GameData.gameBoardButtonData[i][3]);
+			
+			button.setText(GameData.buttonText[GameData.gameBoardButtonData[i][5]]);
+			window.getFrame().addButton(button);
+		};
+	}
 	
 	//
 	//			Test
@@ -167,7 +189,6 @@ public class GameConstructor
 			return null;
 		}
 	}
-	
 	
 	public static Animation getAnimation(int id) {
 		try {

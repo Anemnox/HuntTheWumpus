@@ -231,35 +231,39 @@ public class GameControl extends Thread implements RunOnGameLoop {
 					currentAction = GameAction.WAIT;
 					break;
 				case SHOOT:
-					player.setShot(true);
-					if (caveMap.focusedCave() == caveMap.getCave(wumpus.getPosition())) {
-						wumpus.takeDamage();
-						player.hitWumpus();
-					} else {
-						for (GameEntity ge : listOfPlayers) {
-							if (caveMap.focusedCave() == caveMap.getCave(ge.getPosition())) {
-								for(int i = 0; i < 20; i++) {
-									dice.rollAnimation();
-									try {
-										Thread.sleep(60);
-									} catch (Exception e) {
-										
+					if (!player.getShot() && player.getArrows() > 0) {
+						player.setShot(true);
+						player.changeArrow(-1);
+						if (caveMap.focusedCave() == caveMap.getCave(wumpus.getPosition())) {
+							wumpus.takeDamage();
+							player.hitWumpus();
+						} else {
+							for (GameEntity ge : listOfPlayers) {
+								if (caveMap.focusedCave() == caveMap.getCave(ge.getPosition())) {
+									for(int i = 0; i < 20; i++) {
+										dice.rollAnimation();
+										try {
+											Thread.sleep(60);
+										} catch (Exception e) {
+											
+										}
 									}
+									int roll = dice.rollDice();
+									System.out.println(roll);
+									if (roll == 1) {
+										System.out.println("missed");
+									} else if (roll < 4) {
+										((Player)ge).setSlow((int)(roll - 1));
+										System.out.println("Enemy slowed for: " + (roll - 1));
+									} else {
+										((Player)ge).setStun(true);
+										System.out.println("Player stunned");
+									}
+									break;
 								}
-								int roll = dice.rollDice();
-								if (roll == 1) {
-									System.out.println("missed");
-								} else if (roll < 4) {
-									((Player)ge).setSlow((int)(roll * 1.5));
-									System.out.println("Enemy slowed for: " + (roll - 1));
-								} else {
-									((Player)ge).setStun(true);
-									System.out.println("Player stunned");
-								}
-								break;
 							}
+							wumpus.move();
 						}
-						wumpus.move();
 					}
 					
 					currentAction = GameAction.WAIT;
@@ -336,27 +340,8 @@ public class GameControl extends Thread implements RunOnGameLoop {
      * @param dir Input from 0-5, clockwise. 0 represents an upward movement
 	 * and 5 represents a up-left movement.
      */
-    public void shootArrow(int dir) {
-       switch (dir) {
-	       case 0:
-	    	   
-	    	   break;
-	       case 1:
-	    	   
-	    	   break;
-	       case 2:
-	    	   
-	    	   break;
-	       case 3:
-	    	   
-	    	   break;
-	       case 4:
-	    	   
-	    	   break;
-    	   default:	
-    		   System.out.println("This shouldn't happen (Shoot Arrow Error");
-    		   break;
-       }
+    public void shootArrow() {
+       currentAction = GameAction.SHOOT;
     }
     
     
