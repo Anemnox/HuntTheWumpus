@@ -136,9 +136,10 @@ public class GameControl extends Thread implements RunOnGameLoop {
 	    			currentAction = GameAction.ROLL;
 				}
     	});
+    	
     	wumpus = new Wumpus(null, 5, 17); //TODO figure out health value & position
-    	listOfPlayers.add(new Player(null));
-    	listOfPlayers.add(new Player(null));
+    	
+    	
     	for(int i = 0; i < 3; i++) {
     		listOfPlayers.add(new Player(GameConstructor.getAnimation(8)));
     		((Player)listOfPlayers.get(i)).setSkin(i);
