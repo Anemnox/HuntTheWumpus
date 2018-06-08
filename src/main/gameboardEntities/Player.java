@@ -21,13 +21,9 @@ public class Player extends GraphicObject implements GameEntity{
 	private boolean currentTurn;
 	
 	public Player(Animation anim) {
-<<<<<<< HEAD
-		super(anim, new Coordinate(0, 0), 50, 50);
+		super(anim, new Coordinate(31, -30), 34, 94);
 		slowed = 0;
 		stunned = false;
-=======
-		super(anim, new Coordinate(31, -30), 34,94);
->>>>>>> 06f0b533098a73a0fbe68971f43a8e3f3d895218
 		gold = 3;
 		arrows = 2;
 		setSkin(0);
@@ -46,9 +42,7 @@ public class Player extends GraphicObject implements GameEntity{
 	public void setPosition(int position) {
 		caveID = position;
 	}
-	
-<<<<<<< HEAD
-=======
+
 	public void setSkin(int index) {
 		skin = index;
 	}
@@ -57,16 +51,12 @@ public class Player extends GraphicObject implements GameEntity{
 		currentTurn = hasTurn;
 	}
 	
->>>>>>> 06f0b533098a73a0fbe68971f43a8e3f3d895218
 	public int calculateScore() {
 		int score;
 		score = (wumpusHits * 10) + gold + (arrows * 2); //TODO Tweak this
 		return score;
 	}
 
-<<<<<<< HEAD
-=======
-	
 	public void paint(Graphics graphic, int x, int y) {
 		try {
 			((Graphics2D) graphic).setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float) 1.0));
@@ -87,7 +77,6 @@ public class Player extends GraphicObject implements GameEntity{
 		
 	}
 
->>>>>>> 06f0b533098a73a0fbe68971f43a8e3f3d895218
 	//
 	//		setter methods
 	//

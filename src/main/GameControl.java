@@ -137,20 +137,15 @@ public class GameControl extends Thread implements RunOnGameLoop {
 	    			currentAction = GameAction.ROLL;
 				}
     	});
-    	
-<<<<<<< HEAD
     	wumpus = new Wumpus(null, 5, 17); //TODO figure out health value & position
     	listOfPlayers.add(new Player(null));
     	listOfPlayers.add(new Player(null));
-=======
     	for(int i = 0; i < 3; i++) {
     		listOfPlayers.add(new Player(GameConstructor.getAnimation(8)));
     		((Player)listOfPlayers.get(i)).setSkin(i);
     		window.getFrame().add(new PlayerDisplay(new Coordinate(100, 50 + (230 * i)),
     			(Player)listOfPlayers.get(i)));
     	}
-    	
->>>>>>> 06f0b533098a73a0fbe68971f43a8e3f3d895218
 		window.getFrame().addButton(caveMap);
 		window.getFrame().addButton(dice);
 		
@@ -294,13 +289,10 @@ public class GameControl extends Thread implements RunOnGameLoop {
 				}
 				
 				if(turnEnd) {
-<<<<<<< HEAD
 					player.setShot(false);
 					player.setStun(false);
 					player.setSlow(0);
-=======
 					player.setTurn(false);
->>>>>>> 06f0b533098a73a0fbe68971f43a8e3f3d895218
 					currentPlayer ++;
 					totalMoves = 0;
 					rolledDice = false;
@@ -315,14 +307,7 @@ public class GameControl extends Thread implements RunOnGameLoop {
 				
 				
 				
-				
-				
-				
-				
-				
-				
-				
-				
+	
 			} else {
 				try {
 					
