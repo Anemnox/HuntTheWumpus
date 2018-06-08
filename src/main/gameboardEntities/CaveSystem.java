@@ -88,7 +88,7 @@ public class CaveSystem extends ButtonObject
 	 * 
 	 * @param listOfEntities
 	 */
-	public void populateCaves(ArrayList<GraphicObject> listOfEntities) {
+	public void populateCaves(ArrayList<GameEntity> listOfEntities) {
 		for(Cave cave : listOfCaves) {
 			cave.listOfEntities.clear();
 		}
@@ -99,6 +99,7 @@ public class CaveSystem extends ButtonObject
 			int i = rand.nextInt(listOfCaves.size() - 1);
 
 			if(listOfCaves.get(i).getEntities().isEmpty()) {
+				listOfEntities.get(count).setPosition(i);
 				listOfCaves.get(i).addEntity(listOfEntities.get(count));
 				System.out.println("Adding Entity to Cave " + i);
 				count ++;
@@ -129,6 +130,7 @@ public class CaveSystem extends ButtonObject
 				//System.out.println("Cave " + cave.caveID + " was clicked");
 				highlightedCave = cave.caveID;
 				cave.setFocus(true);
+				
 				cave.clicked();
 			} else {
 				cave.setFocus(false);

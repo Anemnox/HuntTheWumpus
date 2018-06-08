@@ -14,7 +14,7 @@ import graphics.UserInterface.ButtonObject;
 
 public class Cave extends ButtonObject{
 	public static Animation doorFrames;
-	public ArrayList<GraphicObject> listOfEntities;
+	public ArrayList<GameEntity> listOfEntities;
 	public int caveID;
 	public float opacity;
 	public int[] doors;
@@ -36,26 +36,41 @@ public class Cave extends ButtonObject{
 		
 		doorWayDirection = new int[passageWays.length];
 		for(int i = 0; i < passageWays.length; i++) {
-			int change = caveID - passageWays[i];
+			int change = passageWays[i] - caveID;
 			int direction = 0;
+			int oddOrEvenRow = ((caveID / 6) % 2);
 			switch(change) {
 			case 1:
 				direction = 3;
 				break;
-			case 6:
+			case -1:
+				direction = 0;
+				break;
+			case 5:
 				direction = 1;
+				break;
+			case -5:
+				direction = 4;
+				break;
+			case 6:
+				if(oddOrEvenRow == 0) {
+					direction = 2;
+				} else {
+					direction = 1;
+				}
+				break;
+			case -6:
+				if(oddOrEvenRow == 0) {
+					direction = 4;
+				} else {
+					direction = 5;
+				}
 				break;
 			case 7:
 				direction = 2;
 				break;
-			case -1:
-				direction = 0;
-				break;
-			case -6:
-				direction = 5;
-				break;
 			case -7:
-				direction = 6;
+				direction = 5;
 				break;
 			default:
 				direction = 0;
@@ -81,19 +96,24 @@ public class Cave extends ButtonObject{
 	}
 	
 	
-	public void addEntity(GraphicObject entity) {
+	public void addEntity(GameEntity entity) {
 		listOfEntities.add(entity);
 	}
+	public void removeEntity(GameEntity entity) {
+		listOfEntities.remove(entity);
+	}
 	
-	public ArrayList<GraphicObject> getEntities() {
+	public ArrayList<GameEntity> getEntities() {
 		return listOfEntities;
 	}
 	
 	public void update(double tick) {
 		boolean tempVisibility = false;
-		for(GraphicObject object : listOfEntities) {
+		for(GameEntity object : listOfEntities) {
 			if(object instanceof Player) {
 				tempVisibility = true;
+			} else {
+				tempVisibility = false;
 			}
 		}
 		
@@ -104,6 +124,8 @@ public class Cave extends ButtonObject{
 		
 		if(roomIsVisible) {
 			animation.setFrame(2);
+		} else {
+			animation.setFrame(0);
 		}
 	}
 	
@@ -135,7 +157,7 @@ public class Cave extends ButtonObject{
 			
 		}
 		try {
-			for(GraphicObject object: listOfEntities) {
+			for(GameEntity object: listOfEntities) {
 				object.paint(graphic, x + x() + 30, y + y() + 20);
 			}
 		} catch(Exception e) {
@@ -164,7 +186,10 @@ public class Cave extends ButtonObject{
 	}
 		
 	public void clicked() {
-		
+		System.out.println();
+		for(int i : doorWayDirection){
+			System.out.print(" " + i);
+		}
 	}
 	
 	public void setFocus(boolean focused) {
@@ -176,5 +201,10 @@ public class Cave extends ButtonObject{
 			opacity = (float) 0.6;
 
 		}
+	}
+
+	public int getID() {
+		// TODO Auto-generated method stub
+		return caveID;
 	}
 }

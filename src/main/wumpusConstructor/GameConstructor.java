@@ -105,13 +105,21 @@ public class GameConstructor
 		//	Button Actions
 		//
 		try {
-		window.getFrame().getButtons().get(3).setAction(
-				new ButtonAction() {
-					public void action() {
-						controls.centerBoard();
-					}
+			window.getFrame().getButtons().get(3).setAction(
+					new ButtonAction() {
+						public void action() {
+							controls.centerBoard();
+						}
 
-				}
+					}
+					);
+			window.getFrame().getButtons().get(0).setAction(
+					new ButtonAction() {
+						public void action() {
+							controls.move();
+						}
+
+					}
 				);
 		} catch (Exception e) {
 			

@@ -7,7 +7,7 @@ import graphics.Coordinate;
 import graphics.GraphicObject;
 
 // The player object stores all data regarding the player
-public class Player extends GraphicObject{
+public class Player extends GraphicObject implements GameEntity{
 	
 	private int wumpusHits;
 	private int arrows;
@@ -29,7 +29,9 @@ public class Player extends GraphicObject{
 	}
 	
 		
-	
+	public void setPosition(int position) {
+		caveID = position;
+	}
 	
 	
 	
@@ -72,4 +74,7 @@ public class Player extends GraphicObject{
 		return arrows;
 	}
 	
+	public int getPosition() {
+		return caveID;
+	}
 }
