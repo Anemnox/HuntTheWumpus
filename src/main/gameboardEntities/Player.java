@@ -156,4 +156,10 @@ public class Player extends GraphicObject implements GameEntity{
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void addTurn() {
+		// TODO Auto-generated method stub
+		
+	}
 }

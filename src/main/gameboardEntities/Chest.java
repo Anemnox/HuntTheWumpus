@@ -22,10 +22,15 @@ public class Chest extends GraphicObject implements GameEntity{
 	 */
 	public Chest() {
 		super(GameConstructor.getAnimation(14), new Coordinate(38, 30), 50, 50);
+		cooldown = 0;
 	}
 	
 	public void update(double millis) {
-		
+		if(cooldown == 0) {
+			animation.setFrame(0);
+		} else {
+			animation.setFrame(1);
+		}
 	}
 	
 	public int getPosition() {
@@ -63,11 +68,7 @@ public class Chest extends GraphicObject implements GameEntity{
 	@Override
 	public void interact(GameEntity entity) {
 		System.out.println("Cooldown: " + cooldown);
-		if (cooldown > 0) {
-			if(entity instanceof Player) {
-				cooldown--;
-			}
-		} else if(entity instanceof Player) {
+		if(entity instanceof Player) {
 			Random rand = new Random();
 			if(rand.nextBoolean()) {
 				((Player) entity).changeGold(1);
@@ -76,6 +77,14 @@ public class Chest extends GraphicObject implements GameEntity{
 			}
 			cooldown = 2;
 			
+		}
+	}
+
+	@Override
+	public void addTurn() {
+		// TODO Auto-generated method stub
+		if(cooldown > 0) {
+			cooldown--;
 		}
 	}
 }

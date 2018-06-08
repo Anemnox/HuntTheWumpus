@@ -8,4 +8,5 @@ public interface GameEntity {
 	public void update(double millis);
 	public void setPosition(int position);
 	public void interact(GameEntity entity);
+	public void addTurn();
 }

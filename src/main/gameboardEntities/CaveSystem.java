@@ -89,7 +89,7 @@ public class CaveSystem extends ButtonObject
 	 */
 	public void emptyCaves() {
 		for(Cave cave : listOfCaves) {
-			cave.listOfEntities.clear();
+			//cave.listOfEntities.clear();
 		}
 	}
 	public void populateCaves(ArrayList<GameEntity> listOfEntities) {
@@ -115,6 +115,12 @@ public class CaveSystem extends ButtonObject
 			cave.update(millis);
 		}
 	};
+	
+	public void addTurn() {
+		for(Cave cave : listOfCaves) {
+			cave.addTurn();
+		}
+	}
 
 	public boolean pointTouch(Coordinate coords) {
 		mouseCoords = new Coordinate(coords.getX(), coords.getY());

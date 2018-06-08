@@ -133,6 +133,12 @@ public class Cave extends ButtonObject{
 		}
 	}
 	
+	public void addTurn() {
+		for(GameEntity entity : listOfEntities) {
+			entity.addTurn();
+		}
+	}
+	
 	public void paint(Graphics graphic, int x, int y) {
 		try {
 			((Graphics2D) graphic).setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, opacity));
@@ -163,11 +169,16 @@ public class Cave extends ButtonObject{
 		
 			try {
 				int i = 0;
-				for(GameEntity object: listOfEntities) {
+				/*for(GameEntity object: listOfEntities) {
 					if(roomIsVisible) {
 						object.paint(graphic, x + x() - 10 + (i * 10), y + y());
 					} 
 					i++;
+				} */
+				for(i = listOfEntities.size() - 1; i >= 0; i--) {
+					if(roomIsVisible) {
+						listOfEntities.get(i).paint(graphic, x + x() - 10 + (i * 10), y + y());
+					}
 				}
 			} catch(Exception e) {
 				

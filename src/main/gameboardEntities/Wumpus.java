@@ -82,4 +82,10 @@ public class Wumpus extends GraphicObject implements GameEntity {
 	public int getHealth() {
 		return health;
 	}
+
+	@Override
+	public void addTurn() {
+		// TODO Auto-generated method stub
+		
+	}
 }

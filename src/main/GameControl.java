@@ -427,6 +427,7 @@ public class GameControl extends Thread implements RunOnGameLoop {
 					if(currentPlayer > listOfPlayers.size() - 1) {
 						currentPlayer = 0;
 						turnNumber ++;
+						caveMap.addTurn();
 					}
 					turnEnd = false;
 				}
