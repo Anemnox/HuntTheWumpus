@@ -236,7 +236,6 @@ public class GameControl extends Thread implements RunOnGameLoop {
 						wumpus.takeDamage();
 						player.hitWumpus();
 					} else {
-						boolean playerInRoom = false;
 						for (GameEntity ge : listOfPlayers) {
 							if (caveMap.focusedCave() == caveMap.getCave(ge.getPosition())) {
 								for(int i = 0; i < 20; i++) {
@@ -260,9 +259,7 @@ public class GameControl extends Thread implements RunOnGameLoop {
 								break;
 							}
 						}
-						if (!playerInRoom) {
-							wumpus.move();
-						}
+						wumpus.move();
 					}
 					
 					currentAction = GameAction.WAIT;
