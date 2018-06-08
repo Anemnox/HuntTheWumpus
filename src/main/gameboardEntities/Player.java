@@ -16,12 +16,14 @@ public class Player extends GraphicObject implements GameEntity{
 	private int arrows;
 	private int gold;
 	private int caveID;
+	private boolean currentTurn;
 	
 	public Player(Animation anim) {
 		super(anim, new Coordinate(31, -30), 34,94);
 		gold = 3;
 		arrows = 2;
 		setSkin(0);
+		currentTurn = false;
 	}
 	
 	//public void paint(Graphics graphic, int x, int y) {
@@ -41,6 +43,9 @@ public class Player extends GraphicObject implements GameEntity{
 		skin = index;
 	}
 	
+	public void setTurn(boolean hasTurn) {
+		currentTurn = hasTurn;
+	}
 	
 	public int calculateScore() {
 		int score;
@@ -100,5 +105,9 @@ public class Player extends GraphicObject implements GameEntity{
 	
 	public int getPosition() {
 		return caveID;
+	}
+	
+	public boolean hasTurn() {
+		return currentTurn;
 	}
 }

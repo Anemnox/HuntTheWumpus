@@ -14,6 +14,7 @@ import etc.MapCoordinates;
 import graphics.*;
 import graphics.UserInterface.ButtonAction;
 import graphics.UserInterface.ButtonObject;
+import graphics.UserInterface.PlayerDisplay;
 import main.gameboardEntities.CaveSystem;
 import main.gameboardEntities.Dice;
 import main.gameboardEntities.GameEntity;
@@ -43,7 +44,6 @@ public class GameControl extends Thread implements RunOnGameLoop {
 	//
 	private CaveSystem caveMap;
 	private ArrayList<GameEntity> listOfPlayers;
-	private Animation playerDisplay;
 	private boolean gameIsRunning;
 	private Dice dice;
 	private int currentPlayer;
@@ -140,16 +140,16 @@ public class GameControl extends Thread implements RunOnGameLoop {
 				}
     	});
     	
-    	listOfPlayers.add(new Player(GameConstructor.getAnimation(8)));
-    	listOfPlayers.add(new Player(GameConstructor.getAnimation(8)));
-    	listOfPlayers.add(new Player(GameConstructor.getAnimation(8)));
-
-    	((Player)listOfPlayers.get(1)).setSkin(1);
-    	((Player)listOfPlayers.get(2)).setSkin(2);
+    	for(int i = 0; i < 3; i++) {
+    		listOfPlayers.add(new Player(GameConstructor.getAnimation(8)));
+    		((Player)listOfPlayers.get(i)).setSkin(i);
+    		window.getFrame().add(new PlayerDisplay(new Coordinate(100, 50 + (230 * i)),
+    			(Player)listOfPlayers.get(i)));
+    	}
     	
-    	playerDisplay = GameConstructor.getAnimation(9);
 		window.getFrame().addButton(caveMap);
 		window.getFrame().addButton(dice);
+		
 		System.out.println("Populating Caves");
 		caveMap.populateCaves(listOfPlayers);
 		start();
@@ -196,8 +196,9 @@ public class GameControl extends Thread implements RunOnGameLoop {
 		turnEnd = false;
 		while(gameIsRunning) {
 			//System.out.println("Game is running");
+			Player player = (Player)(listOfPlayers.get(currentPlayer));
+			player.setTurn(true);
 			if(currentAction != GameAction.WAIT) {
-				Player player = (Player)(listOfPlayers.get(currentPlayer));
 				switch(currentAction) {
 				case ROLL:
 					if(!rolledDice) {
@@ -257,6 +258,7 @@ public class GameControl extends Thread implements RunOnGameLoop {
 				}
 				
 				if(turnEnd) {
+					player.setTurn(false);
 					currentPlayer ++;
 					totalMoves = 0;
 					rolledDice = false;
@@ -281,6 +283,7 @@ public class GameControl extends Thread implements RunOnGameLoop {
 				
 			} else {
 				try {
+					
 					Thread.sleep(50);
 				} catch (Exception e) {
 					

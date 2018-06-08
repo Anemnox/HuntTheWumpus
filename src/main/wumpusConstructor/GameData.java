@@ -44,7 +44,7 @@ public class GameData {
 			{1100, 100, 150, 70, 5, 4}, //Move
 			{1100, 180, 150, 70, 5, 5}, //Shoot
 			{1100, 260, 150, 70, 5, 6}, //Draw
-			{580, 20, 150, 70, 5, 7}, // Center
+			{1100, 340, 150, 70, 5, 7}, // Center
 	};
 	
 	
@@ -61,7 +61,7 @@ public class GameData {
 			"images/Rolling Dice.png",
 			"images/Doors.png",
 			"images/Player.png",
-			"Player Display.png"
+			"images/Player Display.png"
 	};
 	
 	//info: width, height, number of frames, frames per row, Scaling 
