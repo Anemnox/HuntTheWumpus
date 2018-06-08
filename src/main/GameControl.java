@@ -219,8 +219,7 @@ public class GameControl extends Thread implements RunOnGameLoop {
 							}
 						}
 						diceRoll = dice.rollDice();
-						diceRoll -= player.getSlow();
-						player.setMoves(diceRoll);
+						player.changeMoves(diceRoll);
 						rolledDice = true;
 					}
 					
@@ -232,7 +231,7 @@ public class GameControl extends Thread implements RunOnGameLoop {
 							caveMap.getCave(player.getPosition()).removeEntity(player);
 							caveMap.focusedCave().addEntity(player);
 							player.setPosition(caveMap.focusedCave().getID());
-							player.decreaseMove();;
+							player.changeMoves(-1);
 						} else {
 							System.out.println("Not possible");
 							System.out.println(player.getPosition() + "    " + caveMap.focusedCave().getID());
@@ -241,7 +240,8 @@ public class GameControl extends Thread implements RunOnGameLoop {
 					currentAction = GameAction.WAIT;
 					break;
 				case SHOOT:
-					if (!player.getShot() && player.getArrows() > 0) {
+					if (!player.getShot() && player.getArrows() > 0 && rolledDice) {
+						player.changeMoves(-1);
 						player.setShot(true);
 						player.changeArrow(-1);
 						if (caveMap.focusedCave() == caveMap.getCave(wumpus.getPosition())) {
@@ -262,11 +262,11 @@ public class GameControl extends Thread implements RunOnGameLoop {
 									System.out.println(roll);
 									if (roll == 1) {
 										System.out.println("missed");
-									} else if (roll < 4) {
-										((Player)ge).setSlow((int)(roll - 1));
+									} else if (roll < 6) {
+										((Player)ge).changeMoves(-(roll - 1));
 										System.out.println("Enemy slowed for: " + (roll - 1));
 									} else {
-										((Player)ge).setStun(true);
+										((Player)ge).changeMoves(-6);
 										System.out.println("Player stunned");
 									}
 									break;
@@ -295,14 +295,13 @@ public class GameControl extends Thread implements RunOnGameLoop {
 					
 				}
 				
-				if((rolledDice && player.getNumberOfMoves() == 0) || player.getStun()) {
+				if((player.getNumberOfMoves() <= 0 && rolledDice) || player.getNumberOfMoves() == -6) {
 					turnEnd = true;
 				}
 				
 				if(turnEnd) {
+					player.setMoves(0);
 					player.setShot(false);
-					player.setStun(false);
-					player.setSlow(0);
 					player.setTurn(false);
 					player.setMoves(0);
 					currentPlayer ++;
