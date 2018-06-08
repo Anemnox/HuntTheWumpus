@@ -8,20 +8,26 @@ import graphics.GraphicObject;
 
 public class Wumpus extends GraphicObject {
 	private int health;
+	private int location;
 	
 	/**
 	 * Constructor to make a new Wumpus
+	 * @param anim Animation for the wumpus
 	 * @param h How many hits the wumpus can take (health)
 	 * @param loc The room the wumpus is in
 	 */
 	public Wumpus(Animation anim, int h, int loc) {
 		super(anim, new Coordinate(0, 0), 50, 50);
 		health = h;
-		
+		location = loc;
 	}
 	
 	public void update(double millis) {
 		
+	}
+	
+	public int getPosition() {
+		return location;
 	}
 	
 	

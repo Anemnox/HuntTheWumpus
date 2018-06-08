@@ -170,9 +170,12 @@ public class GameConstructor
 	
 	
 	public static Animation getAnimation(int id) {
-		Animation animation = new Animation(getImageResource(id), GameData.imageData[id][0], GameData.imageData[id][1],
-				 GameData.imageData[id][2], GameData.imageData[id][3]);
-		
-		return animation;
+		try {
+			Animation animation = new Animation(getImageResource(id), GameData.imageData[id][0], GameData.imageData[id][1],
+					 GameData.imageData[id][2], GameData.imageData[id][3]);
+			return animation;
+		} catch(Exception e) {
+			return null;
+		}
 	}
 }

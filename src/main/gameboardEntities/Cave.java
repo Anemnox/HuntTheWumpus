@@ -81,7 +81,7 @@ public class Cave extends ButtonObject{
 		
 		opacity = (float) 0.8;
 		// TODO Auto-generated constructor stub
-		textIsVisible = true;
+		textIsVisible = false; //true;
 		listOfEntities = new ArrayList<>();
 		focused = false;
 	}
@@ -110,6 +110,7 @@ public class Cave extends ButtonObject{
 	public void update(double tick) {
 		boolean tempVisibility = false;
 		for(GameEntity object : listOfEntities) {
+			object.update(tick);
 			if(object instanceof Player) {
 				tempVisibility = true;
 			} else {
@@ -123,7 +124,7 @@ public class Cave extends ButtonObject{
 		}
 		
 		if(roomIsVisible) {
-			animation.setFrame(2);
+			animation.setFrame(3);
 		} else {
 			animation.setFrame(0);
 		}
@@ -158,7 +159,7 @@ public class Cave extends ButtonObject{
 		}
 		try {
 			for(GameEntity object: listOfEntities) {
-				object.paint(graphic, x + x() + 30, y + y() + 20);
+				object.paint(graphic, x + x(), y + y());
 			}
 		} catch(Exception e) {
 			
@@ -186,10 +187,10 @@ public class Cave extends ButtonObject{
 	}
 		
 	public void clicked() {
-		System.out.println();
+		/*System.out.println();
 		for(int i : doorWayDirection){
 			System.out.print(" " + i);
-		}
+		}*/
 	}
 	
 	public void setFocus(boolean focused) {

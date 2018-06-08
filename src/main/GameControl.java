@@ -14,10 +14,12 @@ import etc.MapCoordinates;
 import graphics.*;
 import graphics.UserInterface.ButtonAction;
 import graphics.UserInterface.ButtonObject;
+import graphics.UserInterface.PlayerDisplay;
 import main.gameboardEntities.CaveSystem;
 import main.gameboardEntities.Dice;
 import main.gameboardEntities.GameEntity;
 import main.gameboardEntities.Player;
+import main.gameboardEntities.Wumpus;
 import main.wumpusConstructor.GameConstructor;
 import triviaStructure.Question;
 
@@ -43,6 +45,7 @@ public class GameControl extends Thread implements RunOnGameLoop {
 	//
 	private CaveSystem caveMap;
 	private ArrayList<GameEntity> listOfPlayers;
+	private Wumpus wumpus;
 	private boolean gameIsRunning;
 	private Dice dice;
 	private int currentPlayer;
@@ -124,10 +127,6 @@ public class GameControl extends Thread implements RunOnGameLoop {
     public void startGameBoard() {
     	discard = new ArrayList<Object>(); //TODO initialize deck of cards
 		deck = new ArrayList<Object>();
-
-		
-    	//TODO Communicate with Cave to determine which board to initialize
-        
 		
     	GameConstructor.initializeGame(window);
     	caveMap = new CaveSystem(window.getFrame());
@@ -139,10 +138,22 @@ public class GameControl extends Thread implements RunOnGameLoop {
 				}
     	});
     	
+<<<<<<< HEAD
+    	wumpus = new Wumpus(null, 5, 17); //TODO figure out health value & position
     	listOfPlayers.add(new Player(null));
     	listOfPlayers.add(new Player(null));
+=======
+    	for(int i = 0; i < 3; i++) {
+    		listOfPlayers.add(new Player(GameConstructor.getAnimation(8)));
+    		((Player)listOfPlayers.get(i)).setSkin(i);
+    		window.getFrame().add(new PlayerDisplay(new Coordinate(100, 50 + (230 * i)),
+    			(Player)listOfPlayers.get(i)));
+    	}
+    	
+>>>>>>> 06f0b533098a73a0fbe68971f43a8e3f3d895218
 		window.getFrame().addButton(caveMap);
 		window.getFrame().addButton(dice);
+		
 		System.out.println("Populating Caves");
 		caveMap.populateCaves(listOfPlayers);
 		start();
@@ -189,8 +200,9 @@ public class GameControl extends Thread implements RunOnGameLoop {
 		turnEnd = false;
 		while(gameIsRunning) {
 			//System.out.println("Game is running");
+			Player player = (Player)(listOfPlayers.get(currentPlayer));
+			player.setTurn(true);
 			if(currentAction != GameAction.WAIT) {
-				Player player = (Player)(listOfPlayers.get(currentPlayer));
 				switch(currentAction) {
 				case ROLL:
 					if(!rolledDice) {
@@ -203,6 +215,7 @@ public class GameControl extends Thread implements RunOnGameLoop {
 							}
 						}
 						diceRoll = dice.rollDice();
+						diceRoll -= player.getSlow();
 						rolledDice = true;
 					}
 					
@@ -223,7 +236,39 @@ public class GameControl extends Thread implements RunOnGameLoop {
 					currentAction = GameAction.WAIT;
 					break;
 				case SHOOT:
-					
+					player.setShot(true);
+					if (caveMap.focusedCave() == caveMap.getCave(wumpus.getPosition())) {
+						wumpus.takeDamage();
+						player.hitWumpus();
+					} else {
+						boolean playerInRoom = false;
+						for (GameEntity ge : listOfPlayers) {
+							if (caveMap.focusedCave() == caveMap.getCave(ge.getPosition())) {
+								for(int i = 0; i < 20; i++) {
+									dice.rollAnimation();
+									try {
+										Thread.sleep(60);
+									} catch (Exception e) {
+										
+									}
+								}
+								int roll = dice.rollDice();
+								if (roll == 1) {
+									System.out.println("missed");
+								} else if (roll < 4) {
+									((Player)ge).setSlow((int)(roll * 1.5));
+									System.out.println("Enemy slowed for: " + (roll - 1));
+								} else {
+									((Player)ge).setStun(true);
+									System.out.println("Player stunned");
+								}
+								break;
+							}
+						}
+						if (!playerInRoom) {
+							wumpus.move();
+						}
+					}
 					
 					currentAction = GameAction.WAIT;
 					break;
@@ -239,17 +284,23 @@ public class GameControl extends Thread implements RunOnGameLoop {
 					break;
 				
 				default:
-					
-					
+						
 					break;
 					
 				}
 				
-				if(totalMoves >= diceRoll) {
+				if(totalMoves >= diceRoll || player.getStun()) {
 					turnEnd = true;
 				}
 				
 				if(turnEnd) {
+<<<<<<< HEAD
+					player.setShot(false);
+					player.setStun(false);
+					player.setSlow(0);
+=======
+					player.setTurn(false);
+>>>>>>> 06f0b533098a73a0fbe68971f43a8e3f3d895218
 					currentPlayer ++;
 					totalMoves = 0;
 					rolledDice = false;
@@ -274,6 +325,7 @@ public class GameControl extends Thread implements RunOnGameLoop {
 				
 			} else {
 				try {
+					
 					Thread.sleep(50);
 				} catch (Exception e) {
 					
