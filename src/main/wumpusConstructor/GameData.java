@@ -91,8 +91,9 @@ public class GameData {
 			"images/CardFront.png",					//10
 			"images/Scoreboard big boi.png",		//11
 			"images/Scoreboard Small Bou.png",		//12
-			"images/Wumpus.png",
-			"images/Chest.png"
+			"images/Wumpus.png",					//13
+			"images/Chest.png",						//14
+			"images/ChestOpened.png"				//15
 	};
 	
 	//info: width, height, number of frames, frames per row, Scaling 

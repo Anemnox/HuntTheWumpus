@@ -11,7 +11,7 @@ import graphics.GraphicObject;
 import main.wumpusConstructor.GameConstructor;
 
 public class Chest extends GraphicObject implements GameEntity{
-	private int health;
+	private int cooldown;
 	private int location;
 	
 	/**
@@ -22,7 +22,6 @@ public class Chest extends GraphicObject implements GameEntity{
 	 */
 	public Chest() {
 		super(GameConstructor.getAnimation(14), new Coordinate(38, 30), 50, 50);
-		
 	}
 	
 	public void update(double millis) {
@@ -63,14 +62,20 @@ public class Chest extends GraphicObject implements GameEntity{
 
 	@Override
 	public void interact(GameEntity entity) {
-		// TODO Auto-generated method stub
-		if(entity instanceof Player) {
+		System.out.println("Cooldown: " + cooldown);
+		if (cooldown > 0) {
+			if(entity instanceof Player) {
+				cooldown--;
+			}
+		} else if(entity instanceof Player) {
 			Random rand = new Random();
 			if(rand.nextBoolean()) {
 				((Player) entity).changeGold(1);
 			} else {
 				((Player) entity).changeArrow(1);
 			}
+			cooldown = 2;
+			
 		}
 	}
 }
