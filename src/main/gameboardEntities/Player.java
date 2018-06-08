@@ -66,7 +66,7 @@ public class Player extends GraphicObject implements GameEntity{
 	
 	public int calculateScore() {
 		int score;
-		score = (wumpusHits * 18) + (gold * 2)  + (arrows * 3) - triviaFail; //TODO Tweak this
+		score = (wumpusHits * 200) + (gold * 30)  + (arrows * 10) - (triviaFail * 50); //TODO Tweak this
 		return score;
 	}
 

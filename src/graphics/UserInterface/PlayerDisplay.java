@@ -32,11 +32,11 @@ public class PlayerDisplay extends GraphicObject {
 		super.paint(graphic, x, y);
 		player.paint(graphic, x + x() + 30, y + y() + 60);
 		graphic.setColor(Color.black);
-		graphic.setFont(new Font("showcard gothic", Font.BOLD, 28));
+		graphic.setFont(new Font("showcard gothic", Font.BOLD, 22));
 		graphic.drawString("" + player.getNumberOfMoves(), x + x() + 230, y + y() + 90);
 		graphic.drawString("" + player.getArrows(), x + x() + 220, y + y() + 160);
 		graphic.drawString("" + player.getGold(), x + x() + 105, y + y() + 160);
-		graphic.drawString("Cave Position: " + player.getPosition(), x + x() + 10, y + y());
+		graphic.drawString("Cave Position: " + player.getPosition(), x + x() + 35, y + y() + 186);
 
 	}
 

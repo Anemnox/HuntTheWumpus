@@ -14,7 +14,7 @@ import graphics.UserInterface.ButtonObject;
 
 public class Cave extends ButtonObject{
 	public static Animation doorFrames;
-	public static boolean showAll = true;
+	public static boolean showAll = false;
 	public ArrayList<GameEntity> listOfEntities;
 	public int caveID;
 	public float opacity;

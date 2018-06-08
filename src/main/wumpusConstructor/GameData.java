@@ -50,6 +50,8 @@ public class GameData {
 			{1100, 180, 150, 70, 5, 5}, //Shoot
 			{1100, 260, 150, 70, 5, 6}, //Draw
 			{1100, 340, 150, 70, 5, 7}, // Center
+			{600, 670, 150, 70, 5, 3}, // Exit
+
 	};
 	
 	public static int[][] triviaButtonData = {

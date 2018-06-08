@@ -137,6 +137,14 @@ public class GameConstructor
 
 					}
 				);
+			window.getFrame().getButtons().get(4).setAction(
+					new ButtonAction() {
+						public void action() {
+							controls.startMenu();
+						}
+
+					}
+					);
 		} catch (Exception e) {
 			
 		}
@@ -165,6 +173,23 @@ public class GameConstructor
 			
 			button.setText(GameData.buttonText[GameData.scoreboardButtonData[i][5]]);
 			window.getFrame().addButton(button);
+			
+			window.getFrame().getButtons().get(0).setAction(
+					new ButtonAction() {
+						public void action() {
+							controls.startGameBoard();
+						}
+
+					}
+					);
+			window.getFrame().getButtons().get(1).setAction(
+					new ButtonAction() {
+						public void action() {
+							controls.startMenu();
+						}
+
+					}
+					);
 		};
 		for(int i = 0; i < GameData.scoreboardData.length; i++) {
 			ButtonObject button = new ButtonObject(getAnimation(GameData.scoreboardData[i][4]), 

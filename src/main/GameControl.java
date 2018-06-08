@@ -15,6 +15,7 @@ import graphics.*;
 import graphics.UserInterface.ButtonAction;
 import graphics.UserInterface.ButtonObject;
 import graphics.UserInterface.PlayerDisplay;
+import graphics.UserInterface.ScoreDisplay;
 import graphics.UserInterface.WumpusHealth;
 import main.actionCards.ActionCards;
 import main.gameboardEntities.CaveSystem;
@@ -156,6 +157,7 @@ public class GameControl extends Thread implements RunOnGameLoop {
     	listOfEntities.add(new Chest());
     	
     	
+    	listOfPlayers.clear();
     	for(int i = 0; i < 3; i++) {
     		listOfPlayers.add(new Player(GameConstructor.getAnimation(8)));
     		((Player)listOfPlayers.get(i)).setSkin(i);
@@ -222,6 +224,10 @@ public class GameControl extends Thread implements RunOnGameLoop {
 
 	public void startScoreboard() {
 		GameConstructor.initializeScoreboard(window);
+		//listOfPlayers.add(new Player(GameConstructor.getAnimation(8)));
+		for(int i = 0; i < listOfPlayers.size(); i++) {
+			window.getFrame().add(new ScoreDisplay(listOfPlayers.get(i), GameConstructor.getAnimation(12), new Coordinate(100, 100)));
+		}
 	}
 	
 	/**
