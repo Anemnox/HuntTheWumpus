@@ -202,7 +202,7 @@ public class TriviaManager extends ButtonObject{
 					graphic.setColor(color);
 					graphic.fillRect(x() + x, y() + y, width, height);
 				}
-				graphic.drawString("" + mouseRelCamera + "Answer: " + answer, x() + x + 10, y() + y - 40);
+				//graphic.drawString("" + mouseRelCamera + "Answer: " + answer, x() + x + 10, y() + y - 40);
 				
 				for(int i2 = 0; i2 < questionText.size(); i2++) {
 					graphic.drawString(questionText.get(i2), x() + x + 50 , y() + y + 80 + (30 * i2));
