@@ -1,6 +1,8 @@
 package main.gameboardEntities;
 
+import java.awt.AlphaComposite;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 import graphics.Animation;
 import graphics.Coordinate;
@@ -10,14 +12,16 @@ import graphics.GraphicObject;
 public class Player extends GraphicObject implements GameEntity{
 	
 	private int wumpusHits;
+	private int skin;
 	private int arrows;
 	private int gold;
 	private int caveID;
 	
 	public Player(Animation anim) {
-		super(anim, new Coordinate(0, 0), 50, 50);
+		super(anim, new Coordinate(31, -30), 34,94);
 		gold = 3;
 		arrows = 2;
+		setSkin(0);
 	}
 	
 	//public void paint(Graphics graphic, int x, int y) {
@@ -25,7 +29,7 @@ public class Player extends GraphicObject implements GameEntity{
 	//}
 	
 	public void update(double tick) {
-		
+		animation.setFrame(skin);
 	}
 	
 		
@@ -33,7 +37,9 @@ public class Player extends GraphicObject implements GameEntity{
 		caveID = position;
 	}
 	
-	
+	public void setSkin(int index) {
+		skin = index;
+	}
 	
 	
 	public int calculateScore() {
@@ -43,7 +49,25 @@ public class Player extends GraphicObject implements GameEntity{
 	}
 
 	
-	
+	public void paint(Graphics graphic, int x, int y) {
+		try {
+			((Graphics2D) graphic).setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float) 1.0));
+		} catch (Exception e) {
+			
+		}
+		try {
+			if(animation.getFrame() != null) {
+				graphic.drawImage(animation.getFrame(), x() + x, y() + y, null);
+			} else {
+				graphic.setColor(color);
+				graphic.fillRect(x() + x, y() + y, width, height);
+			} 
+		} catch (Exception e) {
+			graphic.setColor(color);
+			graphic.fillRect(x() + x, y() + y, width, height);
+		}
+		
+	}
 
 	//
 	//		setter methods

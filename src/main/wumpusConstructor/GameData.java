@@ -41,10 +41,10 @@ public class GameData {
 	public static int[][] gameBoardButtonData = {
 			//{}, // Setting Button
 			//{}, // Shop Button
-			{1000, 50, 300, 100, 5, 4}, //Move
-			{1000, 150, 300, 100, 5, 5}, //Shoot
-			{1000, 250, 300, 100, 5, 6}, //Draw
-			{500, 10, 300, 100, 5, 7}, // Center
+			{1100, 100, 150, 70, 5, 4}, //Move
+			{1100, 180, 150, 70, 5, 5}, //Shoot
+			{1100, 260, 150, 70, 5, 6}, //Draw
+			{580, 20, 150, 70, 5, 7}, // Center
 	};
 	
 	
@@ -57,9 +57,11 @@ public class GameData {
 			"images/Table Background large.png",
 			"images/Title.png",
 			"images/Caves.png",
-			"images/Button Two.png",
+			"images/ButtonTwo.png",
 			"images/Rolling Dice.png",
-			"images/Doors.png"
+			"images/Doors.png",
+			"images/Player.png",
+			"Player Display.png"
 	};
 	
 	//info: width, height, number of frames, frames per row, Scaling 
@@ -69,9 +71,11 @@ public class GameData {
 			{1366, 768, 1, 1, 100},
 			{700, 389, 1, 1, 100},
 			{100, 86, 4, 2, 100},
-			{100, 50, 1, 1, 100},
+			{150, 70, 1, 1, 100},
 			{130, 130, 15, 4, 100},
 			{100, 86, 6, 3, 100},
+			{34, 94, 4, 2, 100},
+			{300, 200, 2, 1, 100}
 	};
 	
 }

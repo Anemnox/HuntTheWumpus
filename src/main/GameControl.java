@@ -43,6 +43,7 @@ public class GameControl extends Thread implements RunOnGameLoop {
 	//
 	private CaveSystem caveMap;
 	private ArrayList<GameEntity> listOfPlayers;
+	private Animation playerDisplay;
 	private boolean gameIsRunning;
 	private Dice dice;
 	private int currentPlayer;
@@ -139,8 +140,14 @@ public class GameControl extends Thread implements RunOnGameLoop {
 				}
     	});
     	
-    	listOfPlayers.add(new Player(null));
-    	listOfPlayers.add(new Player(null));
+    	listOfPlayers.add(new Player(GameConstructor.getAnimation(8)));
+    	listOfPlayers.add(new Player(GameConstructor.getAnimation(8)));
+    	listOfPlayers.add(new Player(GameConstructor.getAnimation(8)));
+
+    	((Player)listOfPlayers.get(1)).setSkin(1);
+    	((Player)listOfPlayers.get(2)).setSkin(2);
+    	
+    	playerDisplay = GameConstructor.getAnimation(9);
 		window.getFrame().addButton(caveMap);
 		window.getFrame().addButton(dice);
 		System.out.println("Populating Caves");
