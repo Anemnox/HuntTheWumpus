@@ -19,11 +19,11 @@ import main.gameboardEntities.Dice;
 import main.gameboardEntities.GameEntity;
 import main.gameboardEntities.Player;
 import main.gameboardEntities.Wumpus;
+import main.triviaStructure.TriviaManager;
 import main.wumpusConstructor.GameConstructor;
-import triviaStructure.Questions;
 
 public class GameControl extends Thread implements RunOnGameLoop {
-	private Questions question;
+	private TriviaManager question;
 	private String gameState;
 	private GameLoop mainLoop;
 	private WumpusWindow window;

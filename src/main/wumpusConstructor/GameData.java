@@ -52,30 +52,36 @@ public class GameData {
 	// 				image Data
 	//
 	public static String[] imageNames = {
-			"images/minecraftTest.png",
-			"images/MenuButton.png",
-			"images/Table Background large.png",
-			"images/Title.png",
-			"images/Caves.png",
-			"images/ButtonTwo.png",
-			"images/Rolling Dice.png",
-			"images/Doors.png",
-			"images/Player.png",
-			"images/Player Display.png"
+			"images/minecraftTest.png",		 		//0
+			"images/MenuButton.png", 				//1
+			"images/Table Background large.png", 	//2
+			"images/Title.png", 					//3
+			"images/Caves.png", 					//4
+			"images/ButtonTwo.png", 				//5
+			"images/Rolling Dice.png",				//6
+			"images/Doors.png",						//7
+			"images/Player.png",					//8
+			"images/Player Display.png",			//9
+			"images/CardFront.png",					//10
+			"images/Scoreboard big boi.png",		//11
+			"images/Scoreboard Small Bou.png"		//12
 	};
 	
 	//info: width, height, number of frames, frames per row, Scaling 
 	public static int[][] imageData = {
-			{300, 168, 1, 1, 100},
-			{300, 100, 3, 1, 100},
-			{1366, 768, 1, 1, 100},
-			{700, 389, 1, 1, 100},
-			{100, 86, 4, 2, 100},
-			{150, 70, 1, 1, 100},
-			{130, 130, 15, 4, 100},
-			{100, 86, 6, 3, 100},
-			{34, 94, 4, 2, 100},
-			{300, 200, 2, 1, 100}
+			{300, 168, 1, 1, 100},					//0
+			{300, 100, 3, 1, 100},					//1
+			{1366, 768, 1, 1, 100},					//2
+			{700, 389, 1, 1, 100},					//3
+			{100, 86, 4, 2, 100},					//4
+			{150, 70, 1, 1, 100},					//5
+			{130, 130, 15, 4, 100},					//6
+			{100, 86, 6, 3, 100},					//7
+			{34, 94, 4, 2, 100},					//8
+			{300, 200, 2, 1, 100},					//9
+			{500, 315, 1, 1, 100},					//10
+			{409, 584, 1, 1, 100},					//11
+			{381, 255, 1, 1, 100}					//12
 	};
 	
 }

@@ -1,4 +1,4 @@
-package triviaStructure;
+package main.triviaStructure;
 
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -8,7 +8,7 @@ public class QuestionTester {
 	public static void main(String[] args) throws FileNotFoundException
 	{
 		Scanner scan = new Scanner(System.in);
-		Questions quest = new Questions();
+		TriviaManager quest = new TriviaManager();
 		String ans;
 		
 		System.out.println(quest.getQuestion());

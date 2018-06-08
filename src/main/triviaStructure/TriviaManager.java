@@ -1,10 +1,14 @@
-package triviaStructure;
+package main.triviaStructure;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import graphics.Coordinate;
+import graphics.GraphicObject;
+
 import java.io.*;
 
-public class Questions {
+public class TriviaManager extends GraphicObject{
 	
 		private Scanner scan = new Scanner(new File("src\\Questions"));
 		private ArrayList<String> questions = new ArrayList<>();
@@ -12,10 +16,14 @@ public class Questions {
 		private ArrayList<String> correctAns = new ArrayList<>();
 		//ArrayList of question + while method
 		private ArrayList<Boolean> check = new ArrayList<>();
-		public int index = 0;
+		public int currentQuestionIndex = 0;
 		
-		public Questions() throws FileNotFoundException 
+		public boolean isVisible;
+		
+		
+		public TriviaManager() throws FileNotFoundException 
 		{
+		super(null, new Coordinate(300, 100), 500, 500);
 		//Organizes the questions / answers in different lists
 		while (scan.hasNextLine())
 			{
@@ -32,37 +40,44 @@ public class Questions {
 			
 		//checks if while works
 		//for (String q : questions) System.out.println(q);
+		
+		//
+		
 	}
 		
 		
 		//Method 2: DO NOT REPEAT QUESTION
 		//ask random question
 		//reroll if already used
-		public String getQuestion() 
+		public String newQuestion() 
 		{
-			index = (int) (Math.random() * check.size());
-			while (check.get(index))
+			currentQuestionIndex = (int) (Math.random() * check.size());
+			while (check.get(currentQuestionIndex))
 			{
-				index = (int) (Math.random() * check.size());
+				currentQuestionIndex = (int) (Math.random() * check.size());
 		
 			}
 			
-			check.set(index, true);
+			check.set(currentQuestionIndex, true);
 			
-			return questions.get(index);
+			return questions.get(currentQuestionIndex);
+		}
+		
+		public String getQuestion() {
+			return questions.get(currentQuestionIndex);
 		}
 		
 		
 		public String getChoices(int num)
 		{
 			
-			return choices.get(index * 4 + num);
+			return choices.get(currentQuestionIndex * 4 + num);
 		
 		}
 		
 		public boolean isCorrect(String choice)
 		{
-			return (choice.equalsIgnoreCase(correctAns.get(index)));
+			return (choice.equalsIgnoreCase(correctAns.get(currentQuestionIndex)));
 		}
 		
 		

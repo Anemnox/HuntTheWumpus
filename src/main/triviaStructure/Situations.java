@@ -1,4 +1,4 @@
-package triviaStructure;
+package main.triviaStructure;
 
 public class Situations
 {	

@@ -47,7 +47,7 @@ public class Dice extends ButtonObject{
 			graphic.fillRect(x + x(), y + y(), width, height);
 		}
 		try {
-			graphic.drawString("" + diceRoll, x + x() + 30, y + y() - 20);
+			//graphic.drawString("" + diceRoll, x + x() + 30, y + y() - 20);
 			
 		} catch (Exception e) {
 			
