@@ -44,6 +44,7 @@ public class GameControl extends Thread implements RunOnGameLoop {
 	//
 	private CaveSystem caveMap;
 	private ArrayList<GameEntity> listOfPlayers;
+	private TriviaManager trivia;
 	private Wumpus wumpus;
 	private boolean gameIsRunning;
 	private Dice dice;
@@ -149,6 +150,11 @@ public class GameControl extends Thread implements RunOnGameLoop {
 		window.getFrame().addButton(caveMap);
 		window.getFrame().addButton(dice);
 		
+		try {
+			trivia = new TriviaManager();
+		} catch (Exception e) {
+			
+		}
 		System.out.println("Populating Caves");
 		caveMap.populateCaves(listOfPlayers);
 		start();
@@ -296,6 +302,7 @@ public class GameControl extends Thread implements RunOnGameLoop {
 					player.setMoves(0);
 					player.setShot(false);
 					player.setTurn(false);
+					player.setMoves(0);
 					currentPlayer ++;
 					rolledDice = false;
 					currentAction = GameAction.WAIT;

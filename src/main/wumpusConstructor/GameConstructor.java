@@ -8,7 +8,6 @@ import graphics.*;
 import graphics.UserInterface.ButtonAction;
 import graphics.UserInterface.ButtonObject;
 import graphics.UserInterface.GameButtonObject;
-import graphics.UserInterface.TriviaDisplayObject;
 import main.GameControl;
 import main.gameboardEntities.CaveSystem;
 import main.wumpusConstructor.*;
@@ -168,25 +167,11 @@ public class GameConstructor
 		};
 	}
 	
-	//
-	//			Test
-	//
-	public static WumpusWindow testTriviaDisplay() {
-		WumpusWindow window = new WumpusWindow(1366, 768);
-		window.getFrame().add(new TriviaDisplayObject(getAnimation(0), new Coordinate(300, 300), "This is not working"));
-		for(int i = 0; i < GameData.menuData.length; i++) {
-			window.getFrame().add(new GraphicObject(null, new Coordinate(GameData.menuData[i][0], GameData.menuData[i][1]), 
-					GameData.menuData[i][2], GameData.menuData[i][3]));
-		}
-		for(int i = 0; i < GameData.menuButtonData.length; i++) {
-			window.getFrame().addButton(new ButtonObject(null, new Coordinate(GameData.menuButtonData[i][0], GameData.menuButtonData[i][1]), 
-					GameData.menuButtonData[i][2], GameData.menuButtonData[i][3]));
-		}
-		return window;
-	}
 	
 	
-	//IMAGE LOADERS
+	//
+	//		IMAGE LOADERS
+	//
 	public static BufferedImage getImageResource(int id) {
 		try {
 			//String current = new java.io.File( "." ).getCanonicalPath();
