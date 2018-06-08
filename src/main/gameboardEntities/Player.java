@@ -10,7 +10,9 @@ import graphics.GraphicObject;
 
 // The player object stores all data regarding the player
 public class Player extends GraphicObject implements GameEntity{
-	
+	private boolean stunned;
+	private boolean shot;
+	private int slowed;
 	private int wumpusHits;
 	private int skin;
 	private int arrows;
@@ -19,7 +21,9 @@ public class Player extends GraphicObject implements GameEntity{
 	private boolean currentTurn;
 	
 	public Player(Animation anim) {
-		super(anim, new Coordinate(31, -30), 34,94);
+		super(anim, new Coordinate(31, -30), 34, 94);
+		slowed = 0;
+		stunned = false;
 		gold = 3;
 		arrows = 2;
 		setSkin(0);
@@ -38,7 +42,7 @@ public class Player extends GraphicObject implements GameEntity{
 	public void setPosition(int position) {
 		caveID = position;
 	}
-	
+
 	public void setSkin(int index) {
 		skin = index;
 	}
@@ -49,11 +53,10 @@ public class Player extends GraphicObject implements GameEntity{
 	
 	public int calculateScore() {
 		int score;
-		score = (wumpusHits * 10) + gold + (arrows * 2);
+		score = (wumpusHits * 10) + gold + (arrows * 2); //TODO Tweak this
 		return score;
 	}
 
-	
 	public void paint(Graphics graphic, int x, int y) {
 		try {
 			((Graphics2D) graphic).setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float) 1.0));
@@ -77,8 +80,24 @@ public class Player extends GraphicObject implements GameEntity{
 	//
 	//		setter methods
 	//
+	public void hitWumpus() {
+		wumpusHits++;
+	}
+	
 	public void setGold(int setAmount) { // Force sets the gold count of the player
 		gold = setAmount;
+	}
+	
+	public void setShot(boolean shoot) {
+		shot = shoot;
+	}
+	
+	public void setStun(boolean stun) {
+		stunned = stun;
+	}
+	
+	public void setSlow(int slow) {
+		slowed = slow;
 	}
 	
 	public void setArrows(int setAmount) { // Force sets the arrow count of the player
@@ -93,10 +112,23 @@ public class Player extends GraphicObject implements GameEntity{
 		gold += incr;
 	}
 	
+	//
+	//		Getter Methods
+	//
+	public int getSlow() {
+		return slowed;
+	}
 	
-	//Getter Methods;
 	public int getGold() { // Returns how much gold the player has
 		return gold;
+	}
+	
+	public boolean getStun() {
+		return stunned;
+	}
+	
+	public boolean getShot() {
+		return shot;
 	}
 
 	public int getArrows() { // Returns how many arrows the player has

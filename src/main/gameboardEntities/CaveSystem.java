@@ -61,7 +61,6 @@ public class CaveSystem extends ButtonObject
 	
 	/**
 	 * Constructs the cave system
-	 * @param frame TODO Andrew I need you for this
 	 */
 	public CaveSystem(DisplayFrame frame){
 		super(null, new Coordinate(410, 90), 590, 580);
