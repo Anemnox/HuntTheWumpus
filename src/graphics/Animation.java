@@ -56,7 +56,7 @@ public class Animation {
 	            int column = (frameNumber) / framesPerRow;
 	            frame = spriteSheet.getSubimage(row * frameWidth, column * frameHeight, frameWidth, frameHeight);
 	        } else {
-	            System.out.println("Error: Can't change Frames");
+	            //System.out.println("Error: Can't change Frames");
 	        }
     	}
     }

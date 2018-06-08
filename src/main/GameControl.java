@@ -16,6 +16,7 @@ import graphics.UserInterface.ButtonAction;
 import graphics.UserInterface.ButtonObject;
 import main.gameboardEntities.CaveSystem;
 import main.gameboardEntities.Dice;
+import main.gameboardEntities.GameEntity;
 import main.gameboardEntities.Player;
 import main.wumpusConstructor.GameConstructor;
 import triviaStructure.Question;
@@ -41,7 +42,7 @@ public class GameControl extends Thread implements RunOnGameLoop {
 	//		Gameplay Variables
 	//
 	private CaveSystem caveMap;
-	private ArrayList<GraphicObject> listOfPlayers;
+	private ArrayList<GameEntity> listOfPlayers;
 	private boolean gameIsRunning;
 	private Dice dice;
 	private int currentPlayer;
@@ -84,11 +85,9 @@ public class GameControl extends Thread implements RunOnGameLoop {
 	
 	/**
 	 * Method to move the player to a new room
-	 * @param dir Input from 0-5, clockwise. 0 represents an upward movement
-	 * and 5 represents a up-left movement.
 	 */
-    public void move(int dir) {
-    	//playerLoc.move(dir);
+    public void move() {
+    	currentAction = GameAction.MOVE;
     }
 
     /**
@@ -191,6 +190,7 @@ public class GameControl extends Thread implements RunOnGameLoop {
 		while(gameIsRunning) {
 			//System.out.println("Game is running");
 			if(currentAction != GameAction.WAIT) {
+				Player player = (Player)(listOfPlayers.get(currentPlayer));
 				switch(currentAction) {
 				case ROLL:
 					if(!rolledDice) {
@@ -209,8 +209,17 @@ public class GameControl extends Thread implements RunOnGameLoop {
 					currentAction = GameAction.WAIT;
 					break;
 				case MOVE:
-					
-					
+					if(rolledDice) {
+						if(caveMap.getCave(player.getPosition()).possibleDoorway(caveMap.focusedCave().getID())) {
+							caveMap.getCave(player.getPosition()).removeEntity(player);
+							caveMap.focusedCave().addEntity(player);
+							player.setPosition(caveMap.focusedCave().getID());
+							totalMoves++;
+						} else {
+							System.out.println("Not possible");
+							System.out.println(player.getPosition() + "    " + caveMap.focusedCave().getID());
+						}
+					}
 					currentAction = GameAction.WAIT;
 					break;
 				case SHOOT:
