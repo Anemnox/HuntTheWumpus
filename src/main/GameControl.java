@@ -213,6 +213,7 @@ public class GameControl extends Thread implements RunOnGameLoop {
 						}
 						diceRoll = dice.rollDice();
 						diceRoll -= player.getSlow();
+						player.setMoves(diceRoll);
 						rolledDice = true;
 					}
 					
@@ -224,7 +225,7 @@ public class GameControl extends Thread implements RunOnGameLoop {
 							caveMap.getCave(player.getPosition()).removeEntity(player);
 							caveMap.focusedCave().addEntity(player);
 							player.setPosition(caveMap.focusedCave().getID());
-							totalMoves++;
+							player.decreaseMove();;
 						} else {
 							System.out.println("Not possible");
 							System.out.println(player.getPosition() + "    " + caveMap.focusedCave().getID());
@@ -287,7 +288,7 @@ public class GameControl extends Thread implements RunOnGameLoop {
 					
 				}
 				
-				if(totalMoves >= diceRoll || player.getStun()) {
+				if(player.getNumberOfMoves() == 0 || player.getStun()) {
 					turnEnd = true;
 				}
 				
@@ -297,7 +298,6 @@ public class GameControl extends Thread implements RunOnGameLoop {
 					player.setSlow(0);
 					player.setTurn(false);
 					currentPlayer ++;
-					totalMoves = 0;
 					rolledDice = false;
 					currentAction = GameAction.WAIT;
 					if(currentPlayer > listOfPlayers.size() - 1) {
