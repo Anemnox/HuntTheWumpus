@@ -18,9 +18,11 @@ public class Player extends GraphicObject implements GameEntity{
 	private int caveID;
 	private boolean currentTurn;
 	private int moves;
+	private int triviaFail;
 	
 	public Player(Animation anim) {
 		super(anim, new Coordinate(31, -30), 34, 94);
+		triviaFail = 0;
 		gold = 3;
 		arrows = 2;
 		setSkin(0);
@@ -30,6 +32,10 @@ public class Player extends GraphicObject implements GameEntity{
 	//public void paint(Graphics graphic, int x, int y) {
 	
 	//}
+	
+	public void triviaFailed() {
+		triviaFail++;
+	}
 	
 	public void update(double tick) {
 		animation.setFrame(skin);
@@ -59,7 +65,7 @@ public class Player extends GraphicObject implements GameEntity{
 	
 	public int calculateScore() {
 		int score;
-		score = (wumpusHits * 10) + gold + (arrows * 2); //TODO Tweak this
+		score = (wumpusHits * 18) + (gold * 2)  + (arrows * 3) - triviaFail; //TODO Tweak this
 		return score;
 	}
 
