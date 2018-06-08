@@ -35,20 +35,20 @@ public class CaveSystem extends ButtonObject
 			{14, 18, 19}, //13
 			{7, 13, 15, 20}, //14
 			{8, 14, 21}, //15
-			{9, 21, 22}, //16
-			{10, 16, 22, 11}, //17*
-			{13, 24, 19}, //18
-			{13, 18, 26}, //19
+			{9, 17, 21, 22}, //16
+			{10, 11, 16, 22}, //17*
+			{12, 13, 24, 19}, //18
+			{13, 18, 25, 26}, //19
 			{14, 21, 26, 27}, //20
 			{15, 16, 20, 27}, //21
-			{16, 23, 29}, //22
-			{22}, //23
+			{16, 17, 23, 28, 29}, //22
+			{22, 29}, //23
 			{18, 25}, //24
-			{}, //25
-			{19, 20}, //26
-			{20, 27}, //27
-			{}, //28
-			{22}, //29
+			{19, 24, 26}, //25
+			{19, 20, 25}, //26
+			{20, 21, 28}, //27
+			{22, 27}, //28
+			{22, 23}, //29
 			};
 	public ArrayList<Cave> listOfCaves;
 	//constructor
@@ -67,7 +67,6 @@ public class CaveSystem extends ButtonObject
 		super(null, new Coordinate(410, 90), 590, 580);
 		//declare int
 		//list all through 30 arrays
-		Cave.setDoorsAnimation(GameConstructor.getAnimation(7));
 		listOfCaves = new ArrayList<>();
 		for(int i = 0; i < arr1.length; i++) {
 			Coordinate tempCoords = new Coordinate(95 * (i / 6), 94 * (i % 6) + (47 * ((i / 6) % 2)));
@@ -182,6 +181,10 @@ public class CaveSystem extends ButtonObject
 		cameraCoords.setCoords(x, y);
 	}
 	
+	/**
+	 * Returns selected cave
+	 * @return selected cave
+	 */
 	public Cave focusedCave() {
 		return listOfCaves.get(highlightedCave);
 	}
