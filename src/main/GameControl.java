@@ -7,6 +7,7 @@ package main;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.swing.SwingUtilities;
 
@@ -14,7 +15,9 @@ import graphics.*;
 import graphics.UserInterface.ButtonAction;
 import graphics.UserInterface.ButtonObject;
 import graphics.UserInterface.PlayerDisplay;
+import main.actionCards.ActionCards;
 import main.gameboardEntities.CaveSystem;
+import main.gameboardEntities.Chest;
 import main.gameboardEntities.Dice;
 import main.gameboardEntities.GameEntity;
 import main.gameboardEntities.Player;
@@ -44,7 +47,9 @@ public class GameControl extends Thread implements RunOnGameLoop {
 	//
 	private CaveSystem caveMap;
 	private ArrayList<GameEntity> listOfPlayers;
+	private ArrayList<GameEntity> listOfEntities;
 	private TriviaManager trivia;
+	private ActionCards actionDeck;
 	private Wumpus wumpus;
 	private boolean gameIsRunning;
 	private Dice dice;
@@ -58,7 +63,7 @@ public class GameControl extends Thread implements RunOnGameLoop {
 	private int targetDirection;
 	
 	enum GameAction {
-		ROLL, DRAW_TRIVIA, DRAW_ACTION, MOVE, SHOOT, WAIT, WAIT_TRIVIA
+		ROLL, DRAW_TRIVIA, DRAW_ACTION, MOVE, SHOOT, WAIT, WAIT_TRIVIA, END_TURN
 	}
 	
 	/**
@@ -127,6 +132,7 @@ public class GameControl extends Thread implements RunOnGameLoop {
     public void startGameBoard() {
     	discard = new ArrayList<Object>(); //TODO initialize deck of cards
 		deck = new ArrayList<Object>();
+		listOfEntities = new ArrayList<>();
 		
     	GameConstructor.initializeGame(window);
     	caveMap = new CaveSystem(window.getFrame());
@@ -138,7 +144,14 @@ public class GameControl extends Thread implements RunOnGameLoop {
 				}
     	});
     	
-    	wumpus = new Wumpus(null, 5, 17); //TODO figure out health value & position
+    	wumpus = new Wumpus(GameConstructor.getAnimation(13), 5, 0); //TODO figure out health value & position
+    	listOfEntities.add(wumpus);
+    	listOfEntities.add(new Chest());
+    	listOfEntities.add(new Chest());
+    	listOfEntities.add(new Chest());
+    	listOfEntities.add(new Chest());
+    	listOfEntities.add(new Chest());
+    	listOfEntities.add(new Chest());
     	
     	
     	for(int i = 0; i < 3; i++) {
@@ -178,8 +191,16 @@ public class GameControl extends Thread implements RunOnGameLoop {
 		} catch (Exception e) {
 			
 		}
+		
+		try {
+			actionDeck = new ActionCards();
+			window.getFrame().addButton(actionDeck);
+		} catch (Exception e) {
+			
+		}
 		System.out.println("Populating Caves");
 		caveMap.populateCaves(listOfPlayers);
+		caveMap.populateCaves(listOfEntities);
 		start();
     }
 
@@ -191,7 +212,7 @@ public class GameControl extends Thread implements RunOnGameLoop {
     
 	public void displaySettings() {
 		// TODO Auto-generated method stub
-		
+		startScoreboard();
 	}
 
 	public void startScoreboard() {
@@ -230,17 +251,48 @@ public class GameControl extends Thread implements RunOnGameLoop {
 			//System.out.println("Game is running");
 			Player player = (Player)(listOfPlayers.get(currentPlayer));
 			player.setTurn(true);
-			if (currentAction == GameAction.WAIT_TRIVIA){
+			if (currentAction == GameAction.WAIT_TRIVIA || trivia.isVisible){
 				if(trivia.getResult() != -1) {
+					currentAction = GameAction.WAIT;
 					if(trivia.getResult() == 1) {
 						System.out.println("RIGHT");
+						if(player.isFighting()) {
+							Random rand = new Random();
+
+							player.fightWumpus(false);
+							wumpus.takeDamage();
+							if(wumpus.getHealth() != 0) {
+								int pos = rand.nextInt(caveMap.getNumberOfCaves());
+								while(caveMap.getCave(pos).getEntities().isEmpty()) {
+									pos = rand.nextInt(caveMap.getNumberOfCaves());
+								}
+								caveMap.getCave(wumpus.getPosition()).removeEntity(wumpus);
+								wumpus.setPosition(pos);
+								caveMap.getCave(pos).addEntity(wumpus);
+								wumpus.setPosition(pos);	
+								
+							} else {
+								startScoreboard();
+							}
+						}
 					} else {
+						Random rand = new Random();
+
 						System.out.println("WRONG");
 						player.triviaFailed();
+						if(player.isFighting()) {
+							player.fightWumpus(false);
+							caveMap.getCave(player.getPosition()).removeEntity(player);
+							int pos = rand.nextInt(caveMap.getNumberOfCaves());
+							player.setPosition(pos);
+							caveMap.getCave(pos).addEntity(player);
+							player.setPosition(pos);
+	
+						}
+						endTurn();
 					}
 					caveMap.setFocus(true);
 					trivia.setVisible(false);
-					currentAction = GameAction.WAIT;
 				}
 				try {
 					Thread.sleep(50);
@@ -278,8 +330,16 @@ public class GameControl extends Thread implements RunOnGameLoop {
 							System.out.println("Not possible");
 							System.out.println(player.getPosition() + "    " + caveMap.focusedCave().getID());
 						}
+						if(caveMap.getCave(player.getPosition()).getEntities().size() > 1) {
+							caveMap.getCave(player.getPosition()).interact();
+						}
+						if(player.isFighting()) {
+							playTrivia();
+						}
 					}
-					currentAction = GameAction.WAIT;
+					if(!player.isFighting()) {
+						currentAction = GameAction.WAIT;
+					}
 					break;
 				case SHOOT:
 					if (!player.getShot() && player.getArrows() > 0 && rolledDice) {
@@ -314,13 +374,13 @@ public class GameControl extends Thread implements RunOnGameLoop {
 									break;
 								}
 							}
-							wumpus.move();
 						}
 					}
 					
 					currentAction = GameAction.WAIT;
 					break;
 				case DRAW_TRIVIA:
+					System.out.println("PLAYING TRIVIA");
 					trivia.newQuestion();
 					trivia.setVisible(true);
 					caveMap.setFocus(false);
@@ -331,14 +391,17 @@ public class GameControl extends Thread implements RunOnGameLoop {
 					
 					currentAction = GameAction.WAIT;
 					break;
+				case END_TURN:
 				
+					turnEnd = true;
+					currentAction = GameAction.WAIT;
 				default:
 						
 					break;
 					
 				}
 				
-				if((player.getNumberOfMoves() <= 0 && rolledDice) || player.getNumberOfMoves() == -6) {
+				if((currentAction != GameAction.DRAW_TRIVIA && player.getNumberOfMoves() <= 0 && rolledDice) || player.getNumberOfMoves() == -6) {
 					turnEnd = true;
 				}
 				
@@ -380,9 +443,17 @@ public class GameControl extends Thread implements RunOnGameLoop {
 		currentAction = GameAction.DRAW_TRIVIA;
 	}
 	
+	public void drawAction() {
+		
+	}
+	
 	public void centerBoard() {
 		// TODO Auto-generated method stub
 		caveMap.setCamera(1,  1);
+	}
+	
+	public void endTurn() {
+		currentAction = GameAction.END_TURN;
 	}
 	
     /**

@@ -87,10 +87,13 @@ public class CaveSystem extends ButtonObject
 	 * 
 	 * @param listOfEntities
 	 */
-	public void populateCaves(ArrayList<GameEntity> listOfEntities) {
+	public void emptyCaves() {
 		for(Cave cave : listOfCaves) {
 			cave.listOfEntities.clear();
 		}
+	}
+	public void populateCaves(ArrayList<GameEntity> listOfEntities) {
+		
 		
 		int count = 0;
 		Random rand = new Random();

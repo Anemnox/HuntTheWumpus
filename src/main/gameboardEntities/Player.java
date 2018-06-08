@@ -19,9 +19,10 @@ public class Player extends GraphicObject implements GameEntity{
 	private boolean currentTurn;
 	private int moves;
 	private int triviaFail;
+	private boolean fightingWumpus;
 	
 	public Player(Animation anim) {
-		super(anim, new Coordinate(31, -30), 34, 94);
+		super(anim, new Coordinate(28, -30), 34, 94);
 		triviaFail = 0;
 		gold = 3;
 		arrows = 2;
@@ -116,6 +117,9 @@ public class Player extends GraphicObject implements GameEntity{
 		gold += incr;
 	}
 	
+	public void fightWumpus(boolean bool) {
+		fightingWumpus = bool;
+	}
 	//
 	//		Getter Methods
 	//
@@ -141,5 +145,15 @@ public class Player extends GraphicObject implements GameEntity{
 	
 	public boolean hasTurn() {
 		return currentTurn;
+	}
+
+	public boolean isFighting() {
+		return fightingWumpus;
+	}
+	
+	@Override
+	public void interact(GameEntity entity) {
+		// TODO Auto-generated method stub
+		
 	}
 }

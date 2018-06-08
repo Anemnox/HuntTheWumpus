@@ -132,7 +132,7 @@ public class GameConstructor
 			window.getFrame().getButtons().get(2).setAction(
 					new ButtonAction() {
 						public void action() {
-							controls.playTrivia();//TODO change this later
+							controls.endTurn();//TODO change this later
 						}
 
 					}
@@ -159,11 +159,20 @@ public class GameConstructor
 		//  Buttons
 		//
 		for(int i = 0; i < GameData.scoreboardButtonData.length; i++) {
-			ButtonObject button = new GameButtonObject(getAnimation(GameData.gameBoardButtonData[i][4]), 
-					new Coordinate(GameData.gameBoardButtonData[i][0], GameData.gameBoardButtonData[i][1]), 
-			GameData.gameBoardButtonData[i][2], GameData.gameBoardButtonData[i][3]);
+			ButtonObject button = new ButtonObject(getAnimation(GameData.scoreboardButtonData[i][4]), 
+					new Coordinate(GameData.scoreboardButtonData[i][0], GameData.scoreboardButtonData[i][1]), 
+			GameData.scoreboardButtonData[i][2], GameData.scoreboardButtonData[i][3]);
 			
-			button.setText(GameData.buttonText[GameData.gameBoardButtonData[i][5]]);
+			button.setText(GameData.buttonText[GameData.scoreboardButtonData[i][5]]);
+			window.getFrame().addButton(button);
+		};
+		for(int i = 0; i < GameData.scoreboardData.length; i++) {
+			ButtonObject button = new ButtonObject(getAnimation(GameData.scoreboardData[i][4]), 
+					new Coordinate(GameData.scoreboardData[i][0], GameData.scoreboardData[i][1]), 
+			GameData.scoreboardData[i][2], GameData.scoreboardData[i][3]);
+			
+			button.setText(GameData.buttonText[GameData.scoreboardData[i][5]]);
+			button.setFocus(false);
 			window.getFrame().addButton(button);
 		};
 	}

@@ -33,6 +33,7 @@ public class TriviaManager extends ButtonObject{
 		public Coordinate mouseRelCamera;
 		
 		public ArrayList<ButtonObject> listOfButtons;
+		public ArrayList<String> questionText;
 		
 		public TriviaManager() throws FileNotFoundException 
 		{
@@ -56,6 +57,7 @@ public class TriviaManager extends ButtonObject{
 			
 			//
 			listOfButtons = new ArrayList<>();
+			questionText = new ArrayList<>();
 		}
 	
 	
@@ -73,6 +75,8 @@ public class TriviaManager extends ButtonObject{
 			}
 			answer = "";
 			check.set(currentQuestionIndex, true);
+			questionText = ButtonObject.splitString(getQuestion(), 50);
+
 			
 			return questions.get(currentQuestionIndex);
 		}
@@ -198,11 +202,13 @@ public class TriviaManager extends ButtonObject{
 					graphic.setColor(color);
 					graphic.fillRect(x() + x, y() + y, width, height);
 				}
-				graphic.drawString("" + mouseRelCamera, x() + x + 10, y() + y - 40);
-
-				graphic.drawString(getQuestion(), x() + x + 50, y() + y + 80);
+				graphic.drawString("" + mouseRelCamera + "Answer: " + answer, x() + x + 10, y() + y - 40);
+				
+				for(int i2 = 0; i2 < questionText.size(); i2++) {
+					graphic.drawString(questionText.get(i2), x() + x + 50 , y() + y + 80 + (30 * i2));
+				}
 				for(int i = 0; i < 4; i++) {
-					graphic.drawString(getChoices(i), x() + x + 80, y() + y + 130 + (40 * i)); 
+					graphic.drawString(getChoices(i), x() + x + 80, y() + y + 180 + (40 * i)); 
 				}
 				for(ButtonObject button : listOfButtons) {
 					button.paint(graphic, x() + x, y() + y);

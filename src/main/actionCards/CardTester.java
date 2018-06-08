@@ -2,12 +2,12 @@ package main.actionCards;
 
 import java.io.FileNotFoundException;
 
-import main.actionCards.Card;
+import main.actionCards.ActionCards;
 
 public class CardTester {
 	public static void main(String[] args) throws FileNotFoundException
 	{
-		Card q = new Card();
+		ActionCards q = new ActionCards();
 		
 		System.out.println(q.getCard());
 	}

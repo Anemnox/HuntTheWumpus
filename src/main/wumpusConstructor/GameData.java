@@ -26,12 +26,13 @@ public class GameData {
 			"Exit",
 			"Move",
 			"Shoot",
-			"Draw",
+			"End",
 			"Center",
 			"       A   ",
 			"       B   ",
 			"       C   ",
-			"       D   "
+			"       D   ",
+			"  GG",
 	};
 	
 	
@@ -60,8 +61,12 @@ public class GameData {
 	
 
 	public static int[][] scoreboardButtonData = {
-			{},
-			{}
+			{370, 600, 300, 100, 1, 0},
+			{800, 600, 300, 100, 1, 3},
+	};
+	public static int[][] scoreboardData = {
+			{560, 50, 300, 100, 1, 12},
+			
 	};
 	
 	
@@ -83,7 +88,9 @@ public class GameData {
 			"images/Player Display.png",			//9
 			"images/CardFront.png",					//10
 			"images/Scoreboard big boi.png",		//11
-			"images/Scoreboard Small Bou.png"		//12
+			"images/Scoreboard Small Bou.png",		//12
+			"images/Wumpus.png",
+			"images/Chest.png"
 	};
 	
 	//info: width, height, number of frames, frames per row, Scaling 
@@ -100,7 +107,10 @@ public class GameData {
 			{300, 200, 2, 1, 100},					//9
 			{780, 455, 1, 1, 100},					//10
 			{409, 584, 1, 1, 100},					//11
-			{381, 255, 1, 1, 100}					//12
+			{381, 255, 1, 1, 100},					//12
+			{70, 71, 1, 1, 100},				//13
+			{40, 40, 1, 1, 100}					//13
+
 	};
 	
 }

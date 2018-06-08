@@ -36,6 +36,7 @@ public class PlayerDisplay extends GraphicObject {
 		graphic.drawString("" + player.getNumberOfMoves(), x + x() + 230, y + y() + 90);
 		graphic.drawString("" + player.getArrows(), x + x() + 220, y + y() + 160);
 		graphic.drawString("" + player.getGold(), x + x() + 105, y + y() + 160);
+		graphic.drawString("Cave Position: " + player.getPosition(), x + x() + 10, y + y());
 
 	}
 

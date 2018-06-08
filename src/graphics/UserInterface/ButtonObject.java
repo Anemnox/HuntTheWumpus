@@ -3,6 +3,7 @@ package graphics.UserInterface;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.util.ArrayList;
 
 import graphics.Animation;
 import graphics.Coordinate;
@@ -16,6 +17,34 @@ public class ButtonObject extends GraphicObject{
 	protected String textToDisplay;
 	protected Font currentFont;
 	
+	
+	public static ArrayList<String> splitString(String text, int i) {
+		ArrayList<String> strings = new ArrayList<>();
+		int setback = 0;
+		int tempSetBack = 0;
+		String tempText;
+		for(int i1 = 1; i1 < (text.length() / i) + 2; i1++) {
+			//System.out.println(text.length() + " " + (i1) * i);
+			//System.out.println(text.length() < (i * i1));
+			if(text.length() > ((i * i1) - setback)) {
+				System.out.println("Not end");
+				//tempSetBack = setback;
+				//while(text.charAt((i1 * i) - setback) != ' ') {
+					//tempSetBack++;
+				//}
+				
+				System.out.println("Char:: " + text.charAt((i1 * i) - setback));
+				tempText = text.substring((i1 - 1) * i - setback, ((i1) * i) - tempSetBack);
+			} else {
+				System.out.println("End");
+				tempText = text.substring((i1 - 1) * i - setback, text.length() - 1);
+			}
+			System.out.println(tempText);
+			strings.add(tempText);
+		}
+		
+		return strings;
+	}
 	
 	public ButtonObject (Animation anim, Coordinate coords, int width, int height, ButtonAction action) {
 		super(anim, coords, width, height);

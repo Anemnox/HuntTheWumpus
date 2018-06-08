@@ -14,6 +14,7 @@ import graphics.UserInterface.ButtonObject;
 
 public class Cave extends ButtonObject{
 	public static Animation doorFrames;
+	public static boolean showAll = true;
 	public ArrayList<GameEntity> listOfEntities;
 	public int caveID;
 	public float opacity;
@@ -111,10 +112,12 @@ public class Cave extends ButtonObject{
 		boolean tempVisibility = false;
 		for(GameEntity object : listOfEntities) {
 			object.update(tick);
-			if(object instanceof Player) {
-				tempVisibility = true;
+			if(Cave.showAll) {
+				tempVisibility = true;	
 			} else {
-				tempVisibility = false;
+				if(object instanceof Player) {
+					tempVisibility = true;
+				}
 			}
 		}
 		
@@ -157,13 +160,18 @@ public class Cave extends ButtonObject{
 		} catch(Exception e) {
 			
 		}
-		try {
-			for(GameEntity object: listOfEntities) {
-				object.paint(graphic, x + x(), y + y());
-			}
-		} catch(Exception e) {
-			
-		}
+		
+			try {
+				int i = 0;
+				for(GameEntity object: listOfEntities) {
+					if(roomIsVisible) {
+						object.paint(graphic, x + x() - 10 + (i * 10), y + y());
+					} 
+					i++;
+				}
+			} catch(Exception e) {
+				
+			}	
 		if(textIsVisible) {
 			try {
 				graphic.setColor(Color.getHSBColor(0.09f, 0.73f, 0.29f));
@@ -187,8 +195,8 @@ public class Cave extends ButtonObject{
 	}
 		
 	public void clicked() {
-		/*System.out.println();
-		for(int i : doorWayDirection){
+		System.out.println(listOfEntities);
+		/*for(int i : doorWayDirection){
 			System.out.print(" " + i);
 		}*/
 	}
@@ -207,5 +215,14 @@ public class Cave extends ButtonObject{
 	public int getID() {
 		// TODO Auto-generated method stub
 		return caveID;
+	}
+
+	public void interact() {
+		// TODO Auto-generated method stub
+		for(int i1 = 0; i1 < (listOfEntities.size() - 1); i1++) {
+			for(int i2 = i1; i2 < listOfEntities.size(); i2++ ) {
+				listOfEntities.get(i1).interact(listOfEntities.get(i2));
+			}
+		}
 	}
 }
