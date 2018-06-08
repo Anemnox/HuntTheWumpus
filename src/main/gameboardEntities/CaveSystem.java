@@ -68,6 +68,8 @@ public class CaveSystem extends ButtonObject
 		//declare int
 		//list all through 30 arrays
 		listOfCaves = new ArrayList<>();
+		Cave.setDoorsAnimation(GameConstructor.getAnimation(7));
+
 		for(int i = 0; i < arr1.length; i++) {
 			Coordinate tempCoords = new Coordinate(95 * (i / 6), 94 * (i % 6) + (47 * ((i / 6) % 2)));
 			listOfCaves.add(new Cave(GameConstructor.getAnimation(4), tempCoords, i, arr1[i]));
