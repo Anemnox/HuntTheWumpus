@@ -10,9 +10,7 @@ import graphics.GraphicObject;
 
 // The player object stores all data regarding the player
 public class Player extends GraphicObject implements GameEntity{
-	private boolean stunned;
 	private boolean shot;
-	private int slowed;
 	private int wumpusHits;
 	private int skin;
 	private int arrows;
@@ -23,8 +21,6 @@ public class Player extends GraphicObject implements GameEntity{
 	
 	public Player(Animation anim) {
 		super(anim, new Coordinate(31, -30), 34, 94);
-		slowed = 0;
-		stunned = false;
 		gold = 3;
 		arrows = 2;
 		setSkin(0);
@@ -56,8 +52,9 @@ public class Player extends GraphicObject implements GameEntity{
 		moves = i;
 	}
 	
-	public void decreaseMove() {
-		moves --;
+	
+	public void changeMoves(int i) {
+		moves =+ i;
 	}
 	
 	public int calculateScore() {
@@ -101,14 +98,6 @@ public class Player extends GraphicObject implements GameEntity{
 		shot = shoot;
 	}
 	
-	public void setStun(boolean stun) {
-		stunned = stun;
-	}
-	
-	public void setSlow(int slow) {
-		slowed = slow;
-	}
-	
 	public void setArrows(int setAmount) { // Force sets the arrow count of the player
 		arrows = setAmount;
 	}
@@ -124,16 +113,8 @@ public class Player extends GraphicObject implements GameEntity{
 	//
 	//		Getter Methods
 	//
-	public int getSlow() {
-		return slowed;
-	}
-	
 	public int getGold() { // Returns how much gold the player has
 		return gold;
-	}
-	
-	public boolean getStun() {
-		return stunned;
 	}
 	
 	public boolean getShot() {
