@@ -15,6 +15,7 @@ import graphics.*;
 import graphics.UserInterface.ButtonAction;
 import graphics.UserInterface.ButtonObject;
 import graphics.UserInterface.PlayerDisplay;
+import graphics.UserInterface.WumpusHealth;
 import main.actionCards.ActionCards;
 import main.gameboardEntities.CaveSystem;
 import main.gameboardEntities.Chest;
@@ -145,6 +146,7 @@ public class GameControl extends Thread implements RunOnGameLoop {
     	});
     	
     	wumpus = new Wumpus(GameConstructor.getAnimation(13), 5, 0); //TODO figure out health value & position
+    	    	
     	listOfEntities.add(wumpus);
     	listOfEntities.add(new Chest());
     	listOfEntities.add(new Chest());
@@ -201,6 +203,9 @@ public class GameControl extends Thread implements RunOnGameLoop {
 		System.out.println("Populating Caves");
 		caveMap.populateCaves(listOfPlayers);
 		caveMap.populateCaves(listOfEntities);
+		System.out.println(wumpus);
+    	window.getFrame().add(new WumpusHealth(wumpus));
+
 		start();
     }
 
@@ -263,7 +268,7 @@ public class GameControl extends Thread implements RunOnGameLoop {
 							wumpus.takeDamage();
 							if(wumpus.getHealth() != 0) {
 								int pos = rand.nextInt(caveMap.getNumberOfCaves());
-								while(caveMap.getCave(pos).getEntities().isEmpty()) {
+								while(!caveMap.getCave(pos).getEntities().isEmpty()) {
 									pos = rand.nextInt(caveMap.getNumberOfCaves());
 								}
 								caveMap.getCave(wumpus.getPosition()).removeEntity(wumpus);

@@ -64,11 +64,6 @@ public class Wumpus extends GraphicObject implements GameEntity {
 		}
 	}
 	
-	public void paintHealth(Graphics graphic) {
-		graphic.setFont(new Font("showcard gothic", Font.PLAIN, 28));
-		graphic.setColor(Color.BLACK);
-		graphic.drawString("WUMPUS HEALTH: " + getHealth(), 1000, 690);
-	}
 
 	@Override
 	public void setPosition(int position) {
