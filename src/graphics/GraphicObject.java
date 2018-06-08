@@ -28,7 +28,9 @@ public class GraphicObject {
 		color = Color.BLACK;
 	}
 	
-	public void update(double millis) {};
+	public void update(double millis) {
+		
+	};
 	
 		
 	

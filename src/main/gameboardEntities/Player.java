@@ -19,6 +19,7 @@ public class Player extends GraphicObject implements GameEntity{
 	private int gold;
 	private int caveID;
 	private boolean currentTurn;
+	private int moves;
 	
 	public Player(Animation anim) {
 		super(anim, new Coordinate(31, -30), 34, 94);
@@ -49,6 +50,14 @@ public class Player extends GraphicObject implements GameEntity{
 	
 	public void setTurn(boolean hasTurn) {
 		currentTurn = hasTurn;
+	}
+	
+	public void setMoves(int i) {
+		moves = i;
+	}
+	
+	public void decreaseMove() {
+		moves --;
 	}
 	
 	public int calculateScore() {
@@ -137,6 +146,10 @@ public class Player extends GraphicObject implements GameEntity{
 	
 	public int getPosition() {
 		return caveID;
+	}
+	
+	public int getNumberOfMoves() {
+		return moves;
 	}
 	
 	public boolean hasTurn() {
