@@ -10,7 +10,6 @@ import java.util.ArrayList;
 
 import javax.swing.SwingUtilities;
 
-import etc.MapCoordinates;
 import graphics.*;
 import graphics.UserInterface.ButtonAction;
 import graphics.UserInterface.ButtonObject;
@@ -20,10 +19,10 @@ import main.gameboardEntities.Dice;
 import main.gameboardEntities.GameEntity;
 import main.gameboardEntities.Player;
 import main.wumpusConstructor.GameConstructor;
-import triviaStructure.Question;
+import triviaStructure.Questions;
 
 public class GameControl extends Thread implements RunOnGameLoop {
-	private Question question;
+	private Questions question;
 	private String gameState;
 	private GameLoop mainLoop;
 	private WumpusWindow window;
@@ -99,7 +98,7 @@ public class GameControl extends Thread implements RunOnGameLoop {
     }
 
     public void displayTrivia(int x) {
-    	//currentTrivia = new TriviaDisplayObject(Trivia.getTriviax());
+
     }
     
 

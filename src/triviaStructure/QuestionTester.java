@@ -8,7 +8,7 @@ public class QuestionTester {
 	public static void main(String[] args) throws FileNotFoundException
 	{
 		Scanner scan = new Scanner(System.in);
-		Question quest = new Question();
+		Questions quest = new Questions();
 		String ans;
 		
 		System.out.println(quest.getQuestion());

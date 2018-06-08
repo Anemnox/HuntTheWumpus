@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.*;
 
-public class Question {
+public class Questions {
 	
 		private Scanner scan = new Scanner(new File("src\\Questions"));
 		private ArrayList<String> questions = new ArrayList<>();
@@ -14,7 +14,7 @@ public class Question {
 		private ArrayList<Boolean> check = new ArrayList<>();
 		public int index = 0;
 		
-		public Question() throws FileNotFoundException 
+		public Questions() throws FileNotFoundException 
 		{
 		//Organizes the questions / answers in different lists
 		while (scan.hasNextLine())
