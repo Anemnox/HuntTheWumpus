@@ -1,9 +1,8 @@
-package card;
+package main.actionCards;
 
 import java.io.FileNotFoundException;
 
-
-import card.Card;
+import main.actionCards.Card;
 
 public class CardTester {
 	public static void main(String[] args) throws FileNotFoundException

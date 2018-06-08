@@ -11,14 +11,17 @@ import graphics.GraphicObject;
 public class ButtonObject extends GraphicObject{
 	protected boolean mouseHover;
 	protected boolean mouseDown;
+	protected boolean hasFocus;
 	protected ButtonAction buttonAction;
 	protected String textToDisplay;
 	protected Font currentFont;
+	
 	
 	public ButtonObject (Animation anim, Coordinate coords, int width, int height, ButtonAction action) {
 		super(anim, coords, width, height);
 		buttonAction = action;
 		currentFont = new Font("Showcard gothic", Font.PLAIN, 58);
+		hasFocus = true;
 	}
 	public ButtonObject (Animation anim, Coordinate coords, int width, int height) {
 		this(anim, coords, width, height, null);
@@ -41,13 +44,22 @@ public class ButtonObject extends GraphicObject{
 		textToDisplay = text;
 	}
 	
+	public void setFocus(boolean focused) {
+		hasFocus = focused;
+	}
+	
+	
 	//Mouse Interaction classes
 	public void mouseHover() {
-		mouseHover = true;
+		if(hasFocus) {
+			mouseHover = true;
+		}
 	}	
 	
 	public void mouseDown() {
-		mouseDown = true;
+		if(hasFocus) {
+			mouseDown = true;
+		}
 	}
 	
 	public void mouseUp() {
@@ -56,10 +68,12 @@ public class ButtonObject extends GraphicObject{
 	
 	public void clicked() {
 		// TODO Auto-generated method stub
-		try {
-			buttonAction.action();
-		} catch(Exception e) {
-			System.err.println("No Action Set");
+		if(hasFocus) {
+			try {
+				buttonAction.action();
+			} catch(Exception e) {
+				System.err.println("No Action Set");
+			}
 		}
 	}
 	
@@ -96,5 +110,9 @@ public class ButtonObject extends GraphicObject{
 	
 	public boolean getMouseDown() {
 		return mouseDown;
+	}
+	
+	public boolean isFocused() {
+		return hasFocus;
 	}
 }

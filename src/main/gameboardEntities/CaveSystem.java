@@ -78,7 +78,6 @@ public class CaveSystem extends ButtonObject
 		currentFrame = frame;
 		
 		
-		
 		/* run a true false situation grabbing index (number in the array) 
 		 *  and tell whether it is possible to move to each room until it finds a match
 		 */
@@ -120,21 +119,41 @@ public class CaveSystem extends ButtonObject
 	}
 	
 	public void clicked() {
-		//super.clicked();
-		mouseRelCamera = new Coordinate(
-				mouseCoords.getX() - coords.getX() - cameraCoords.getX(),
-				mouseCoords.getY() - coords.getY() - cameraCoords.getY());
-		//System.out.println(mouseRelCamera);
-		for(Cave cave : listOfCaves) {
-			if(cave.pointTouch(mouseRelCamera)) {
-				//System.out.println("Cave " + cave.caveID + " was clicked");
-				highlightedCave = cave.caveID;
-				cave.setFocus(true);
-				
-				cave.clicked();
-			} else {
-				cave.setFocus(false);
-				cave.noContact();
+		if(hasFocus) {
+			//super.clicked();
+			mouseRelCamera = new Coordinate(
+					mouseCoords.getX() - coords.getX() - cameraCoords.getX(),
+					mouseCoords.getY() - coords.getY() - cameraCoords.getY());
+			//System.out.println(mouseRelCamera);
+			for(Cave cave : listOfCaves) {
+				if(cave.pointTouch(mouseRelCamera)) {
+					//System.out.println("Cave " + cave.caveID + " was clicked");
+					highlightedCave = cave.caveID;
+					cave.setHighlighted(true);
+					
+					cave.clicked();
+				} else {
+					cave.setHighlighted(false);
+					cave.noContact();
+				}
+			}
+		}
+	}
+	
+	
+	public void mouseHover() {
+		if(hasFocus) {
+			mouseRelCamera = new Coordinate(
+					mouseCoords.getX() - coords.getX() - cameraCoords.getX(),
+					mouseCoords.getY() - coords.getY() - cameraCoords.getY());
+			
+			for(Cave cave : listOfCaves) {	
+				if(cave.pointTouch(mouseRelCamera)) {
+					//System.out.println("Hovering over cave " + cave.caveID);
+					cave.mouseHover();
+				} else {
+					cave.noContact();
+				}
 			}
 		}
 	}
@@ -163,21 +182,6 @@ public class CaveSystem extends ButtonObject
 		}
 	}
 		
-	public void mouseHover() {
-		mouseRelCamera = new Coordinate(
-				mouseCoords.getX() - coords.getX() - cameraCoords.getX(),
-				mouseCoords.getY() - coords.getY() - cameraCoords.getY());
-		
-		for(Cave cave : listOfCaves) {	
-			if(cave.pointTouch(mouseRelCamera)) {
-				//System.out.println("Hovering over cave " + cave.caveID);
-				cave.mouseHover();
-			} else {
-				cave.noContact();
-			}
-		}
-	}
-	
 	public void setCamera(int x, int y) {
 		cameraCoords.setCoords(x, y);
 	}

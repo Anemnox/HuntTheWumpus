@@ -23,7 +23,7 @@ public class TriviaManager extends ButtonObject{
 		//ArrayList of question + while method
 		private ArrayList<Boolean> check = new ArrayList<>();
 		public int currentQuestionIndex;
-		
+		public String answer;
 		
 		
 		public boolean isVisible;
@@ -32,7 +32,7 @@ public class TriviaManager extends ButtonObject{
 		public Coordinate mouseCoords;
 		public Coordinate mouseRelCamera;
 		
-		public ArrayList<GameButtonObject> listOfButtons;
+		public ArrayList<ButtonObject> listOfButtons;
 		
 		public TriviaManager() throws FileNotFoundException 
 		{
@@ -55,6 +55,7 @@ public class TriviaManager extends ButtonObject{
 			//for (String q : questions) System.out.println(q);
 			
 			//
+			listOfButtons = new ArrayList<>();
 		}
 	
 	
@@ -63,15 +64,14 @@ public class TriviaManager extends ButtonObject{
 		//Method 2: DO NOT REPEAT QUESTION
 		//ask random question
 		//reroll if already used
-		public String newQuestion() 
-		{
+		public String newQuestion() {
 			currentQuestionIndex = (int) (Math.random() * check.size());
 			while (check.get(currentQuestionIndex))
 			{
 				currentQuestionIndex = (int) (Math.random() * check.size());
 		
 			}
-			
+			answer = "";
 			check.set(currentQuestionIndex, true);
 			
 			return questions.get(currentQuestionIndex);
@@ -82,29 +82,64 @@ public class TriviaManager extends ButtonObject{
 		}
 		
 		
-		public String getChoices(int num)
-		{
-			
+		public String getChoices(int num) {
 			return choices.get(currentQuestionIndex * 4 + num);
 		
 		}
 		
-		public boolean isCorrect(String choice)
-		{
+
+		public void setAnswer(String string) {
+			// TODO Auto-generated method stub
+			answer = string;
+		}
+		
+		public boolean isCorrect(String choice) {
 			return (choice.equalsIgnoreCase(correctAns.get(currentQuestionIndex)));
 		}
 			
+
+		public int getResult() {
+			if(answer != "") {
+				if(isCorrect(answer)) {
+					return 1;
+				} else {
+					return 0;
+				}
+			} 
+			return -1;
+		}	
 			
-			
-		public boolean checksIfQuestionUsed()
-		{
+		public boolean checksIfQuestionUsed() {
 			return false;	
 		}
 		
-				
+		
+		
+		//
+		//		Buttons
+		//
+		
+		public void addButton(ButtonObject button) {
+			listOfButtons.add(button);
+		}
+		
+		public ArrayList<ButtonObject> getButtons() {
+			return listOfButtons;
+		}
+		
+		//
+		//		Button Clicks
+		//
+		
+		
 		//
 		//		Mouse Click Checks
 		//
+		
+		public boolean pointTouch(Coordinate coords) {
+			mouseCoords = new Coordinate(coords.getX(), coords.getY());
+			return super.pointTouch(coords);
+		}
 		
 		public void clicked() {
 			if(isVisible) {
@@ -113,7 +148,7 @@ public class TriviaManager extends ButtonObject{
 						mouseCoords.getX() - coords.getX(),
 						mouseCoords.getY() - coords.getY());
 				//System.out.println(mouseRelCamera);
-				for(GameButtonObject button : listOfButtons) {
+				for(ButtonObject button : listOfButtons) {
 					if(button.pointTouch(mouseRelCamera)) {
 						//System.out.println("Cave " + cave.caveID + " was clicked");
 						
@@ -125,13 +160,14 @@ public class TriviaManager extends ButtonObject{
 			}
 		}
 		
+		
 		public void mouseHover() {
 			if(isVisible) {
 				mouseRelCamera = new Coordinate(
 						mouseCoords.getX() - coords.getX(),
 						mouseCoords.getY() - coords.getY());
 				
-				for(GameButtonObject button : listOfButtons) {	
+				for(ButtonObject button : listOfButtons) {	
 					if(button.pointTouch(mouseRelCamera)) {
 						//System.out.println("Hovering over cave " + cave.caveID);
 						button.mouseHover();
@@ -142,6 +178,11 @@ public class TriviaManager extends ButtonObject{
 			}
 		}
 
+		public void update(double tick) {
+			for(ButtonObject object : listOfButtons) {
+				object.update(tick);
+			}
+		}
 		public void paint(Graphics graphic, int x, int y) {
 			if(isVisible) {
 				try {
@@ -157,9 +198,14 @@ public class TriviaManager extends ButtonObject{
 					graphic.setColor(color);
 					graphic.fillRect(x() + x, y() + y, width, height);
 				}
+				graphic.drawString("" + mouseRelCamera, x() + x + 10, y() + y - 40);
+
 				graphic.drawString(getQuestion(), x() + x + 50, y() + y + 80);
 				for(int i = 0; i < 4; i++) {
 					graphic.drawString(getChoices(i), x() + x + 80, y() + y + 130 + (40 * i)); 
+				}
+				for(ButtonObject button : listOfButtons) {
+					button.paint(graphic, x() + x, y() + y);
 				}
 				
 			}
@@ -169,6 +215,10 @@ public class TriviaManager extends ButtonObject{
 		public void setVisible(boolean visibility) {
 			isVisible = visibility;
 		}
+
+
+
+
 		
 			
 }

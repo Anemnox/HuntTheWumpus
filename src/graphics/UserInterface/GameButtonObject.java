@@ -18,20 +18,22 @@ public class GameButtonObject extends ButtonObject {
 		if(mouseDown) {
 			animation.setFrame(2);
 		} else if (mouseHover) {
-			animation.setFrame(1);
-			currentFont = new Font("showcard gothic", Font.BOLD, 28);
-		} else {
-			animation.setFrame(0);
 			currentFont = new Font("showcard gothic", Font.PLAIN, 28);
+			animation.setFrame(1);
+
+		} else {
+			currentFont = new Font("showcard gothic", Font.PLAIN, 28);
+			animation.setFrame(0);
 		}
 	}
 	
 	public void paint(Graphics graphic, int x, int y) {
 		try {
+			graphic.setColor(Color.getHSBColor(0.09f, 0.73f, 0.29f));
+			graphic.setFont(currentFont);
 			if(animation.getFrame() != null) {
 				graphic.drawImage(animation.getFrame(), x + x(), y + y(), null);
 			} else {
-				graphic.setColor(color);
 				graphic.fillRect(x(), y(), width, height);
 			} 
 		} catch (Exception e) {
@@ -39,9 +41,7 @@ public class GameButtonObject extends ButtonObject {
 			graphic.fillRect(x(), y(), width, height);
 		}	
 		try {
-			graphic.setColor(Color.getHSBColor(0.09f, 0.73f, 0.29f));
-			graphic.setFont(currentFont);
-			graphic.drawString(textToDisplay, x() + 20, y() + 40);
+			graphic.drawString(textToDisplay, x() + x + 25, y() + y + 42);
 		} catch (Exception e) {
 			
 		}

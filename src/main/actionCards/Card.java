@@ -1,11 +1,15 @@
-package card;
+package main.actionCards;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Card {
+import graphics.Coordinate;
+import graphics.UserInterface.ButtonObject;
+import main.wumpusConstructor.GameConstructor;
+
+public class Card extends ButtonObject {
 	
 	private Scanner scan = new Scanner(new File("src\\card\\Cards"));
 
@@ -14,8 +18,12 @@ public class Card {
 	private ArrayList<String> cardList = new ArrayList<>();
 	private ArrayList<Integer> iDList = new ArrayList<>();
 	
+	private boolean isVisible;
+	
+	
 	public Card() throws FileNotFoundException 
 	{
+		super(GameConstructor.getAnimation(10), new Coordinate(300, 100), 780, 455);
 		while (scan.hasNextLine())
 		{
 			cardList.add(scan.nextLine());

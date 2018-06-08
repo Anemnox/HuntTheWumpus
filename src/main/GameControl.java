@@ -58,7 +58,7 @@ public class GameControl extends Thread implements RunOnGameLoop {
 	private int targetDirection;
 	
 	enum GameAction {
-		ROLL, DRAW_TRIVIA, DRAW_ACTION, MOVE, SHOOT, WAIT
+		ROLL, DRAW_TRIVIA, DRAW_ACTION, MOVE, SHOOT, WAIT, WAIT_TRIVIA
 	}
 	
 	/**
@@ -151,8 +151,30 @@ public class GameControl extends Thread implements RunOnGameLoop {
 		window.getFrame().addButton(dice);
 		
 		try {
-			trivia = new TriviaManager();
+			trivia = GameConstructor.getTriviaManager();
 			window.getFrame().addButton(trivia);
+			for(int i = 0; i < 4; i++) {
+			trivia.getButtons().get(0).setAction(new ButtonAction() {
+				public void action() {
+					trivia.setAnswer("a");
+				}
+			});
+			}
+			trivia.getButtons().get(1).setAction(new ButtonAction() {
+				public void action() {
+					trivia.setAnswer("b");
+				}
+			});
+			trivia.getButtons().get(2).setAction(new ButtonAction() {
+				public void action() {
+					trivia.setAnswer("c");
+				}
+			});
+			trivia.getButtons().get(3).setAction(new ButtonAction() {
+				public void action() {
+					trivia.setAnswer("d");
+				}
+			});
 		} catch (Exception e) {
 			
 		}
@@ -161,6 +183,8 @@ public class GameControl extends Thread implements RunOnGameLoop {
 		start();
     }
 
+    
+    
     /**
      * Method to display the settings screen
      */
@@ -206,7 +230,25 @@ public class GameControl extends Thread implements RunOnGameLoop {
 			//System.out.println("Game is running");
 			Player player = (Player)(listOfPlayers.get(currentPlayer));
 			player.setTurn(true);
-			if(currentAction != GameAction.WAIT) {
+			if (currentAction == GameAction.WAIT_TRIVIA){
+				if(trivia.getResult() != -1) {
+					if(trivia.getResult() == 1) {
+						System.out.println("RIGHT");
+					} else {
+						System.out.println("WRONG");
+						player.triviaFailed();
+					}
+					caveMap.setFocus(true);
+					trivia.setVisible(false);
+					currentAction = GameAction.WAIT;
+				}
+				try {
+					Thread.sleep(50);
+				} catch (Exception e) {
+					
+				}
+			
+			} else if(currentAction != GameAction.WAIT) {
 				switch(currentAction) {
 				case ROLL:
 					if(!rolledDice) {
@@ -279,9 +321,10 @@ public class GameControl extends Thread implements RunOnGameLoop {
 					currentAction = GameAction.WAIT;
 					break;
 				case DRAW_TRIVIA:
+					trivia.newQuestion();
 					trivia.setVisible(true);
-					
-					currentAction = GameAction.WAIT;
+					caveMap.setFocus(false);
+					currentAction = GameAction.WAIT_TRIVIA;
 					break;
 				case DRAW_ACTION:
 					
@@ -315,9 +358,7 @@ public class GameControl extends Thread implements RunOnGameLoop {
 				}
 				
 				
-				
-				
-	
+
 			} else {
 				try {
 					
@@ -373,7 +414,7 @@ public class GameControl extends Thread implements RunOnGameLoop {
     			}
     		}
     		
-    		if(window.getFrame().mouseDown() && caveMap != null) {
+    		if(window.getFrame().mouseDown() && caveMap != null && caveMap.isFocused()) {
     			if(!isHolding) {
     				isHolding = true;
     				holdPoint = new Coordinate(mouseCoords.getX(), mouseCoords.getY());

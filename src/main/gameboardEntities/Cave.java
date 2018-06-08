@@ -193,7 +193,7 @@ public class Cave extends ButtonObject{
 		}*/
 	}
 	
-	public void setFocus(boolean focused) {
+	public void setHighlighted(boolean focused) {
 		this.focused = focused;
 	}
 	

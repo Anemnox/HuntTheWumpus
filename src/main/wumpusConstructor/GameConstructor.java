@@ -171,9 +171,16 @@ public class GameConstructor
 	public static TriviaManager getTriviaManager() {
 		try {
 			TriviaManager trivia = new TriviaManager();
-			
+			for(int i = 0; i < GameData.triviaButtonData.length; i++) {
+				GameButtonObject button = new GameButtonObject(getAnimation(GameData.triviaButtonData[i][4]), 
+						new Coordinate(GameData.triviaButtonData[i][0], GameData.triviaButtonData[i][1]), 
+						GameData.triviaButtonData[i][2], GameData.triviaButtonData[i][3]);
+				button.setText(GameData.buttonText[GameData.triviaButtonData[i][5]]);
+				trivia.addButton(button);
+			};
 			return trivia;
 		} catch (Exception e) {
+			e.printStackTrace();
 			return null;
 		}
 	}
