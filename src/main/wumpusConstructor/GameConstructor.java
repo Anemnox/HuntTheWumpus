@@ -131,7 +131,7 @@ public class GameConstructor
 			window.getFrame().getButtons().get(2).setAction(
 					new ButtonAction() {
 						public void action() {
-							controls.startScoreboard();//TODO change this later
+							controls.playTrivia();//TODO change this later
 						}
 
 					}

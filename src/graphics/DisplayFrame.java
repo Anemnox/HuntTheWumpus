@@ -90,14 +90,14 @@ public class DisplayFrame extends JPanel implements MouseListener {
     	} catch (Exception e) {
     		
     	}
-    	for(ButtonObject object : listOfButtons) {
+    	for(GraphicObject object : listOfObjects) {
     		try {
     			object.paint(graphics, x(), y());
     		} catch (Exception e) {
     			
     		}
         }
-    	for(GraphicObject object : listOfObjects) {
+    	for(ButtonObject object : listOfButtons) {
     		try {
     			object.paint(graphics, x(), y());
     		} catch (Exception e) {

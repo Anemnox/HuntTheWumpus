@@ -152,6 +152,7 @@ public class GameControl extends Thread implements RunOnGameLoop {
 		
 		try {
 			trivia = new TriviaManager();
+			window.getFrame().addButton(trivia);
 		} catch (Exception e) {
 			
 		}
@@ -278,7 +279,7 @@ public class GameControl extends Thread implements RunOnGameLoop {
 					currentAction = GameAction.WAIT;
 					break;
 				case DRAW_TRIVIA:
-					
+					trivia.setVisible(true);
 					
 					currentAction = GameAction.WAIT;
 					break;
@@ -336,7 +337,7 @@ public class GameControl extends Thread implements RunOnGameLoop {
 	
 	
 	public void playTrivia() {
-		
+		currentAction = GameAction.DRAW_TRIVIA;
 	}
 	
 	public void centerBoard() {

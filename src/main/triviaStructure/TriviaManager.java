@@ -4,12 +4,17 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import graphics.Coordinate;
-import graphics.GraphicObject;
+import graphics.UserInterface.ButtonObject;
+import graphics.UserInterface.GameButtonObject;
+import main.gameboardEntities.Cave;
+import main.wumpusConstructor.GameConstructor;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.io.*;
 
-public class TriviaManager extends GraphicObject{
+public class TriviaManager extends ButtonObject{
 	
 		private Scanner scan = new Scanner(new File("src\\Questions"));
 		private ArrayList<String> questions = new ArrayList<>();
@@ -19,12 +24,19 @@ public class TriviaManager extends GraphicObject{
 		private ArrayList<Boolean> check = new ArrayList<>();
 		public int currentQuestionIndex;
 		
+		
+		
 		public boolean isVisible;
 		
+		//
+		public Coordinate mouseCoords;
+		public Coordinate mouseRelCamera;
+		
+		public ArrayList<GameButtonObject> listOfButtons;
 		
 		public TriviaManager() throws FileNotFoundException 
 		{
-			super(null, new Coordinate(300, 100), 500, 315);
+			super(GameConstructor.getAnimation(10), new Coordinate(300, 100), 780, 455);
 			//Organizes the questions / answers in different lists
 			currentQuestionIndex = 0;
 			while (scan.hasNextLine())
@@ -43,7 +55,6 @@ public class TriviaManager extends GraphicObject{
 			//for (String q : questions) System.out.println(q);
 			
 			//
-			
 		}
 	
 	
@@ -97,28 +108,65 @@ public class TriviaManager extends GraphicObject{
 		public void paint(Graphics graphic, int x, int y) {
 			if(isVisible) {
 				try {
+					graphic.setColor(Color.BLACK);
+					graphic.setFont(new Font("showcard gothic", Font.PLAIN, 24));
+
 					if(animation.getFrame() != null) {
 						graphic.drawImage(animation.getFrame(), x() + x, y() + y, null);
 					} else {
-						graphic.setColor(color);
 						graphic.fillRect(x() + x, y() + y, width, height);
 					} 
 				} catch (Exception e) {
 					graphic.setColor(color);
 					graphic.fillRect(x() + x, y() + y, width, height);
 				}
-				graphic.drawString(getQuestion(), x() + x, y() + y);
+				graphic.drawString(getQuestion(), x() + x + 50, y() + y + 80);
+				for(int i = 0; i < 4; i++) {
+					graphic.drawString(getChoices(i), x() + x + 80, y() + y + 130 + (40 * i)); 
+				}
 			}
 		}
 		
-	
+		//
+		//		Mouse Click Checks
+		//
 		
-		//make methods small as possible	
+		public void clicked() {
+			//super.clicked();
+			mouseRelCamera = new Coordinate(
+					mouseCoords.getX() - coords.getX(),
+					mouseCoords.getY() - coords.getY());
+			//System.out.println(mouseRelCamera);
+			for(GameButtonObject button : listOfButtons) {
+				if(button.pointTouch(mouseRelCamera)) {
+					//System.out.println("Cave " + cave.caveID + " was clicked");
+					
+					button.clicked();
+				} else {
+					button.noContact();
+				}
+			}
+		}
 		
-		
-			//Method for different situations (buy arrows, fall in hole, etc, etc etc ask Michael)
+		public void mouseHover() {
+			mouseRelCamera = new Coordinate(
+					mouseCoords.getX() - coords.getX(),
+					mouseCoords.getY() - coords.getY());
+			
+			for(GameButtonObject button : listOfButtons) {	
+				if(button.pointTouch(mouseRelCamera)) {
+					//System.out.println("Hovering over cave " + cave.caveID);
+					button.mouseHover();
+				} else {
+					button.noContact();
+				}
+			}
+		}
 			
 			
+		public void setVisible(boolean visibility) {
+			isVisible = visibility;
+		}
 		
 			
 }
