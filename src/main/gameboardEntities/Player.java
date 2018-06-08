@@ -54,7 +54,7 @@ public class Player extends GraphicObject implements GameEntity{
 	
 	
 	public void changeMoves(int i) {
-		moves =+ i;
+		moves += i;
 	}
 	
 	public int calculateScore() {

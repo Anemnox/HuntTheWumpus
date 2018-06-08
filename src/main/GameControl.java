@@ -239,7 +239,7 @@ public class GameControl extends Thread implements RunOnGameLoop {
 					currentAction = GameAction.WAIT;
 					break;
 				case SHOOT:
-					if (!player.getShot() && player.getArrows() > 0) {
+					if (!player.getShot() && player.getArrows() > 0 && rolledDice) {
 						player.changeMoves(-1);
 						player.setShot(true);
 						player.changeArrow(-1);
@@ -262,7 +262,7 @@ public class GameControl extends Thread implements RunOnGameLoop {
 									if (roll == 1) {
 										System.out.println("missed");
 									} else if (roll < 6) {
-										((Player)ge).changeMoves(roll - 1);
+										((Player)ge).changeMoves(-(roll - 1));
 										System.out.println("Enemy slowed for: " + (roll - 1));
 									} else {
 										((Player)ge).changeMoves(-6);
@@ -294,7 +294,7 @@ public class GameControl extends Thread implements RunOnGameLoop {
 					
 				}
 				
-				if(player.getNumberOfMoves() <= 0) {
+				if((player.getNumberOfMoves() <= 0 && rolledDice) || player.getNumberOfMoves() == -6) {
 					turnEnd = true;
 				}
 				
