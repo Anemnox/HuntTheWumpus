@@ -10,6 +10,7 @@ import graphics.UserInterface.ButtonObject;
 import graphics.UserInterface.GameButtonObject;
 import main.GameControl;
 import main.gameboardEntities.CaveSystem;
+import main.triviaStructure.TriviaManager;
 import main.wumpusConstructor.*;
 
 public class GameConstructor
@@ -167,6 +168,15 @@ public class GameConstructor
 		};
 	}
 	
+	public static TriviaManager getTriviaManager() {
+		try {
+			TriviaManager trivia = new TriviaManager();
+			
+			return trivia;
+		} catch (Exception e) {
+			return null;
+		}
+	}
 	
 	
 	//

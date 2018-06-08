@@ -98,13 +98,50 @@ public class TriviaManager extends ButtonObject{
 			
 		public boolean checksIfQuestionUsed()
 		{
-			
-			
-			
-			return false;
-			
+			return false;	
 		}
 		
+				
+		//
+		//		Mouse Click Checks
+		//
+		
+		public void clicked() {
+			if(isVisible) {
+				//super.clicked();
+				mouseRelCamera = new Coordinate(
+						mouseCoords.getX() - coords.getX(),
+						mouseCoords.getY() - coords.getY());
+				//System.out.println(mouseRelCamera);
+				for(GameButtonObject button : listOfButtons) {
+					if(button.pointTouch(mouseRelCamera)) {
+						//System.out.println("Cave " + cave.caveID + " was clicked");
+						
+						button.clicked();
+					} else {
+						button.noContact();
+					}
+				}
+			}
+		}
+		
+		public void mouseHover() {
+			if(isVisible) {
+				mouseRelCamera = new Coordinate(
+						mouseCoords.getX() - coords.getX(),
+						mouseCoords.getY() - coords.getY());
+				
+				for(GameButtonObject button : listOfButtons) {	
+					if(button.pointTouch(mouseRelCamera)) {
+						//System.out.println("Hovering over cave " + cave.caveID);
+						button.mouseHover();
+					} else {
+						button.noContact();
+					}
+				}
+			}
+		}
+
 		public void paint(Graphics graphic, int x, int y) {
 			if(isVisible) {
 				try {
@@ -124,45 +161,10 @@ public class TriviaManager extends ButtonObject{
 				for(int i = 0; i < 4; i++) {
 					graphic.drawString(getChoices(i), x() + x + 80, y() + y + 130 + (40 * i)); 
 				}
+				
 			}
 		}
-		
-		//
-		//		Mouse Click Checks
-		//
-		
-		public void clicked() {
-			//super.clicked();
-			mouseRelCamera = new Coordinate(
-					mouseCoords.getX() - coords.getX(),
-					mouseCoords.getY() - coords.getY());
-			//System.out.println(mouseRelCamera);
-			for(GameButtonObject button : listOfButtons) {
-				if(button.pointTouch(mouseRelCamera)) {
-					//System.out.println("Cave " + cave.caveID + " was clicked");
-					
-					button.clicked();
-				} else {
-					button.noContact();
-				}
-			}
-		}
-		
-		public void mouseHover() {
-			mouseRelCamera = new Coordinate(
-					mouseCoords.getX() - coords.getX(),
-					mouseCoords.getY() - coords.getY());
-			
-			for(GameButtonObject button : listOfButtons) {	
-				if(button.pointTouch(mouseRelCamera)) {
-					//System.out.println("Hovering over cave " + cave.caveID);
-					button.mouseHover();
-				} else {
-					button.noContact();
-				}
-			}
-		}
-			
+	
 			
 		public void setVisible(boolean visibility) {
 			isVisible = visibility;

@@ -27,7 +27,11 @@ public class GameData {
 			"Move",
 			"Shoot",
 			"Draw",
-			"Center"
+			"Center",
+			"   A   ",
+			"   B   ",
+			"   C   ",
+			"   D   "
 	};
 	
 	
@@ -47,10 +51,20 @@ public class GameData {
 			{1100, 340, 150, 70, 5, 7}, // Center
 	};
 	
+	public static int[][] triviaButtonData = {
+		{400, 400, 150, 70, 5, 8}, //A
+		{700, 400, 150, 70, 5, 9}, //B
+		{1000, 400, 150, 70, 5, 10}, //C
+		{1300, 400, 150, 70, 5, 11}, //D
+	};
+	
+
 	public static int[][] scoreboardButtonData = {
 			{},
 			{}
 	};
+	
+	
 	
 	
 	//
