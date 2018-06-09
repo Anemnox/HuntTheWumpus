@@ -1,11 +1,11 @@
 package main;
 
 import graphics.WumpusWindow;
+import main.wumpusConstructor.GameConstructor;
 
 public class Driver {
 	public static void main(String args[]) {
-		GameControl controls = new GameControl();
-		
-		
+		GameConstructor.controls = new GameControl();
+
 	}
 }
