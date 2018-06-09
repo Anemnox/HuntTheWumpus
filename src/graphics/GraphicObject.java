@@ -2,35 +2,31 @@ package graphics;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
 
 public class GraphicObject {
-	protected Coordinate coords;
-	protected int[][] points;
-	protected double radius; 
-	protected int height;
-	protected int width;
+	private Coordinate coords;
+	private int[][] points;
+	private double radius; 
+	private int height;
+	private int width;
 	
 	
-	protected Color color;
-	protected Animation animation;
+	private Color color;
+	private Animation animation;
 	
 	/*
 	 * Constructs an Object for the graphical userface.
 	 *  
 	 * @param p convex points with origin of (0, 0)
 	 */
-	public GraphicObject(Animation anim, Coordinate coords, int width, int height) {
-		animation = anim;
+	public GraphicObject(Coordinate coords, int width, int height) {
 		this.coords = coords;
 		this.width = width;
 		this.height = height;
 		color = Color.BLACK;
 	}
 	
-	public void update(double millis) {
-		
-	};
+	public void update(double millis) {};
 	
 		
 	
@@ -40,11 +36,11 @@ public class GraphicObject {
 				graphic.drawImage(animation.getFrame(), x() + x, y() + y, null);
 			} else {
 				graphic.setColor(color);
-				graphic.fillRect(x() + x, y() + y, width, height);
+				graphic.fillRect(x(), y(), width, height);
 			} 
 		} catch (Exception e) {
 			graphic.setColor(color);
-			graphic.fillRect(x() + x, y() + y, width, height);
+			graphic.fillRect(x(), y(), width, height);
 		}
 		
 	}
@@ -77,6 +73,20 @@ public class GraphicObject {
 	
 	
 	
+	//Mouse Interaction classes
+	public void mouseHover() {
+		color = Color.GREEN;
+	}
+	
+	public void mouseClick() {
+		
+	}
+	
+	public void noContact() {
+		color = Color.BLACK;
+	}
+	
+	
 	
 	
 	
@@ -106,12 +116,7 @@ public class GraphicObject {
 		return coords.getY();
 	}
 	
-	public BufferedImage getFrame() {
-		return animation.getFrame();
-	}
-	
 	public String toString() {
 		return "Object: " + x() + ", " + y();
 	}
-
 }

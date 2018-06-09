@@ -1,9 +1,6 @@
 package graphics;
 
-import java.awt.Image;
 import java.awt.image.BufferedImage;
-
-
 
 /**
  * Created by sn317602 on 11/18/2016.
@@ -11,11 +8,10 @@ import java.awt.image.BufferedImage;
 public class Animation {
     private BufferedImage spriteSheet;
     private BufferedImage frame;
-    private int scaling;
     private int currentFrame;
     private int frameHeight;
     private int frameWidth;
-    private int framesPerRow;
+    private int frameColumn;
     public int numberOfFrames;
     public int time;
 
@@ -25,9 +21,8 @@ public class Animation {
         frameHeight = h;
         frameWidth = w;
         numberOfFrames = num;
-        framesPerRow = column;
+        frameColumn = column;
         setFrame(0);
-        scaling = 100;
     }
 
     //Temporary Background Creator - MAKE SURE TO MAKE BACKGROUND CLASS
@@ -37,28 +32,20 @@ public class Animation {
         frameHeight = h;
         frameWidth = w;
         numberOfFrames = num;
-        framesPerRow = column;
+        frameColumn = column;
         setFrame(0);
     }
 
-    //set image Scale
-    public void setScale(int scale) {
-    	this.scaling = scale;
-    }
-    
-    
     //Changing Animation Frames
     public void setFrame(int frameNumber) {
-    	if(spriteSheet != null) {
-	        if(frameNumber < numberOfFrames) {
-	            currentFrame = frameNumber;
-	            int row = (frameNumber) % framesPerRow;
-	            int column = (frameNumber) / framesPerRow;
-	            frame = spriteSheet.getSubimage(row * frameWidth, column * frameHeight, frameWidth, frameHeight);
-	        } else {
-	            //System.out.println("Error: Can't change Frames");
-	        }
-    	}
+        if(frameNumber < numberOfFrames) {
+            currentFrame = frameNumber;
+            int row = (frameNumber) % frameColumn;
+            int column = (frameNumber) / frameColumn;
+            frame = spriteSheet.getSubimage(row * frameWidth, column * frameHeight, frameWidth, frameHeight);
+        } else {
+            System.out.println("Error: Can't change Frames");
+        }
     }
 
     public void nextFrame(){
@@ -71,14 +58,7 @@ public class Animation {
 
     //Returning Frame
     public BufferedImage getFrame() {
-    	return frame;
-        /*return (BufferedImage) frame.getScaledInstance((int)(frameWidth * ((double) scaling / 100)), 
-        		(int)(frameHeight * ((double) scaling / 100)), 
-        		Image.SCALE_DEFAULT);*/
-    }
-    
-    public int getFrameIndex() {
-    	return currentFrame;
+        return frame;
     }
 }
 
